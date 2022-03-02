@@ -1,8 +1,5 @@
 package controllers;
 
-import exceptions.AuthenticationException;
-import exceptions.NullValueException;
-import listeners.userContextListener;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -10,17 +7,16 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.*;
+import javax.mail.*;
+import javax.mail.internet.*;
 import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import model.Admin;
 
-public class loginServlet extends HttpServlet {
+public class forgotPassServlet extends HttpServlet {
 
     Connection con;
 
@@ -56,56 +52,57 @@ public class loginServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
-            ServletContext sc = getServletContext();
             try {
-                if (con != null) {
-                    HttpSession session = request.getSession();
-                    String userEmail = request.getParameter("resUserEmail").trim();
-                    String pass = request.getParameter("resPass").trim();
-                    if (userEmail.isEmpty() && pass.isEmpty()) {
-                        sc.setAttribute("errorMessage", "Both email and password is empty!");
-                        throw new NullValueException();
-                    } else if (userEmail.isEmpty()) {
-                        sc.setAttribute("errorMessage", "Entered username or email is empty!");
-                        throw new NullValueException();
-                    } else if (pass.isEmpty()) {
-                        sc.setAttribute("errorMessage", "Entered password is empty!");
-                        throw new NullValueException();
-                    }
-                    String query = "SELECT * FROM ADMINACCOUNTS";
-                    PreparedStatement pStmt = con.prepareStatement(query);
-                    ResultSet rs = pStmt.executeQuery();
-                    while (rs.next()) {
-                        if ((userEmail.equals(rs.getString("EMAIL")) || userEmail.equals(rs.getString("USERNAME")))
-                                && pass.equals(/*decrypt*/rs.getString("PASSWORD"))) { //add encryption?
-                            session.setAttribute("sessionTest", true);
-                            Admin human = new Admin(userEmail, pass);
-                            sc.setAttribute("loginDetails", human);
+                String email = request.getParameter("adminEmail");
+                String strQuery = "SELECT PASSWORD FROM ADMINACCOUNTS WHERE EMAIL='" + email + "'";
+                PreparedStatement pStmt = con.prepareStatement(strQuery);
+                ResultSet rs = pStmt.executeQuery();
+                rs.next();
+                String password = rs.getString(1);
+                if (password != null) {
+                    String receiver = email;
+                    String from = "kaEntengsAdminTest";
 
-                            userContextListener ucl = new userContextListener();
-                            ucl.contextInitialized(new ServletContextEvent(sc));
-                            response.sendRedirect("admin_database.jsp");
-                            return;
-                        } else if (userEmail.equals(rs.getString("EMAIL")) && !pass.equals(/*decrypt*/rs.getString("PASSWORD"))) {
-                            //error 2 - correct email, wrong pass
-                            sc.setAttribute("errorMessage", "Sorry, you entered the wrong password!");
-                            throw new AuthenticationException();
+                    Properties props = new Properties();
+                    props.put("mail.smtp.host", "smtp.mailtrap.io");
+                    props.put("mail.smtp.port", "2525");
+                    props.put("mail.smtp.auth", "true");
+
+                    Session session = Session.getInstance(props, new javax.mail.Authenticator() {
+
+                        protected PasswordAuthentication getPasswordAuthentication() {
+                            return new PasswordAuthentication("ebfcf7c7036a91", "91b19e43b09fa6"); //create account in mailtrap.io for unique keys
                         }
+                    });
+
+                    //compose the message  
+                    try {
+                        MimeMessage message = new MimeMessage(session);
+                        message.setFrom(new InternetAddress(from));
+                        message.addRecipient(Message.RecipientType.TO, new InternetAddress(receiver));
+                        message.setSubject("Ka-Enteng's Forgot Password Test");
+                        message.setText("Hey! Your password is " + password + ".");
+                        message.saveChanges();
+
+                        // Send message  
+                        Transport.send(message);
+                        System.out.println("Email sent successfully!");
+
+                    } catch (MessagingException mex) {
+                        mex.printStackTrace();
                     }
-                    pStmt.close();
-                    rs.close();
-                    sc.setAttribute("errorMessage", "Sorry, the email does not exist in our database!");
-                    throw new AuthenticationException();
+                    /*mail code
+                        paste your mail code here
+                        ------------------
+                    Mail code*/
+                    out.println("Your password has been sent to your email successfully!");
+                    response.sendRedirect("admin_login.jsp");
+                    return;
                 } else {
-                    response.sendError(HttpServletResponse.SC_NOT_FOUND);
+                    out.println("Invalid email provided!");
                 }
-            } catch (SQLException sqle) {
-                sc.setAttribute("errorMessage", "SQL Exception occurred!");
-                response.sendRedirect("errorPage.jsp");
-            } catch (NullValueException nve) {
-                response.sendRedirect("errorPage.jsp");
-            } catch (AuthenticationException aue) {
-                response.sendRedirect("errorPage.jsp");
+            } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }
