@@ -189,7 +189,7 @@ textarea {
     -webkit-appearance: none;
 }
 
-::-webkit-file-upload-button {
+ ::-webkit-file-upload-button {
     -webkit-appearance: button;
     /* 1 */
     font: inherit;
@@ -214,8 +214,8 @@ template {
 
 
 /*  Reset CSS styling end
-
-    Actual styling starts here   */
+    
+        Actual styling starts here   */
 
  :root {
     --white: #ffffff;
@@ -228,22 +228,10 @@ template {
 }
 
 @import url('https://fonts.googleapis.com/css2?family=Arima+Madurai:wght@100;200;300;400;500;700;800;900&family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&display=swap');
-.navbar {
-    justify-content: center !important;
-}
-
 .navbar-brand {
     font-family: 'Arima Madurai';
     margin: 0px !important;
     font-size: calc(1.275rem + .3vw) !important;
-}
-
-.list-group-item {
-    font-family: 'Open Sans';
-}
-
-.list-group-item {
-    border: none !important;
 }
 
 .btn-primary {
@@ -252,13 +240,61 @@ template {
     color: var(--white) !important;
 }
 
+.bg-green {
+    background-color: var(--green);
+}
+
+.bg-ivory {
+    background-color: var(--ivory);
+}
+
+#landing-page-main-header {
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+}
+
+#landing-page-tour-img {
+    position: absolute;
+    height: 110%;
+    top: 3rem;
+    right: 3rem;
+}
+
+@media only screen and (max-width: 1200px) {
+    #landing-page-tour-img {
+        position: relative;
+        padding-top: 1rem;
+        ;
+        width: 100%;
+        top: 0px;
+        right: 0px;
+    }
+}
+
 h1,
 h2,
 h3,
 h4,
 h5,
-h6 {
+h6,
+.display-1,
+.display-2,
+.display-3,
+.display-4,
+.display-5,
+.display-6 {
     font-family: 'Arima Madurai';
+}
+
+p,
+a,
+button {
+    font-family: 'Open Sans';
+}
+
+.class-subtitle {
+    opacity: 50%;
 }
 
 #header a {
