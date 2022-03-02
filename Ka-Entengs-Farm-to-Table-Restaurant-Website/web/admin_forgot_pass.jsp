@@ -9,11 +9,23 @@
         <!-- Bootstrap CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-        <title>Ka Enteng's Farm and Table Restaurant</title>
+        <title>Forgot Password</title>
     </head>
 
     <body>
     <header-component></header-component>
+    <div class="forgotPassBox">
+        <h2 class = "forgotLabel">Forgot Password?</h2>
+        <form action="forgotPass.do" method="POST">
+            <!-- input field for email -->
+            <div class ="forgotEmail">
+                <input type="text" class="fEmail" name="adminEmail" placeholder="Email">
+            </div>
+            <br><br>
+            <!-- button to submit inputs -->
+            <button class ="sendEmailBT">Send Email</button>
+        </form>
+    </div>
     <footer-component></footer-component>
     <script src="script.js" type="text/javascript" defer></script>
     <!-- Bootstrap JS -->

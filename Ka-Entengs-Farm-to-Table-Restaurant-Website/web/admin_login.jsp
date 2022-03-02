@@ -1,18 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="style.css" rel="stylesheet" type="text/css" />
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="style.css" rel="stylesheet" type="text/css" />
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 
-    <title>Admin Login</title>
-</head>
+        <title>Admin Login</title>
+    </head>
 
-<body>
+    <body>
+        <%
+            response.setHeader("Cache-control", "no-cache, no-store, must-revalidate");
+        %>
     <header-component></header-component>
     <div class="loginBox">
         <h2 class = "loginLabel">Login</h2>
@@ -25,9 +28,9 @@
             <input type="text" class="userPass" name="resPass" placeholder="Password" >
             <br><br>
             <!-- button to submit inputs -->
-            <button class ="forgetPassBT">forgot password?</button>
             <button class ="loginBT">Login</button>
         </form>
+        <button onclick="location.href = 'admin_forgot_pass.jsp'" class ="forgetPassBT">forgot password?</button>
     </div>
     <footer-component></footer-component>
     <script src="script.js" type="text/javascript" defer></script>
