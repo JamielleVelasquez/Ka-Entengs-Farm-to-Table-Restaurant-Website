@@ -9,34 +9,59 @@
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <!-- jquery for bootstrap datepicker -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <!-- bootstrap datepicker -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.standalone.min.css" integrity="sha512-TQQ3J4WkE/rwojNFo6OJdyu6G8Xe9z8rMrlF9y7xpFbQfW5g8aSWcygCQ4vqRiJqFsDsE1T6MoAOMJkFXlrI9A==" crossorigin="anonymous"
+        referrerpolicy="no-referrer" />
 
     <title>Reservation</title>
 </head>
 
 <body>
     <header-component></header-component>
-    <div class="reserveBox">
-        <h2 class="reserveLabel">RESERVATION</h2>
-        <form action="reserve.do" method="POST">
-            <!-- input field for username -->
-            <div class="fName">
-                <label class="unpwLabel">First Name</label><br>
-                <input type="text" class="flName" name="resFn">
+    <div class="container-fluid p-4 p-lg-5">
+        <div class="display-4 reserveLabel">Reservation</div>
+        <div class="row justify-content-center">
+            <form action="reserve.do" method="POST" class="col-12 col-sm-5 p-1 ms-1 mb-4 p-lg-5 ms-lg-5">
+                <div class="row g-0 m-0 my-4">
+                    <!-- input field for amount of people -->
+                    <input type="number" class="form-control w-50" name="" placeholder="Number of people">
+                    <!-- variable to display available slots -->
+                    <p class="w-25 text-center my-auto">Slots left: 30</p>
+                    <!-- input field for date -->
+                    <div class="input-daterange m-0 w-25">
+                        <input type="text" class="form-control" placeholder="Date" readonly>
+                    </div>
+                </div>
+
+                <!-- input field for username -->
+                <input type="text" class="flName form-control p-2 m-0 my-4" name="resFn" placeholder="First Name">
+                <input type="text" class="flName form-control p-2 m-0 my-4" name="resLn" placeholder="Last Name">
+                <input type="number" class="userpass form-control p-2 m-0 my-4" name="resNum" placeholder="Phone Number">
+                <input type="email" class="userpass form-control p-2 m-0 my-4" name="resEmail" placeholder="Email Address">
+                <!-- error messages go here -->
+                <p>There are no more slots left for that day, please try again</p>
+                <!-- button to submit inputs -->
+                <button class="reserveBT btn btn-primary">Reserve</button>
+            </form>
+            <div class="vr line col-2 mx-4 d-none d-sm-block"></div>
+            <div class="col-12 col-sm-5 p-1 ms-1 p-lg-5 ms-lg-5">
+                <h2>Cancellation Policy</h2>
+                <!-- Needs to be Checked -->
+                <p>
+                    We understand that unavoidable circumstances arise and appointments sometimes have to be cancelled or rescheduled. We ask that you do so as early as possible. Tours can always be rescheduled, provided there is still space available for your group. To
+                    reschedule, or cancel your tour, please contact us at least 10 business days prior to your appointment by email at (insert email) or by phone (insert phone). Bookings should not be considered cancelled or rescheduled until a confirmation
+                    email has been received.
+                </p>
+                <p>
+                    Bookings, rescheduled or cancelled, less than 10 business days prior to your tour date, will be charged a Php 1250.00 administration fee. There is a Php 5000.00 no-show fee, per tour group of 15-30 people (not per school), for groups that simply don’t
+                    show up on the day of their tour without cancelling in advance. If you have any concerns, please call us to discuss your specific situation.
+                </p>
             </div>
-            <div class="lName">
-                <label class="unpwLabel">Last Name</label><br>
-                <input type="text" class="flName" name="resLn">
-            </div>
-            <br>
-            <label class="unpwLabel">Phone Number</label><br>
-            <input type="number" class="userpass" name="resNum">
-            <br><br>
-            <label class="unpwLabel">Email Address</label><br>
-            <input type="text" class="userpass" name="resEmail">
-            <br><br>
-            <!-- button to submit inputs -->
-            <button class="reserveBT">Reserve</button>
-        </form>
+        </div>
+
     </div>
     <footer-component></footer-component>
     <script src="script.js" type="text/javascript" defer></script>
