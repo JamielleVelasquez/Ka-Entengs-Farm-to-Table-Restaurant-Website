@@ -272,6 +272,22 @@ template {
     right: 3rem;
 }
 
+@media only screen and (max-width: 576px) {
+    #tour-info-things-to-remember {
+        background-color: transparent;
+    }
+    #tour-info-headline {
+        position: relative !important;
+        top: 0px !important;
+        left: 0px !important;
+        transform: none !important;
+    }
+    #iternerary {
+        margin-top: 0px !important;
+        padding-top: 0px !important;
+    }
+}
+
 @media only screen and (max-width: 1200px) {
     #landing-page-tour-img {
         position: relative;
