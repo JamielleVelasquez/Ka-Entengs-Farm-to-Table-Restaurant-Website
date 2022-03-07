@@ -16,17 +16,21 @@
 <body>
     <!-- This error page is also for 404 -->
     <header-component></header-component>
-    <section class="errorMessageSec">
+    <section class="errorMessageSec row align-items-center g-0 p-2 text-center" style="height: 90vh;">
         <div class="errorMsgDiv">
             <div class="errorBox">
                 <h1>Oops! Something went wrong.</h1>
-                <p>
+                <!-- Error Type -->
+                <p class="fs-5 fw-bold text-danger">Error 404</p>
+                <p class="col-9 col-sm-6 mx-auto">
+
                     <%
                         String errMsg = (String) getServletContext().getAttribute("errorMessage");
                         out.print(errMsg);
                     %>
+
                 </p>
-                <button class="backBT" onclick="goBack()">Back</button>
+                <button class="btn btn-primary backBT" onclick="goBack()">Go Back</button>
             </div>
         </div>
     </section>
