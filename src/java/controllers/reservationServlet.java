@@ -58,30 +58,38 @@ public class reservationServlet extends HttpServlet {
                 if (con != null) {
                     String fn = request.getParameter("resFn").trim();
                     String ln = request.getParameter("resLn").trim();
-                    String cpNum = request.getParameter("resNum").trim();
+                    int cpNum = Integer.parseInt(request.getParameter("resNum"));
+                    String numPpl = request.getParameter("resNumPpl");
                     String email = request.getParameter("resEmail").trim();
 
                     //checks if fields are empty
                     if (fn.isEmpty()) {
                         sc.setAttribute("errorMessage", "First name field is empty!");
-                        throw new SQLException(); //change this exception to user-defined exception soon, placeholder
+                        throw new SQLException(); 
                     } else if (ln.isEmpty()) {
                         sc.setAttribute("errorMessage", "Last name field is empty!");
-                        throw new SQLException(); //change this exception to user-defined exception soon, placeholder
-                    } else if (cpNum.isEmpty()) {
+                        throw new SQLException(); 
+                    } else if (numPpl.isEmpty()) {
+                        sc.setAttribute("errorMessage", "Number of People field is empty!");
+                        throw new SQLException(); 
+                    } else if (cpNum == 0) {
                         sc.setAttribute("errorMessage", "Cellphone number field is empty!");
-                        throw new SQLException(); //change this exception to user-defined exception soon, placeholder
+                        throw new SQLException(); 
                     } else if (email.isEmpty()) {
                         sc.setAttribute("errorMessage", "Email field is empty!");
-                        throw new SQLException(); //change this exception to user-defined exception soon, placeholder
-                    }
+                        throw new SQLException(); 
+                    } /*else if (date.isEmpty()?) {
+                        sc.setAttribute("errorMessage", "Date is empty or invalid!");
+                        throw new SQLException(); 
+                    } */ 
 
-                    PreparedStatement pStmt = con.prepareStatement("INSERT INTO RESERVATIONDB (FNAME, LNAME, CPNUMBER, EMAIL) "
-                            + "VALUES (?, ?, ?, ?)");
+                    PreparedStatement pStmt = con.prepareStatement("INSERT INTO RESERVATIONDB (FNAME, LNAME, CPNUMBER, NUMBEROFPPL, EMAIL) "
+                            + "VALUES (?, ?, ?, ?, ?)");
                     pStmt.setString(1, fn);
                     pStmt.setString(2, ln);
-                    pStmt.setString(3, cpNum);
-                    pStmt.setString(4, email);
+                    pStmt.setInt(3, cpNum);
+                    pStmt.setString(4, numPpl);
+                    pStmt.setString(5, email);
 
                     pStmt.executeUpdate();
                     response.sendRedirect("tour_info.html");

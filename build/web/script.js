@@ -73,3 +73,16 @@ class Footer extends HTMLElement {
 
 customElements.define('header-component', Header)
 customElements.define('footer-component', Footer)
+
+$(document).ready(function() {
+
+    $('.input-daterange').datepicker({
+        format: 'dd-mm-yyyy',
+        autoclose: true,
+        widgetPositioning: {
+            horizontal: "bottom",
+            vertical: "auto"
+        }
+    });
+
+});
