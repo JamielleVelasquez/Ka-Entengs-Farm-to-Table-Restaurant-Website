@@ -272,6 +272,15 @@ template {
     right: 3rem;
 }
 
+#menu h4 {
+    font-weight: bold;
+    padding-top: 1.5rem;
+}
+
+#menu small {
+    font-weight: lighter;
+}
+
 @media only screen and (max-width: 576px) {
     #tour-info-things-to-remember {
         background-color: transparent;
