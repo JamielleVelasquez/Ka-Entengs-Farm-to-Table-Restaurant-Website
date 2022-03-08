@@ -58,8 +58,8 @@ public class reservationServlet extends HttpServlet {
                 if (con != null) {
                     String fn = request.getParameter("resFn").trim();
                     String ln = request.getParameter("resLn").trim();
-                    int cpNum = Integer.parseInt(request.getParameter("resNum"));
-                    String numPpl = request.getParameter("resNumPpl");
+                    String cpNum = request.getParameter("resNum").trim();
+                    int numPpl = Integer.parseInt(request.getParameter("resNumPpl"));
                     String email = request.getParameter("resEmail").trim();
 
                     //checks if fields are empty
@@ -69,10 +69,10 @@ public class reservationServlet extends HttpServlet {
                     } else if (ln.isEmpty()) {
                         sc.setAttribute("errorMessage", "Last name field is empty!");
                         throw new SQLException(); 
-                    } else if (numPpl.isEmpty()) {
+                    } else if (numPpl == 0) {
                         sc.setAttribute("errorMessage", "Number of People field is empty!");
                         throw new SQLException(); 
-                    } else if (cpNum == 0) {
+                    } else if (cpNum.isEmpty()) {
                         sc.setAttribute("errorMessage", "Cellphone number field is empty!");
                         throw new SQLException(); 
                     } else if (email.isEmpty()) {
@@ -87,8 +87,8 @@ public class reservationServlet extends HttpServlet {
                             + "VALUES (?, ?, ?, ?, ?)");
                     pStmt.setString(1, fn);
                     pStmt.setString(2, ln);
-                    pStmt.setInt(3, cpNum);
-                    pStmt.setString(4, numPpl);
+                    pStmt.setString(3, cpNum);
+                    pStmt.setInt(4, numPpl);
                     pStmt.setString(5, email);
 
                     pStmt.executeUpdate();

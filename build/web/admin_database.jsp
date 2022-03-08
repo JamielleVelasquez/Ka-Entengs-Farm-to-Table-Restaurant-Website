@@ -32,10 +32,11 @@
     <div class="databaseDisplay">
         <table border="3" width="100%" cellspacing="2" cellpadding="2">
             <tr>
-                <td>FNAME</td>
-                <td>LNAME</td>
-                <td>CPNUMBER</td>
-                <td>EMAIL</td>
+                <td>First Name</td>
+                <td>Last Name</td>
+                <td>Cellphone Number</td>
+                <td>Number of People</td>
+                <td>Email</td>
                 <!-- <td>DATE</td> --> <!-- Pag gumagana na ung DATE -->
             </tr>
             <%
@@ -64,7 +65,8 @@
             <tr>
                 <td><%out.print(rs.getString("FNAME")); %></td>
                 <td><%out.print(rs.getString("LNAME")); %></td>
-                <td><%out.print(rs.getInt("CPNUMBER"));%></td>
+                <td><%out.print(rs.getString("CPNUMBER"));%></td>
+                <td><%out.print(rs.getInt("NUMBEROFPPL"));%></td>
                 <td><%out.print(rs.getString("EMAIL"));%></td>
                 <!-- <td><%//out.print(rs.getString("DATE"));%></td> --> <!-- Pag gumagana na ung DATE -->
             </tr>
