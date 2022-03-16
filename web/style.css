@@ -308,6 +308,16 @@ template {
     }
 }
 
+@media only screen and (max-width: 992px) {
+    #container-text-image {
+        height: auto !important;
+    }
+    #container-image {
+        float: none;
+        height: 500px !important;
+    }
+}
+
 h1,
 h2,
 h3,
