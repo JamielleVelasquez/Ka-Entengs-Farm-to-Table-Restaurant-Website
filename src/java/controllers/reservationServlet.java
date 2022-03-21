@@ -2,15 +2,12 @@ package controllers;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
 import java.sql.SQLException;
-import java.util.Calendar;
+import java.text.*;
+import java.util.Date;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
-import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -19,6 +16,9 @@ import javax.servlet.http.HttpServletResponse;
 public class reservationServlet extends HttpServlet {
 
     Connection con;
+    DateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+    Date todayDate = new Date();
+    Date inputDate = null;
 
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
@@ -59,37 +59,57 @@ public class reservationServlet extends HttpServlet {
                     String fn = request.getParameter("resFn").trim();
                     String ln = request.getParameter("resLn").trim();
                     String cpNum = request.getParameter("resNum").trim();
+                    String date = request.getParameter("resDate").trim();
+
+                    try {
+                        inputDate = sdf.parse(date);
+                    } catch (ParseException pe) {
+                        pe.printStackTrace();
+                    }
                     int numPpl = Integer.parseInt(request.getParameter("resNumPpl"));
+                    if(numPpl > 30){
+                        sc.setAttribute("errorMessage", "Max number of people is 30!");
+                        throw new SQLException();
+                    }else if(numPpl <= 0){
+                        sc.setAttribute("errorMessage", "Cannot accept less than or equal to 0 value!");
+                        throw new SQLException();
+                    }
                     String email = request.getParameter("resEmail").trim();
 
                     //checks if fields are empty
                     if (fn.isEmpty()) {
                         sc.setAttribute("errorMessage", "First name field is empty!");
-                        throw new SQLException(); 
+                        throw new SQLException();
                     } else if (ln.isEmpty()) {
                         sc.setAttribute("errorMessage", "Last name field is empty!");
-                        throw new SQLException(); 
+                        throw new SQLException();
                     } else if (numPpl == 0) {
                         sc.setAttribute("errorMessage", "Number of People field is empty!");
-                        throw new SQLException(); 
+                        throw new SQLException();
                     } else if (cpNum.isEmpty()) {
                         sc.setAttribute("errorMessage", "Cellphone number field is empty!");
-                        throw new SQLException(); 
+                        throw new SQLException();
                     } else if (email.isEmpty()) {
                         sc.setAttribute("errorMessage", "Email field is empty!");
-                        throw new SQLException(); 
-                    } /*else if (date.isEmpty()?) {
+                        throw new SQLException();
+                    } else if (date.isEmpty()) {
                         sc.setAttribute("errorMessage", "Date is empty or invalid!");
-                        throw new SQLException(); 
-                    } */ 
-
-                    PreparedStatement pStmt = con.prepareStatement("INSERT INTO RESERVATIONDB (FNAME, LNAME, CPNUMBER, NUMBEROFPPL, EMAIL) "
-                            + "VALUES (?, ?, ?, ?, ?)");
+                        throw new SQLException();
+                    }
+                    
+                    //separate if check if date is before today, you can't time travel bro
+                    if (todayDate.after(inputDate)) {
+                        sc.setAttribute("errorMessage", "Date entered is before today! Please enter a valid date!");
+                        throw new SQLException();
+                    }
+                    PreparedStatement pStmt = con.prepareStatement("INSERT INTO RESERVATIONDB (FNAME, LNAME, CPNUMBER, NUMBEROFPPL, EMAIL, RESERVEDDATE)"
+                            + "VALUES (?, ?, ?, ?, ?, ?)");
                     pStmt.setString(1, fn);
                     pStmt.setString(2, ln);
                     pStmt.setString(3, cpNum);
                     pStmt.setInt(4, numPpl);
                     pStmt.setString(5, email);
+                    pStmt.setDate(6, new java.sql.Date(inputDate.getTime()));
 
                     pStmt.executeUpdate();
                     response.sendRedirect("tour_info.html");
@@ -99,6 +119,7 @@ public class reservationServlet extends HttpServlet {
                     response.sendError(HttpServletResponse.SC_NOT_FOUND);
                 }
             } catch (SQLException sqle) {
+                response.sendRedirect("errorPage.jsp");
                 sqle.printStackTrace();
             }
         }

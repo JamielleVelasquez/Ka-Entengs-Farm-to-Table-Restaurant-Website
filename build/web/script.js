@@ -44,7 +44,7 @@ class Footer extends HTMLElement {
     connectedCallback() {
         this.innerHTML = `
         <footer>
-        <div class="container-fluid p-5 text-center text-md-start" id="footer">
+        <div class="container-fluid p-3 py-5 p-sm-5 text-center text-md-start" id="footer">
             <div class="row">
                 <div class="col-12 g-3 col-md-6">
                     <h3> Enteng's Farm to Table Restaurant</h3>

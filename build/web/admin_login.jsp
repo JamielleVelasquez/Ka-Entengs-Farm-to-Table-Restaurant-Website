@@ -27,9 +27,9 @@
                 <form action="login.do" method="POST">
                     <!-- input field for username -->
                     <div class="userEmail">
-                        <input type="text" class="uNameEmail form-control mx-auto m-4" name="resUserEmail" placeholder="Username / Email">
+                        <input type="text" class="uNameEmail form-control mx-auto m-4" name="resUserEmail" placeholder="Username / Email" required>
                     </div>
-                    <input type="text" class="userPass form-control mx-auto m-4" name="resPass" placeholder="Password">
+                    <input type="password" class="userPass form-control mx-auto m-4" name="resPass" placeholder="Password" required>
                     <a href="admin_forgot_pass.jsp" class="forgetPassBT text-decoration-none m-3 text-muted">forgot password?</a>
                     <br>
                     <!-- button to submit inputs -->

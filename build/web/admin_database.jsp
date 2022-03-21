@@ -1,3 +1,4 @@
+<%@page import="model.Admin"%>
 <%@page import="java.sql.*"%>
 <%@page import="java.io.PrintWriter"%>
 <!DOCTYPE html>
@@ -22,58 +23,127 @@
                 return;
             }
             response.setHeader("Cache-control", "no-cache, no-store, must-revalidate");
-        %>
+            Admin scMsg = (Admin) getServletContext().getAttribute("loginDetails");
+            String firstName = scMsg.getUsername();
+        %> 
     <header-component></header-component>
-    <div class="navbar-links">
-        <ul>
-            <li><a href="logout.do">Logout</a></li>
-        </ul>
+    <div class="container-fluid p-3 pb-sm-0 p-sm-5 ">
+        <div class="row g-0 mb-5 justify-content-center justify-content-sm-between m-0 mx-sm-5">
+            <div style="width: auto;">
+                <h1>Reservations</h1>
+                <hr class="color-green opacity-100" style="height: 2px;">
+            </div>
+            <div class="text-end mx-5" style="width: auto;">
+                <h6>
+                    Signed in as:
+                    <% out.print(firstName); %>
+                </h6>
+                <form action="logout.do" method="POST">
+                    <button class="btn btn-primary">Log Out</button>
+                </form>
+            </div>
+        </div>
+        <div class="row g-0 justify-content-center justify-content-sm-between flex-wrap">
+            <div style="width: auto;" class="p-0 m-1">
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="" data-bs-toggle="dropdown">
+                        Sorting by: Name
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Sorting by: Name</a></li>
+                        <li><a class="dropdown-item" href="#">Sorting by: Date</a></li>
+                        <li><a class="dropdown-item" href="#">Sorting by: no. of Persons</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div style="width: auto;" class="p-0 m-1">
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="" data-bs-toggle="dropdown">
+                        Ascending
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Ascending</a></li>
+                        <li><a class="dropdown-item" href="#">Descending</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div style="width: auto;" class="p-0 m-1">
+                <div class="dropdown">
+                    <button class="btn btn-primary dropdown-toggle" type="button" id="" data-bs-toggle="dropdown">
+                        Searching in: First Name
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">Searching in: First Name</a></li>
+                        <li><a class="dropdown-item" href="#">Searching in: Last Name</a></li>
+                        <li><a class="dropdown-item" href="#">Searching in: Date</a></li>
+                        <li><a class="dropdown-item" href="#">Searching in: Number</a></li>
+                        <li><a class="dropdown-item" href="#">Searching in: Email</a></li>
+                        <li><a class="dropdown-item" href="#">Searching in: no. of Persons</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div style="width: auto;" class="p-0 m-1">
+                <input type="text" class="form-control" placeholder="Search:">
+            </div>
+            <div style="width: auto;" class="p-0 m-1">
+                <button class="btn btn-primary">Print PDF</button>
+            </div>
+        </div>
+
     </div>
-    <div class="databaseDisplay">
-        <table border="3" width="100%" cellspacing="2" cellpadding="2">
-            <tr>
-                <td>First Name</td>
-                <td>Last Name</td>
-                <td>Cellphone Number</td>
-                <td>Number of People</td>
-                <td>Email</td>
-                <!-- <td>DATE</td> --> <!-- Pag gumagana na ung DATE -->
-            </tr>
-            <%
-                try {
+    <%
+        try {
 
-                    //Register driver
-                    Class.forName(getServletContext().getInitParameter("jdbcClassName"));
-                    System.out.println("Loaded driver.");
+            //Register driver
+            Class.forName(getServletContext().getInitParameter("jdbcClassName"));
+            System.out.println("Loaded driver.");
 
-                    //Use String buffer for connection
-                    StringBuffer buff = new StringBuffer(getServletContext().getInitParameter("jdbcDriverURL"))
-                            .append("://").append(getServletContext().getInitParameter("dbHostName"))
-                            .append(":").append(getServletContext().getInitParameter("dbPort"))
-                            .append("/").append(getServletContext().getInitParameter("databaseName"));
-                    //jdbc:derby://localhost:1527/KaEntengRestaurantToTableDB
+            //Use String buffer for connection
+            StringBuffer buff = new StringBuffer(getServletContext().getInitParameter("jdbcDriverURL"))
+                    .append("://").append(getServletContext().getInitParameter("dbHostName"))
+                    .append(":").append(getServletContext().getInitParameter("dbPort"))
+                    .append("/").append(getServletContext().getInitParameter("databaseName"));
+            //jdbc:derby://localhost:1527/KaEntengRestaurantToTableDB
 
-                    //Establish connection
-                    Connection con = DriverManager.getConnection(buff.toString(),
-                            getServletContext().getInitParameter("dbUserName"), getServletContext().getInitParameter("dbPassword"));
-                    System.out.println("You are now connected.");
-                    String query = "SELECT * FROM RESERVATIONDB";
-                    PreparedStatement pStmt = con.prepareStatement(query);
-                    ResultSet rs = pStmt.executeQuery();
-                    while (rs.next()) {
-            %>
-            <tr>
-                <td><%out.print(rs.getString("FNAME")); %></td>
-                <td><%out.print(rs.getString("LNAME")); %></td>
-                <td><%out.print(rs.getString("CPNUMBER"));%></td>
-                <td><%out.print(rs.getInt("NUMBEROFPPL"));%></td>
-                <td><%out.print(rs.getString("EMAIL"));%></td>
-                <!-- <td><%//out.print(rs.getString("DATE"));%></td> --> <!-- Pag gumagana na ung DATE -->
-            </tr>
-            <%
-                }
-            %>
-        </table>
+            //Establish connection
+            Connection con = DriverManager.getConnection(buff.toString(),
+                    getServletContext().getInitParameter("dbUserName"), getServletContext().getInitParameter("dbPassword"));
+            System.out.println("You are now connected.");
+            String query = "SELECT * FROM RESERVATIONDB";
+            PreparedStatement pStmt = con.prepareStatement(query);
+            ResultSet rs = pStmt.executeQuery();
+
+    %>
+    <div class="container-fluid p-3">
+
+        <!-- One Instance of a Reservation -->
+        <%while (rs.next()) {%>
+        <div class="row g-0 align-items-center justify-content-center justify-content-sm-between p-1 p-sm-4 my-3 border rounded" style="border-color:darkgray; word-wrap:break-word;">
+
+
+            <div class="card border-0 my-2" style="width: auto;">
+                <h1 class="card-header bg-white border-0">
+                    <p><%out.print(rs.getString("FNAME")); %>
+                        <%out.print(rs.getString("LNAME")); %></p>
+                </h1>
+                <h6 class="card-subtitle py-2 px-3">
+                    <p><%out.print(rs.getString("RESERVEDDATE"));%></p>
+                </h6>
+            </div>
+            <ul class="list-group list-group-flush my-2" style="width: auto;">
+                <p><%out.print(rs.getInt("NUMBEROFPPL"));%></p>
+                <p><%out.print(rs.getString("CPNUMBER"));%></p>
+                <p><%out.println(rs.getString("EMAIL"));%></p>
+            </ul>
+
+            <div class=" my-2" style="width: auto;">
+                <button class="btn btn-success text-white mb-3">Edit</button>
+                <br>
+                <button class="btn btn-danger">Delete</button>
+            </div>
+
+        </div>
+        <%}%>
         <%
                 rs.close();
                 pStmt.close();
@@ -83,6 +153,7 @@
             }
         %>
     </div>
+
     <footer-component></footer-component>
     <script src="script.js" type="text/javascript" defer></script>
     <!-- Bootstrap JS -->

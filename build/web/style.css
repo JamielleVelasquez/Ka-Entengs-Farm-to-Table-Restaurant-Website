@@ -255,6 +255,10 @@ template {
     color: var(--green);
 }
 
+.color-grey {
+    color: var(--grey);
+}
+
 .bg-ivory {
     background-color: var(--ivory);
 }
@@ -305,6 +309,16 @@ template {
         width: 100%;
         top: 0px;
         right: 0px;
+    }
+}
+
+@media only screen and (max-width: 992px) {
+    #container-text-image {
+        height: auto !important;
+    }
+    #container-image {
+        float: none;
+        height: 500px !important;
     }
 }
 

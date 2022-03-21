@@ -17,6 +17,10 @@ public class Admin {
     public String getEmail() {
         return email;
     }
+    
+    public String getUsername() {
+        return userEmail;
+    }
 
     public String getPassword() {
         return password;

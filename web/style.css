@@ -255,6 +255,10 @@ template {
     color: var(--green);
 }
 
+.color-grey {
+    color: var(--grey);
+}
+
 .bg-ivory {
     background-color: var(--ivory);
 }

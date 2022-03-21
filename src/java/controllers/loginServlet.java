@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.Admin;
+import static security.cipher.*;
 
 public class loginServlet extends HttpServlet {
 
@@ -77,7 +78,7 @@ public class loginServlet extends HttpServlet {
                     ResultSet rs = pStmt.executeQuery();
                     while (rs.next()) {
                         if ((userEmail.equals(rs.getString("EMAIL")) || userEmail.equals(rs.getString("USERNAME")))
-                                && pass.equals(/*decrypt*/rs.getString("PASSWORD"))) { //add encryption?
+                                && pass.equals(decrypt(rs.getString("PASSWORD")))) { //add encryption?
                             session.setAttribute("sessionTest", true);
                             Admin human = new Admin(userEmail, pass);
                             sc.setAttribute("loginDetails", human);
@@ -86,7 +87,7 @@ public class loginServlet extends HttpServlet {
                             ucl.contextInitialized(new ServletContextEvent(sc));
                             response.sendRedirect("admin_database.jsp");
                             return;
-                        } else if (userEmail.equals(rs.getString("EMAIL")) && !pass.equals(/*decrypt*/rs.getString("PASSWORD"))) {
+                        } else if (userEmail.equals(rs.getString("EMAIL")) && !pass.equals(decrypt(rs.getString("PASSWORD")))) {
                             //error 2 - correct email, wrong pass
                             sc.setAttribute("errorMessage", "Sorry, you entered the wrong password!");
                             throw new AuthenticationException();

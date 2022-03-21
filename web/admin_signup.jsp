@@ -22,18 +22,21 @@
         <header-component></header-component>
         <div class="row align-items-center g-0" style="height: 80vh;">
             <div class="loginBox col-12 p-3 col-sm-9 col-lg-6 mx-auto text-center">
-                <div class="loginLabel display-3">Login</div>
+                <div class="loginLabel display-3">Sign Up</div>
                 <hr class="w-25 mx-auto mb-5 color-green opacity-100" style="height: 2px;">
-                <form action="login.do" method="POST">
+                <form action="signup.do" method="POST">
                     <!-- input field for username -->
                     <div class="userEmail">
-                        <input type="text" class="uNameEmail form-control mx-auto m-4" name="resUserEmail" placeholder="Username / Email" required>
+                        <input type="text" class="uNameEmail form-control mx-auto m-4" name="regEmail" placeholder="Email" required>
                     </div>
-                    <input type="password" class="userPass form-control mx-auto m-4" name="resPass" placeholder="Password" required>
-                    <a href="admin_forgot_pass.jsp" class="forgetPassBT text-decoration-none m-3 text-muted">forgot password?</a>
+                    <div class="userName">
+                        <input type="text" class="uNameEmail form-control mx-auto m-4" name="regUser" placeholder="Username" required>
+                    </div>
+                    <input type="password" class="userPass form-control mx-auto m-4" name="regPass" placeholder="Password" required>
+                    <input type="password" class="userPass form-control mx-auto m-4" name="regConfirmPass" placeholder="Confirm Password" required>
                     <br>
                     <!-- button to submit inputs -->
-                    <button class="loginBT btn btn-primary mt-3">Login</button>
+                    <button class="loginBT btn btn-primary mt-3">Sign Up</button>
                 </form>
             </div>
         </div>

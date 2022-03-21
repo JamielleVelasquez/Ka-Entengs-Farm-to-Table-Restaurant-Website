@@ -27,20 +27,20 @@
             <form action="reserve.do" method="POST" class="col-12 col-sm-5 p-1 ms-1 mb-4 p-lg-5 ms-lg-5">
                 <div class="row g-0 m-0 my-4">
                     <!-- input field for amount of people -->
-                    <input type="number" class="form-control w-50" name="resNumPpl" placeholder="Number of people">
+                    <input type="number" class="form-control w-50" name="resNumPpl" placeholder="Number of people" required>
                     <!-- variable to display available slots -->
                     <p class="w-25 text-center my-auto">Slots left: 30</p>
                     <!-- input field for date -->
                     <div class="input-daterange m-0 w-25">
-                        <input type="text" class="form-control" name="resDate" placeholder="Date" readonly>
+                        <input type="text" class="form-control" name="resDate" placeholder="Date" required>
                     </div>
                 </div>
 
                 <!-- input field for username -->
                 <input type="text" class="flName form-control p-2 m-0 my-4" name="resFn" placeholder="First Name">
                 <input type="text" class="flName form-control p-2 m-0 my-4" name="resLn" placeholder="Last Name">
-                <input type="number" class="userpass form-control p-2 m-0 my-4" name="resNum" placeholder="Phone Number">
-                <input type="email" class="userpass form-control p-2 m-0 my-4" name="resEmail" placeholder="Email Address">
+                <input type="number" class="userpass form-control p-2 m-0 my-4" name="resNum" placeholder="Phone Number" required>
+                <input type="email" class="userpass form-control p-2 m-0 my-4" name="resEmail" placeholder="Email Address" required>
                 <!-- error messages go here -->
                 <p class="text-danger">There are no more slots left for that day, please try again</p>
                 <!-- button to submit inputs -->

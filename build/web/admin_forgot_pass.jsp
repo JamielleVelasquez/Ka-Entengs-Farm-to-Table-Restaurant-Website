@@ -22,7 +22,7 @@
             <form action="forgotPass.do" method="POST">
                 <!-- input field for email -->
                 <div class="forgotEmail">
-                    <input type="text" class="fEmail form-control mx-auto m-4" name="adminEmail" placeholder="Email">
+                    <input type="text" class="fEmail form-control mx-auto m-4" name="adminEmail" placeholder="Email" required>
                 </div>
                 <!-- button to submit inputs -->
                 <button class="sendEmailBT btn btn-primary mt-3">Send Email</button>
