@@ -117,7 +117,8 @@
     <div class="container-fluid p-3">
 
         <!-- One Instance of a Reservation -->
-        <%while (rs.next()) {%>
+        <%int i = 1;
+            while (rs.next()) {%>
         <div class="row g-0 align-items-center justify-content-center justify-content-sm-between p-1 p-sm-4 my-3 border rounded" style="border-color:darkgray; word-wrap:break-word;">
 
 
@@ -127,7 +128,7 @@
                         <%out.print(rs.getString("LNAME")); %></p>
                 </h1>
                 <h6 class="card-subtitle py-2 px-3">
-                    <p><%out.print(rs.getString("RESERVEDDATE"));%></p>
+                    <p><%out.print(rs.getDate("RESERVEDDATE"));%></p>
                 </h6>
             </div>
             <ul class="list-group list-group-flush my-2" style="width: auto;">
@@ -137,9 +138,17 @@
             </ul>
 
             <div class=" my-2" style="width: auto;">
-                <button class="btn btn-success text-white mb-3">Edit</button>
+                <form method="POST" action="admin_update.jsp">
+                    <% session.setAttribute("check" + i, rs.getString("USERID"));%>
+                    <input type="hidden" name="update<%=i%>" value="<%= rs.getString("USERID")%>">
+                    <input class="btn btn-success text-white mb-3" type="submit" value="Edit">
+                </form>
                 <br>
-                <button class="btn btn-danger">Delete</button>
+                <form method="POST" action="delete.do">
+                    <% session.setAttribute("delete" + i, rs.getString("USERID"));%>
+                    <input type="hidden" name="delete<%=i%>" value="<%= rs.getString("USERID")%>">
+                    <input class="btn btn-danger" type="submit" value="Delete">
+                </form>
             </div>
 
         </div>

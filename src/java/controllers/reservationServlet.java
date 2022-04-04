@@ -6,6 +6,7 @@ import java.sql.*;
 import java.sql.SQLException;
 import java.text.*;
 import java.util.Date;
+import java.util.Random;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -67,10 +68,10 @@ public class reservationServlet extends HttpServlet {
                         pe.printStackTrace();
                     }
                     int numPpl = Integer.parseInt(request.getParameter("resNumPpl"));
-                    if(numPpl > 30){
+                    if (numPpl > 30) {
                         sc.setAttribute("errorMessage", "Max number of people is 30!");
                         throw new SQLException();
-                    }else if(numPpl <= 0){
+                    } else if (numPpl <= 0) {
                         sc.setAttribute("errorMessage", "Cannot accept less than or equal to 0 value!");
                         throw new SQLException();
                     }
@@ -96,20 +97,38 @@ public class reservationServlet extends HttpServlet {
                         sc.setAttribute("errorMessage", "Date is empty or invalid!");
                         throw new SQLException();
                     }
-                    
+
+                    System.out.println(todayDate);
+                    System.out.println(inputDate);
+
                     //separate if check if date is before today, you can't time travel bro
                     if (todayDate.after(inputDate)) {
                         sc.setAttribute("errorMessage", "Date entered is before today! Please enter a valid date!");
                         throw new SQLException();
                     }
-                    PreparedStatement pStmt = con.prepareStatement("INSERT INTO RESERVATIONDB (FNAME, LNAME, CPNUMBER, NUMBEROFPPL, EMAIL, RESERVEDDATE)"
-                            + "VALUES (?, ?, ?, ?, ?, ?)");
-                    pStmt.setString(1, fn);
-                    pStmt.setString(2, ln);
-                    pStmt.setString(3, cpNum);
-                    pStmt.setInt(4, numPpl);
-                    pStmt.setString(5, email);
-                    pStmt.setDate(6, new java.sql.Date(inputDate.getTime()));
+                    String query = "SELECT * FROM RESERVATIONDB";
+                    PreparedStatement prepStmt = con.prepareStatement(query, ResultSet.TYPE_SCROLL_SENSITIVE,
+                            ResultSet.CONCUR_READ_ONLY);
+                    ResultSet rs = prepStmt.executeQuery();
+                    Random rnd = new Random();
+                    int userid = rnd.nextInt(99999);
+                    if (rs.next()) { //check if there exists record
+                        while (rs.next()) { //loop through db
+                            if (rs.getInt("USERID") == userid) { //if found userid same as random number, add 1 to random number
+                                System.out.println("in if");
+                                userid += 1;
+                            }
+                        }
+                    }
+                    PreparedStatement pStmt = con.prepareStatement("INSERT INTO RESERVATIONDB (USERID, FNAME, LNAME, CPNUMBER, NUMBEROFPPL, EMAIL, RESERVEDDATE)"
+                            + "VALUES (?, ?, ?, ?, ?, ?, ?)");
+                    pStmt.setInt(1, userid);
+                    pStmt.setString(2, fn);
+                    pStmt.setString(3, ln);
+                    pStmt.setString(4, cpNum);
+                    pStmt.setInt(5, numPpl);
+                    pStmt.setString(6, email);
+                    pStmt.setDate(7, new java.sql.Date(inputDate.getTime()));
 
                     pStmt.executeUpdate();
                     response.sendRedirect("tour_info.html");

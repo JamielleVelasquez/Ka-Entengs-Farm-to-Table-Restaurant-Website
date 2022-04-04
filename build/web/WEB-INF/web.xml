@@ -164,6 +164,70 @@
             <param-value>KaEntengRestaurantToTableDB</param-value>
         </init-param>
     </servlet>
+    <servlet>
+        <servlet-name>updateServlet</servlet-name>
+        <servlet-class>controllers.updateServlet</servlet-class>
+        <init-param>
+            <param-name>jdbcClassName</param-name>
+            <param-value>org.apache.derby.jdbc.ClientDriver</param-value>
+        </init-param>
+        <init-param>
+            <param-name>dbUserName</param-name>
+            <param-value>app</param-value>
+        </init-param>
+        <init-param>
+            <param-name>dbPassword</param-name>
+            <param-value>app</param-value>
+        </init-param>
+        <init-param>
+            <param-name>jdbcDriverURL</param-name>
+            <param-value>jdbc:derby</param-value>
+        </init-param>
+        <init-param>
+            <param-name>dbHostName</param-name>
+            <param-value>localhost</param-value>
+        </init-param>
+        <init-param>
+            <param-name>dbPort</param-name>
+            <param-value>1527</param-value>
+        </init-param>
+        <init-param>
+            <param-name>databaseName</param-name>
+            <param-value>KaEntengRestaurantToTableDB</param-value>
+        </init-param>
+    </servlet>
+    <servlet>
+        <servlet-name>deleteServlet</servlet-name>
+        <servlet-class>controllers.deleteServlet</servlet-class>
+        <init-param>
+            <param-name>jdbcClassName</param-name>
+            <param-value>org.apache.derby.jdbc.ClientDriver</param-value>
+        </init-param>
+        <init-param>
+            <param-name>dbUserName</param-name>
+            <param-value>app</param-value>
+        </init-param>
+        <init-param>
+            <param-name>dbPassword</param-name>
+            <param-value>app</param-value>
+        </init-param>
+        <init-param>
+            <param-name>jdbcDriverURL</param-name>
+            <param-value>jdbc:derby</param-value>
+        </init-param>
+        <init-param>
+            <param-name>dbHostName</param-name>
+            <param-value>localhost</param-value>
+        </init-param>
+        <init-param>
+            <param-name>dbPort</param-name>
+            <param-value>1527</param-value>
+        </init-param>
+        <init-param>
+            <param-name>databaseName</param-name>
+            <param-value>KaEntengRestaurantToTableDB</param-value>
+        </init-param>
+    </servlet>
     <servlet-mapping>
         <servlet-name>reservationServlet</servlet-name>
         <url-pattern>/reserve.do</url-pattern>
@@ -195,6 +259,14 @@
     <servlet-mapping>
         <servlet-name>signupServlet</servlet-name>
         <url-pattern>/signup.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>updateServlet</servlet-name>
+        <url-pattern>/update.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>deleteServlet</servlet-name>
+        <url-pattern>/delete.do</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>
