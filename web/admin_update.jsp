@@ -34,6 +34,7 @@
                             .append(":").append(getServletContext().getInitParameter("dbPort"))
                             .append("/").append(getServletContext().getInitParameter("databaseName"));
                     //jdbc:derby://localhost:1527/KaEntengRestaurantToTableDB
+                    //test comment
 
                     //Establish connection
                     Connection con = DriverManager.getConnection(buff.toString(),
