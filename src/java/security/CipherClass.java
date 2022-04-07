@@ -4,7 +4,7 @@ import javax.crypto.Cipher;
 import javax.crypto.spec.SecretKeySpec;
 import org.apache.commons.codec.binary.Base64;
 
-public class cipher {
+public class CipherClass {
 
     private static byte[] key = { //change this custom key if you want
         0x74, 0x68, 0x69, 0x73, 0x49, 0x73, 0x41, 0x53,

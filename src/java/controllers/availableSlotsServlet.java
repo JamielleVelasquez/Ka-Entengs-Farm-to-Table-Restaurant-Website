@@ -1,21 +1,15 @@
 package controllers;
 
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
-import javax.servlet.ServletException;
-import javax.servlet.http.HttpServlet;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import java.sql.*;
+import java.text.*;
+import java.util.Date;
+import javax.servlet.*;
+import javax.servlet.http.*;
 
-public class DeleteServlet extends HttpServlet {
+public class availableSlotsServlet extends HttpServlet {
 
+    DateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
     Connection con;
 
     public void init(ServletConfig config) throws ServletException {
@@ -48,31 +42,41 @@ public class DeleteServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
-        ServletContext sc = getServletContext();
-        HttpSession session = request.getSession();
         try {
-            PreparedStatement prepStmt = con.prepareStatement("SELECT * FROM RESERVATIONDB", ResultSet.TYPE_SCROLL_SENSITIVE,
-                    ResultSet.CONCUR_READ_ONLY);
-            ResultSet rss = prepStmt.executeQuery();
-            rss.last();
-            String deleteBT = "";
-            PreparedStatement pStmt = con.prepareStatement("DELETE FROM RESERVATIONDB WHERE USERID = ?");
-            for (int i = 1; i <= rss.getRow(); i++) {
-                deleteBT = request.getParameter("delete" + i);
-                System.out.println(deleteBT);
-                if (deleteBT != null) {
-                    System.out.println(deleteBT);
-                    pStmt.setInt(1, Integer.parseInt(deleteBT));
-                }
+            response.setContentType("text/html;charset=UTF-8");
+            ServletContext sc = getServletContext();
+
+            int selectedDateSlots = 30;
+            Date selectedDate = new Date();
+
+            try {
+                String tempDate = request.getParameter("resDate").trim();
+                selectedDate = sdf.parse(tempDate);
+            } catch (NullPointerException npe) {
+                response.sendRedirect("errorPage.jsp");
+                npe.printStackTrace();
+            } catch (ParseException pe) {
+                response.sendRedirect("errorPage.jsp");
+                pe.printStackTrace();
             }
-            pStmt.executeUpdate();
-            System.out.println("Record deleted successfully.");
-            response.sendRedirect("admin_database.jsp");
-        } catch (Exception e) {
-            e.printStackTrace();
+
+            String query = "SELECT NUMBEROFPPL FROM RESERVATIONDB WHERE RESERVEDDATE=?";
+            PreparedStatement prepStmt = con.prepareStatement(query);
+            prepStmt.setDate(1, new java.sql.Date(selectedDate.getTime()));
+            ResultSet rs = prepStmt.executeQuery();
+            while (rs.next()) { //loop through db
+                selectedDateSlots -= rs.getInt("NUMBEROFPPL");
+            }
+            sc.setAttribute("selectedDateSlots", selectedDateSlots);
+            sc.setAttribute("selectedDate", sdf.format(selectedDate));
+            response.sendRedirect("reservation.jsp");
+            prepStmt.close();
+
+        } catch (SQLException sqle) {
             response.sendRedirect("errorPage.jsp");
+            sqle.printStackTrace();
         }
+
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
