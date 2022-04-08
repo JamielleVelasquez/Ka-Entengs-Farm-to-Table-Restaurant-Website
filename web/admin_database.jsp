@@ -149,19 +149,15 @@
 
             <div class=" my-2" style="width: auto;">
                 <form method="POST" action="admin_update.jsp">
-                    <%--
-                    <% session.setAttribute("check" + i, rs.getString("USERID"));%>
+-                    <% session.setAttribute("check" + i, rs.getString("USERID"));%>
                     <input type="hidden" name="update<%=i%>" value="<%= rs.getString(" USERID ")%>">
-                    --%>
-                    <input class="btn btn-success text-white mb-3" type="submit" value="Edit">
+-                    <input class="btn btn-success text-white mb-3" type="submit" value="Edit">
                 </form>
                 <br>
                 <form method="POST" action="delete.do">
-                    <%--
-                    <% session.setAttribute("delete" + i, rs.getString("USERID"));%>
+-                    <% session.setAttribute("delete" + i, rs.getString("USERID"));%>
                     <input type="hidden" name="delete<%=i%>" value="<%= rs.getString(" USERID ")%>">
-                    --%>
-                    <input class="btn btn-danger" type="submit" value="Delete">
+-                    <input class="btn btn-danger" type="submit" value="Delete">
                 </form>
             </div>
         </div>

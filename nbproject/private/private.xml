@@ -5,8 +5,9 @@
         <group>
             <file>file:/C:/Users/jamie/Documents/School%20Documents/Software%20Engineering/Ka-Entengs-Farm-to-Table-Restaurant-Website/src/java/logging/LoggerClass.java</file>
             <file>file:/C:/Users/jamie/Documents/School%20Documents/Software%20Engineering/Ka-Entengs-Farm-to-Table-Restaurant-Website/web/tour_info.html</file>
-            <file>file:/C:/Users/jamie/Documents/School%20Documents/Software%20Engineering/Ka-Entengs-Farm-to-Table-Restaurant-Website/src/java/controllers/availableSlotsServlet.java</file>
+            <file>file:/C:/Users/jamie/Documents/School%20Documents/Software%20Engineering/Ka-Entengs-Farm-to-Table-Restaurant-Website/src/java/controllers/DeleteServlet.java</file>
             <file>file:/C:/Users/jamie/Documents/School%20Documents/Software%20Engineering/Ka-Entengs-Farm-to-Table-Restaurant-Website/src/java/controllers/LoginServlet.java</file>
+            <file>file:/C:/Users/jamie/Documents/School%20Documents/Software%20Engineering/Ka-Entengs-Farm-to-Table-Restaurant-Website/src/java/controllers/AvailableSlotsServlet.java</file>
             <file>file:/C:/Users/jamie/Documents/School%20Documents/Software%20Engineering/Ka-Entengs-Farm-to-Table-Restaurant-Website/web/reservation.jsp</file>
             <file>file:/C:/Users/jamie/Documents/School%20Documents/Software%20Engineering/Ka-Entengs-Farm-to-Table-Restaurant-Website/src/java/security/CipherClass.java</file>
         </group>

@@ -2,7 +2,8 @@ package logging;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.logging.*;
 
 public class LoggerClass {
@@ -12,37 +13,39 @@ public class LoggerClass {
     public LoggerClass() {
 
         logger = Logger.getLogger(LoggerClass.class.getName());
-
-        Handler consoleHandler = null;
+        Formatter simpleFormatter;
         Handler fileHandler = null;
         try {
-            //Creating consoleHandler and fileHandler
-            consoleHandler = new ConsoleHandler();
-            PrintWriter writer = new PrintWriter("\\KaEnteng.log");
-            writer.print("");
-            writer.close();
-            fileHandler = new FileHandler("\\KaEnteng.log");
+            //Creating file and fileHandler
+            String fileName = new SimpleDateFormat("'logs\\'yyyyMMddHHmm'KaEnteng.log'").format(new Date());
+            File file = new File(fileName);
+            fileHandler = new FileHandler(fileName);
+
+            // Creating SimpleFormatter
+            simpleFormatter = new SimpleFormatter();
 
             //Assigning handlers to LOGGER object
-            logger.addHandler(consoleHandler);
             logger.addHandler(fileHandler);
 
+            // Setting formatter to the handler
+            fileHandler.setFormatter(simpleFormatter);
+
+            if (file.createNewFile()) {
+                logger.log(Level.CONFIG, "File Created at: {0}", file.getAbsolutePath());
+
+            } else {
+                logger.log(Level.SEVERE, "Error in creating the file");
+            }
+
             //Setting levels to handlers and LOGGER
-            consoleHandler.setLevel(Level.ALL);
             fileHandler.setLevel(Level.ALL);
             logger.setLevel(Level.ALL);
 
-            logger.config("Configuration done.");
+            logger.log(Level.CONFIG, "Loging configuration done.");
 
-            //Console handler removed
-            logger.removeHandler(consoleHandler);
-
-            logger.log(Level.FINE, "Finer logged");
         } catch (IOException exception) {
-            logger.log(Level.SEVERE, "Error occur in FileHandler.", exception);
+            logger.log(Level.SEVERE, "Error occured in FileHandler.", exception);
         }
-
-        logger.finer("Finest example on LOGGER handler completed.");
     }
 
     public Logger getLoggerClass() {

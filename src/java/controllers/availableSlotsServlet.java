@@ -7,7 +7,7 @@ import java.util.Date;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
-public class availableSlotsServlet extends HttpServlet {
+public class AvailableSlotsServlet extends HttpServlet {
 
     DateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
     Connection con;
