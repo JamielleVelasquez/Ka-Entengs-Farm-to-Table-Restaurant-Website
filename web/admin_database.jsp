@@ -91,30 +91,30 @@
         </div>
 
     </div>
-    <%
-        try {
-
-            //Register driver
-            Class.forName(getServletContext().getInitParameter("jdbcClassName"));
-            System.out.println("Loaded driver.");
-
-            //Use String buffer for connection
-            StringBuffer buff = new StringBuffer(getServletContext().getInitParameter("jdbcDriverURL"))
-                    .append("://").append(getServletContext().getInitParameter("dbHostName"))
-                    .append(":").append(getServletContext().getInitParameter("dbPort"))
-                    .append("/").append(getServletContext().getInitParameter("databaseName"));
-            //jdbc:derby://localhost:1527/KaEntengRestaurantToTableDB
-
-            //Establish connection
-            Connection con = DriverManager.getConnection(buff.toString(),
-                    getServletContext().getInitParameter("dbUserName"), getServletContext().getInitParameter("dbPassword"));
-            System.out.println("You are now connected.");
-            String query = "SELECT * FROM RESERVATIONDB";
-            PreparedStatement pStmt = con.prepareStatement(query);
-            ResultSet rs = pStmt.executeQuery();
-
-    %>
     <div class="container-fluid p-3">
+        <%
+            try {
+
+                //Register driver
+                Class.forName(getServletContext().getInitParameter("jdbcClassName"));
+                System.out.println("Loaded driver.");
+
+                //Use String buffer for connection
+                StringBuffer buff = new StringBuffer(getServletContext().getInitParameter("jdbcDriverURL"))
+                        .append("://").append(getServletContext().getInitParameter("dbHostName"))
+                        .append(":").append(getServletContext().getInitParameter("dbPort"))
+                        .append("/").append(getServletContext().getInitParameter("databaseName"));
+                //jdbc:derby://localhost:1527/KaEntengRestaurantToTableDB
+
+                //Establish connection
+                Connection con = DriverManager.getConnection(buff.toString(),
+                        getServletContext().getInitParameter("dbUserName"), getServletContext().getInitParameter("dbPassword"));
+                System.out.println("You are now connected.");
+                String query = "SELECT * FROM RESERVATIONDB";
+                PreparedStatement pStmt = con.prepareStatement(query);
+                ResultSet rs = pStmt.executeQuery();
+
+        %>
 
         <!-- One Instance of a Reservation -->
         <%int i = 1;
@@ -139,13 +139,11 @@
 
             <div class=" my-2" style="width: auto;">
                 <form method="POST" action="admin_update.jsp">
-                    <% session.setAttribute("check" + i, rs.getString("USERID"));%>
                     <input type="hidden" name="update<%=i%>" value="<%= rs.getString("USERID")%>">
                     <input class="btn btn-success text-white mb-3" type="submit" value="Edit">
                 </form>
                 <br>
                 <form method="POST" action="delete.do">
-                    <% session.setAttribute("delete" + i, rs.getString("USERID"));%>
                     <input type="hidden" name="delete<%=i%>" value="<%= rs.getString("USERID")%>">
                     <input class="btn btn-danger" type="submit" value="Delete">
                 </form>
