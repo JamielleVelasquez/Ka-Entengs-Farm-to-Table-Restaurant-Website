@@ -25,7 +25,7 @@
             response.setHeader("Cache-control", "no-cache, no-store, must-revalidate");
             Admin scMsg = (Admin) getServletContext().getAttribute("loginDetails");
             String firstName = scMsg.getUsername();
-        %>
+        %> 
     <header-component></header-component>
     <div class="container-fluid p-3 pb-sm-0 p-sm-5 ">
         <div class="row g-0 mb-5 justify-content-center justify-content-sm-between m-0 mx-sm-5">
@@ -91,30 +91,30 @@
         </div>
 
     </div>
-    <%
-        try {
-
-            //Register driver
-            Class.forName(getServletContext().getInitParameter("jdbcClassName"));
-            System.out.println("Loaded driver.");
-
-            //Use String buffer for connection
-            StringBuffer buff = new StringBuffer(getServletContext().getInitParameter("jdbcDriverURL"))
-                    .append("://").append(getServletContext().getInitParameter("dbHostName"))
-                    .append(":").append(getServletContext().getInitParameter("dbPort"))
-                    .append("/").append(getServletContext().getInitParameter("databaseName"));
-            //jdbc:derby://localhost:1527/KaEntengRestaurantToTableDB
-
-            //Establish connection
-            Connection con = DriverManager.getConnection(buff.toString(),
-                    getServletContext().getInitParameter("dbUserName"), getServletContext().getInitParameter("dbPassword"));
-            System.out.println("You are now connected.");
-            String query = "SELECT * FROM RESERVATIONDB";
-            PreparedStatement pStmt = con.prepareStatement(query);
-            ResultSet rs = pStmt.executeQuery();
-
-    %>
     <div class="container-fluid p-3">
+        <%
+            try {
+
+                //Register driver
+                Class.forName(getServletContext().getInitParameter("jdbcClassName"));
+                System.out.println("Loaded driver.");
+
+                //Use String buffer for connection
+                StringBuffer buff = new StringBuffer(getServletContext().getInitParameter("jdbcDriverURL"))
+                        .append("://").append(getServletContext().getInitParameter("dbHostName"))
+                        .append(":").append(getServletContext().getInitParameter("dbPort"))
+                        .append("/").append(getServletContext().getInitParameter("databaseName"));
+                //jdbc:derby://localhost:1527/KaEntengRestaurantToTableDB
+
+                //Establish connection
+                Connection con = DriverManager.getConnection(buff.toString(),
+                        getServletContext().getInitParameter("dbUserName"), getServletContext().getInitParameter("dbPassword"));
+                System.out.println("You are now connected.");
+                String query = "SELECT * FROM RESERVATIONDB";
+                PreparedStatement pStmt = con.prepareStatement(query);
+                ResultSet rs = pStmt.executeQuery();
+
+        %>
 
         <!-- One Instance of a Reservation -->
         <%int i = 1;
@@ -124,44 +124,34 @@
 
             <div class="card border-0 my-2" style="width: auto;">
                 <h1 class="card-header bg-white border-0">
-                    <p>
-                        <%out.print(rs.getString("FNAME")); %>
-                        <%out.print(rs.getString("LNAME")); %>
-                    </p>
+                    <p><%out.print(rs.getString("FNAME")); %>
+                        <%out.print(rs.getString("LNAME")); %></p>
                 </h1>
                 <h6 class="card-subtitle py-2 px-3">
-                    <p>
-                        <%out.print(rs.getDate("RESERVEDDATE"));%>
-                    </p>
+                    <p><%out.print(rs.getDate("RESERVEDDATE"));%></p>
                 </h6>
             </div>
             <ul class="list-group list-group-flush my-2" style="width: auto;">
-                <p>
-                    <%out.print(rs.getInt("NUMBEROFPPL"));%>
-                </p>
-                <p>
-                    <%out.print(rs.getString("CPNUMBER"));%>
-                </p>
-                <p>
-                    <%out.println(rs.getString("EMAIL"));%>
-                </p>
+                <p><%out.print(rs.getInt("NUMBEROFPPL"));%></p>
+                <p><%out.print(rs.getString("CPNUMBER"));%></p>
+                <p><%out.println(rs.getString("EMAIL"));%></p>
             </ul>
 
             <div class=" my-2" style="width: auto;">
                 <form method="POST" action="admin_update.jsp">
--                    <% session.setAttribute("check" + i, rs.getString("USERID"));%>
-                    <input type="hidden" name="update<%=i%>" value="<%= rs.getString(" USERID ")%>">
--                    <input class="btn btn-success text-white mb-3" type="submit" value="Edit">
+                    <input type="hidden" name="update<%=i%>" value="<%= rs.getString("USERID")%>">
+                    <input class="btn btn-success text-white mb-3" type="submit" value="Edit">
                 </form>
                 <br>
                 <form method="POST" action="delete.do">
--                    <% session.setAttribute("delete" + i, rs.getString("USERID"));%>
-                    <input type="hidden" name="delete<%=i%>" value="<%= rs.getString(" USERID ")%>">
--                    <input class="btn btn-danger" type="submit" value="Delete">
+                    <input type="hidden" name="delete<%=i%>" value="<%= rs.getString("USERID")%>">
+                    <input class="btn btn-danger" type="submit" value="Delete">
                 </form>
             </div>
+
         </div>
-        <%}
+        <%}%>
+        <%
                 rs.close();
                 pStmt.close();
                 con.close();
@@ -170,6 +160,7 @@
             }
         %>
     </div>
+
     <footer-component></footer-component>
     <script src="script.js" type="text/javascript" defer></script>
     <!-- Bootstrap JS -->
