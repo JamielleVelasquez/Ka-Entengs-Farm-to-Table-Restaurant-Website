@@ -68,7 +68,7 @@
                     email has been received.
                 </p>
                 <p>
-                    Bookings, rescheduled or cancelled, less than 10 business days prior to your tour date, will be charged a Php 1250.00 administration fee. There is a Php 5000.00 no-show fee, per tour group of 15-30 people (not per school), for groups that simply don’t
+                    Bookings, rescheduled or cancelled, less than 10 business days prior to your tour date, will be charged a Php 1250.00 administration fee. There is a Php 5000.00 no-show fee, per tour group of 15-30 people (not per school), for groups that simply don't
                     show up on the day of their tour without cancelling in advance. If you have any concerns, please call us to discuss your specific situation.
                 </p>
             </div>

@@ -48,6 +48,7 @@ public class ReservationServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             ServletContext sc = getServletContext();
+            sc.setAttribute("errorMessage", "");
             try {
                 if (con != null) {
                     String fn = request.getParameter("resFn").trim();
@@ -61,29 +62,43 @@ public class ReservationServlet extends HttpServlet {
                         pe.printStackTrace();
                     }
                     int numPpl = Integer.parseInt(request.getParameter("resNumPpl"));
-                    
+
                     String email = request.getParameter("resEmail").trim();
 
-                    System.out.println(todayDate);
-                    System.out.println(inputDate);
-                    
                     //add 3 days to current date to implement company policy
                     Calendar c = Calendar.getInstance();
                     c.setTime(todayDate);
                     c.add(Calendar.DATE, 3);
-                    System.out.println(c.getTime());
-                    
-                    //update error message if the reservation is not 3 days ahead
+
+                    //check how many slots are available for the date chosen
+                    int selectedDateSlots = 30;
+
+                    String query = "SELECT NUMBEROFPPL FROM RESERVATIONDB WHERE RESERVEDDATE=?";
+                    PreparedStatement prepStmt = con.prepareStatement(query);
+                    prepStmt.setDate(1, new java.sql.Date(inputDate.getTime()));
+                    ResultSet rs = prepStmt.executeQuery();
+                    while (rs.next()) { //loop through db
+                        selectedDateSlots -= rs.getInt("NUMBEROFPPL");
+                    }
+                    prepStmt.close();
+                    //update error message if the reservation is not 3 days ahead or over the max 30 person policy
                     if (inputDate.before(c.getTime())) {
                         sc.setAttribute("errorMessage", "Date is invalid, we only allow reservations that are 3 days in advance");
                         RequestDispatcher dispatcher = request.getRequestDispatcher("reservation.jsp");
                         dispatcher.forward(request, response);
+                        return;
+                    } else if (selectedDateSlots - numPpl < 0) {
+                        sc.setAttribute("errorMessage", "Your group is too big for that date, please pick another day.");
+                        RequestDispatcher dispatcher = request.getRequestDispatcher("reservation.jsp");
+                        dispatcher.forward(request, response);
+                        return;
                     }
-                    
-                    String query = "SELECT * FROM RESERVATIONDB";
-                    PreparedStatement prepStmt = con.prepareStatement(query, ResultSet.TYPE_SCROLL_SENSITIVE,
+
+                    //create new USERID and check if there is duplicate in db
+                    query = "SELECT * FROM RESERVATIONDB";
+                    prepStmt = con.prepareStatement(query, ResultSet.TYPE_SCROLL_SENSITIVE,
                             ResultSet.CONCUR_READ_ONLY);
-                    ResultSet rs = prepStmt.executeQuery();
+                    rs = prepStmt.executeQuery();
                     Random rnd = new Random();
                     int userid = rnd.nextInt(99999);
                     if (rs.next()) { //check if there exists record

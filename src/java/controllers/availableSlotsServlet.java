@@ -3,6 +3,7 @@ package controllers;
 import java.io.IOException;
 import java.sql.*;
 import java.text.*;
+import java.util.Calendar;
 import java.util.Date;
 import javax.servlet.*;
 import javax.servlet.http.*;
@@ -10,6 +11,8 @@ import javax.servlet.http.*;
 public class AvailableSlotsServlet extends HttpServlet {
 
     DateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+    Date todayDate = new Date();
+
     Connection con;
 
     public void init(ServletConfig config) throws ServletException {
@@ -43,9 +46,11 @@ public class AvailableSlotsServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
+
             response.setContentType("text/html;charset=UTF-8");
             ServletContext sc = getServletContext();
-
+            sc.setAttribute("errorMessage", "");
+            
             int selectedDateSlots = 30;
             Date selectedDate = new Date();
 
@@ -60,6 +65,18 @@ public class AvailableSlotsServlet extends HttpServlet {
                 pe.printStackTrace();
             }
 
+            //add 3 days to current date to implement company policy
+            Calendar c = Calendar.getInstance();
+            c.setTime(todayDate);
+            c.add(Calendar.DATE, 3);
+
+            //update error message if the reservation is not 3 days ahead
+            if (selectedDate.before(c.getTime())) {
+                sc.setAttribute("errorMessage", "Date is invalid, we only allow reservations that are 3 days in advance");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("reservation.jsp");
+                dispatcher.forward(request, response);
+            }
+
             String query = "SELECT NUMBEROFPPL FROM RESERVATIONDB WHERE RESERVEDDATE=?";
             PreparedStatement prepStmt = con.prepareStatement(query);
             prepStmt.setDate(1, new java.sql.Date(selectedDate.getTime()));
@@ -67,6 +84,8 @@ public class AvailableSlotsServlet extends HttpServlet {
             while (rs.next()) { //loop through db
                 selectedDateSlots -= rs.getInt("NUMBEROFPPL");
             }
+            if(selectedDateSlots < 0)
+                selectedDateSlots = 0;
             sc.setAttribute("selectedDateSlots", selectedDateSlots);
             sc.setAttribute("selectedDate", sdf.format(selectedDate));
             response.sendRedirect("reservation.jsp");

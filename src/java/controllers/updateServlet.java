@@ -4,11 +4,13 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -20,7 +22,7 @@ import javax.servlet.http.HttpSession;
 public class UpdateServlet extends HttpServlet {
 
     Connection con;
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyy");
     Date todayDate = new Date();
     Date inputDate = null;
 
@@ -63,51 +65,46 @@ public class UpdateServlet extends HttpServlet {
             String ln = request.getParameter("lname").trim();
             String cpNum = request.getParameter("number").trim();
             String date = request.getParameter("date").trim();
+
             try {
                 inputDate = sdf.parse(date);
             } catch (ParseException pe) {
                 pe.printStackTrace();
             }
+
             int numPpl = Integer.parseInt(request.getParameter("numofppl"));
-            if (numPpl > 30) {
-                sc.setAttribute("errorMessage", "Max number of people is 30!");
-                throw new SQLException();
-            } else if (numPpl <= 0) {
-                sc.setAttribute("errorMessage", "Cannot accept less than or equal to 0 value!");
-                throw new SQLException();
-            }
+
             String email = request.getParameter("email").trim();
 
-            //checks if fields are empty
-            if (fn.isEmpty()) {
-                sc.setAttribute("errorMessage", "First name field is empty!");
-                throw new SQLException();
-            } else if (ln.isEmpty()) {
-                sc.setAttribute("errorMessage", "Last name field is empty!");
-                throw new SQLException();
-            } else if (numPpl == 0) {
-                sc.setAttribute("errorMessage", "Number of People field is empty!");
-                throw new SQLException();
-            } else if (cpNum.isEmpty()) {
-                sc.setAttribute("errorMessage", "Cellphone number field is empty!");
-                throw new SQLException();
-            } else if (email.isEmpty()) {
-                sc.setAttribute("errorMessage", "Email field is empty!");
-                throw new SQLException();
-            } else if (date.isEmpty()) {
-                sc.setAttribute("errorMessage", "Date is empty or invalid!");
-                throw new SQLException();
-            }
-            System.out.println(userid);
+            //add 3 days to current date to implement company policy
+            Calendar c = Calendar.getInstance();
+            c.setTime(todayDate);
+            c.add(Calendar.DATE, 3);
 
-            //separate if check if date is before today, you can't time travel bro
-            System.out.println(inputDate);
-            System.out.println(todayDate);
-            if (todayDate.after(inputDate)) {
-                sc.setAttribute("errorMessage", "Date entered is before today! Please enter a valid date!");
-                throw new SQLException();
-            }
+            //check how many slots are available for the date chosen
+            int selectedDateSlots = 30;
 
+            String query = "SELECT NUMBEROFPPL FROM RESERVATIONDB WHERE RESERVEDDATE=?";
+            PreparedStatement prepStmt = con.prepareStatement(query);
+            prepStmt.setDate(1, new java.sql.Date(inputDate.getTime()));
+            ResultSet rs = prepStmt.executeQuery();
+            while (rs.next()) { //loop through db
+                selectedDateSlots -= rs.getInt("NUMBEROFPPL");
+            }
+            prepStmt.close();
+            
+            //update error message if the reservation is not 3 days ahead or over the max 30 person policy
+            if (inputDate.before(c.getTime())) {
+                sc.setAttribute("errorMessage", "Your edited date was less than 3 days in advance");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("errorPage.jsp");
+                dispatcher.forward(request, response);
+                return;
+            } else if (selectedDateSlots - numPpl < 0) {
+                sc.setAttribute("errorMessage", "Your edited number of people is too big for that date");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("errorPage.jsp");
+                dispatcher.forward(request, response);
+                return;
+            }
             PreparedStatement pStmt = con.prepareStatement("UPDATE RESERVATIONDB SET FNAME = ?, LNAME = ?, "
                     + "CPNUMBER = ?, NUMBEROFPPL = ?, EMAIL = ?, RESERVEDDATE = ?"
                     + "WHERE USERID = ?");
@@ -117,7 +114,6 @@ public class UpdateServlet extends HttpServlet {
             pStmt.setString(3, cpNum);
             pStmt.setInt(4, numPpl);
             pStmt.setString(5, email);
-            System.out.println(new java.sql.Date(inputDate.getTime()));
             pStmt.setDate(6, new java.sql.Date(inputDate.getTime()));
             pStmt.setInt(7, userid);
 

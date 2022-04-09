@@ -32,6 +32,8 @@
                     <input type="password" class="userPass form-control mx-auto m-4" name="resPass" placeholder="Password" required>
                     <a href="admin_forgot_pass.jsp" class="forgetPassBT text-decoration-none m-3 text-muted">forgot password?</a>
                     <br>
+                    <!-- error messages go here -->
+                    <p class="text-danger mt-3 m-0">${errorMessage}</p>
                     <!-- button to submit inputs -->
                     <button class="loginBT btn btn-primary mt-3">Login</button>
                 </form>

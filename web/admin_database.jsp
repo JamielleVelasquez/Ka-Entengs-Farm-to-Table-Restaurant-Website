@@ -145,7 +145,25 @@
                 <br>
                 <form method="POST" action="delete.do">
                     <input type="hidden" name="delete<%=i%>" value="<%= rs.getString("USERID")%>">
-                    <input class="btn btn-danger" type="submit" value="Delete">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
+                        Delete
+                    </button>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="deleteModal" tabindex="-1">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-body">
+                                    Delete this record?
+                                </div>
+                                <div class="modal-footer">
+                                    <input class="btn btn-danger" type="submit" value="Delete">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                 </form>
             </div>
 
@@ -160,7 +178,6 @@
             }
         %>
     </div>
-
     <footer-component></footer-component>
     <script src="script.js" type="text/javascript" defer></script>
     <!-- Bootstrap JS -->

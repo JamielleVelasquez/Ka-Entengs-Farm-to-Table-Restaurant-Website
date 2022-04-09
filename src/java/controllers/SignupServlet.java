@@ -1,12 +1,11 @@
 package controllers;
-
-import exceptions.*;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -51,6 +50,7 @@ public class SignupServlet extends HttpServlet {
             throws ServletException, IOException {
         request.setCharacterEncoding("UTF-8");
         ServletContext sc = getServletContext();
+        sc.setAttribute("errorMessage", "");
         try {
             if (con != null) {
                 String username = request.getParameter("regUser").trim();
@@ -59,29 +59,26 @@ public class SignupServlet extends HttpServlet {
                 String conpass = request.getParameter("regConfirmPass").trim();
                 if (!pass.equals(conpass)) { //password checker
                     sc.setAttribute("errorMessage", "Error, your password does not match with your confirm password!");
-                    throw new AuthenticationException();
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("admin_signup.jsp");
+                    dispatcher.forward(request, response);
+                    return;
                 }
-                if (username.isEmpty()) {
-                    sc.setAttribute("errorMessage", "Error, username field is empty!");
-                    throw new NullValueException();
-                } else if (email.isEmpty()) {
-                    sc.setAttribute("errorMessage", "Error, email field is empty!");
-                    throw new NullValueException();
-                } else if (pass.isEmpty()) {
-                    sc.setAttribute("errorMessage", "Error, password field is empty!");
-                    throw new NullValueException();
-                }
+
                 String query = "SELECT USERNAME, EMAIL FROM ADMINACCOUNTS";
                 PreparedStatement pStmt = con.prepareStatement(query);
                 ResultSet rs = pStmt.executeQuery();
                 while (rs.next()) {
                     if (email.equals(rs.getString("EMAIL"))) { //check if email exists
                         sc.setAttribute("errorMessage", "Sorry, that email is already taken! Please sign up with a different one!");
-                        throw new AuthenticationException();
+                        RequestDispatcher dispatcher = request.getRequestDispatcher("admin_signup.jsp");
+                        dispatcher.forward(request, response);
+                        return;
                     }
                     if (username.equals(rs.getString("USERNAME"))) { //check if email exists
                         sc.setAttribute("errorMessage", "Sorry, that username is already taken! Please enter a different one!");
-                        throw new AuthenticationException();
+                        RequestDispatcher dispatcher = request.getRequestDispatcher("admin_signup.jsp");
+                        dispatcher.forward(request, response);
+                        return;
                     }
                 }
                 pStmt.close();
@@ -100,10 +97,6 @@ public class SignupServlet extends HttpServlet {
             }
         } catch (SQLException sqle) {
             sc.setAttribute("errorMessage", "SQL Exception occurred!");
-            response.sendRedirect("errorPage.jsp");
-        } catch (AuthenticationException aue) {
-            response.sendRedirect("errorPage.jsp");
-        } catch (NullValueException nve) {
             response.sendRedirect("errorPage.jsp");
         }
     }

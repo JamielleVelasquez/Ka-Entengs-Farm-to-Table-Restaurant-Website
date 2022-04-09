@@ -1,6 +1,4 @@
 package controllers;
-
-import exceptions.AuthenticationException;
 import listeners.UserContextListener;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -11,6 +9,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.logging.Logger;
 import java.util.logging.Level;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
@@ -62,6 +61,7 @@ public class LoginServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
             ServletContext sc = getServletContext();
+            sc.setAttribute("errorMessage", "");
             try {
                 if (con != null) {
                     
@@ -93,14 +93,14 @@ public class LoginServlet extends HttpServlet {
                     pStmt.close();
                     rs.close();
                     sc.setAttribute("errorMessage", "Sorry, your username or password was incorrect!");
-                    throw new AuthenticationException();
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("admin_login.jsp");
+                    dispatcher.forward(request, response);
+                    return;
                 } else {
                     response.sendError(HttpServletResponse.SC_NOT_FOUND);
                 }
             } catch (SQLException sqle) {
                 sc.setAttribute("errorMessage", "SQL Exception occurred!");
-                response.sendRedirect("errorPage.jsp");
-            }catch (AuthenticationException aue) {
                 response.sendRedirect("errorPage.jsp");
             }
         }

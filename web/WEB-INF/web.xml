@@ -230,7 +230,7 @@
     </servlet>
     <servlet>
         <servlet-name>availableSlotsServlet</servlet-name>
-        <servlet-class>controllers.availableSlotsServlet</servlet-class>
+        <servlet-class>controllers.AvailableSlotsServlet</servlet-class>
         <init-param>
             <param-name>jdbcClassName</param-name>
             <param-value>org.apache.derby.jdbc.ClientDriver</param-value>
