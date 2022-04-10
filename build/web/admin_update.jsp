@@ -1,3 +1,4 @@
+<%@page import="model.Reservation"%>
 <%@page import="java.text.DateFormat"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -27,64 +28,27 @@
                 <div class="col-12 p-1 p-lg-5">
                     <%
                         DateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-                        try {
-                            //Register driver
-                            Class.forName(getServletContext().getInitParameter("jdbcClassName"));
-                            System.out.println("Loaded driver.");
-
-                            //Use String buffer for connection
-                            StringBuffer buff = new StringBuffer(getServletContext().getInitParameter("jdbcDriverURL"))
-                                    .append("://").append(getServletContext().getInitParameter("dbHostName"))
-                                    .append(":").append(getServletContext().getInitParameter("dbPort"))
-                                    .append("/").append(getServletContext().getInitParameter("databaseName"));
-                            //jdbc:derby://localhost:1527/KaEntengRestaurantToTableDB
-                            //test comment
-
-                            //Establish connection
-                            Connection con = DriverManager.getConnection(buff.toString(),
-                                    getServletContext().getInitParameter("dbUserName"), getServletContext().getInitParameter("dbPassword"));
-                            System.out.println("You are now connected.");
-                            PreparedStatement prepStmt = con.prepareStatement("SELECT * FROM RESERVATIONDB", ResultSet.TYPE_SCROLL_SENSITIVE,
-                                    ResultSet.CONCUR_READ_ONLY);
-                            ResultSet rss = prepStmt.executeQuery();
-                            rss.last();
-                            String updateBT = "";
-                            PreparedStatement pStmt = con.prepareStatement("SELECT * FROM RESERVATIONDB WHERE USERID = ?");
-                            for (int i = 1; i <= rss.getRow(); i++) {
-                                updateBT = request.getParameter("update" + i);
-                                if (updateBT != null) {
-                                    System.out.println(updateBT);
-                                    pStmt.setInt(1, Integer.parseInt(updateBT));
-                                }
-                            }
-                            ResultSet rs = pStmt.executeQuery();
-                            while (rs.next()) {
-                                Date date = (Date) rs.getObject("RESERVEDDATE");
+                        Reservation reservation = (Reservation) getServletContext().getAttribute("reservation");
                     %>
                     <form action="update.do" method="POST" >
-                        <input type="hidden" id="userid" name="userid" value="<%= rs.getString("USERID")%>">
+                        <input type="hidden" id="userid" name="userid" value="<%=reservation.getUserId()%>">
                         <div class="row g-0 m-0 my-4">
                             <!-- input field for amount of people -->
-                            <input type="number" class="form-control w-50" name="numofppl" value="<%= rs.getInt("NUMBEROFPPL")%>" required min="1" max="30" value="1">
+                            <input type="number" class="form-control w-50" name="numofppl" value="<%=reservation.getGroupSize()%>" required min="1" max="30" value="1">
                             <!-- input field for date -->
                             <div class="input-daterange m-0 w-50" >
-                                <input type="text" class="form-control" name="date" value="<%= sdf.format(date)%>" required>
+                                <input type="text" class="form-control" name="date" value="<%=sdf.format(reservation.getDate())%>" required>
                             </div>
                         </div>
 
                         <!-- input field for username -->
-                        <input type="text" class="flName form-control p-2 m-0 my-4" name="fname" value="<%= rs.getString("FNAME")%>" required>
-                        <input type="text" class="flName form-control p-2 m-0 my-4" name="lname" value="<%= rs.getString("LNAME")%>" required>
-                        <input type="number" class="userpass form-control p-2 m-0 my-4" name="number" value="<%= rs.getString("CPNUMBER")%>" required>
-                        <input type="email" class="userpass form-control p-2 m-0 my-4" name="email" value="<%= rs.getString("EMAIL")%>" required>
+                        <input type="text" class="flName form-control p-2 m-0 my-4" name="fname" value="<%=reservation.getFirstName()%>" required>
+                        <input type="text" class="flName form-control p-2 m-0 my-4" name="lname" value="<%=reservation.getlastName()%>" required>
+                        <input type="number" class="userpass form-control p-2 m-0 my-4" name="number" value="<%=reservation.getCellNum()%>" required>
+                        <input type="email" class="userpass form-control p-2 m-0 my-4" name="email" value="<%=reservation.getEmail()%>" required>
                         <!-- button to submit inputs -->
-                        <button type="submit" class="reserveBT btn btn-primary">Update</button>
+                        <button type="submit" name="action" value="Update" class="btn btn-primary">Update</button>
                     </form>
-                    <%
-                            }
-                        } catch (SQLException sqle) {
-                            sqle.printStackTrace();
-                        }%>
                 </div>
             </div>
         </div>

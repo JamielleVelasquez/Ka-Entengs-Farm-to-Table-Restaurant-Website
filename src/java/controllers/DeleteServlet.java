@@ -6,13 +6,15 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
+import model.Reservation;
 
 public class DeleteServlet extends HttpServlet {
 
@@ -48,27 +50,27 @@ public class DeleteServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        response.setContentType("text/html;charset=UTF-8");
         ServletContext sc = getServletContext();
-        HttpSession session = request.getSession();
+        response.setContentType("text/html;charset=UTF-8");
         try {
-            PreparedStatement prepStmt = con.prepareStatement("SELECT * FROM RESERVATIONDB", ResultSet.TYPE_SCROLL_SENSITIVE,
-                    ResultSet.CONCUR_READ_ONLY);
-            ResultSet rss = prepStmt.executeQuery();
-            rss.last();
-            String deleteBT = "";
             PreparedStatement pStmt = con.prepareStatement("DELETE FROM RESERVATIONDB WHERE USERID = ?");
-            for (int i = 1; i <= rss.getRow(); i++) {
-                deleteBT = request.getParameter("delete" + i);
-                System.out.println(deleteBT);
-                if (deleteBT != null) {
-                    System.out.println(deleteBT);
-                    pStmt.setInt(1, Integer.parseInt(deleteBT));
-                }
-            }
+            pStmt.setInt(1, Integer.parseInt(request.getParameter("userid")));
             pStmt.executeUpdate();
-            System.out.println("Record deleted successfully.");
-            response.sendRedirect("admin_database.jsp");
+            String query = "SELECT * FROM RESERVATIONDB";
+            pStmt = con.prepareStatement(query);
+            ResultSet rs = pStmt.executeQuery();
+
+            ArrayList<Reservation> reservationArray = new ArrayList<Reservation>();
+
+            while (rs.next()) {
+                Reservation reservation = new Reservation(rs.getInt("USERID"), rs.getInt("NUMBEROFPPL"), rs.getString("FNAME"), rs.getString("LNAME"), rs.getString("CPNUMBER"), rs.getString("EMAIL"), rs.getDate("RESERVEDDATE"));
+                reservationArray.add(reservation);
+            }
+            sc.setAttribute("reservationArray", reservationArray);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("admin_database.jsp");
+            dispatcher.forward(request, response);
+            pStmt.close();
+            return;
         } catch (Exception e) {
             e.printStackTrace();
             response.sendRedirect("errorPage.jsp");

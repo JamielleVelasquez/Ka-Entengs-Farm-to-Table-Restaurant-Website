@@ -1,3 +1,6 @@
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="model.Reservation"%>
 <%@page import="model.Admin"%>
 <%@page import="java.sql.*"%>
 <%@page import="java.io.PrintWriter"%>
@@ -42,105 +45,92 @@
                 </form>
 
             </div>
-            <form style="width: auto;" class="p-0 m-1">
+            <form action="pdf.do" method="get" style="width: auto;" class="p-0 m-1">
                 <button class="btn btn-primary">Print PDF</button>
             </form>
         </div>
-        <div class="row g-0 justify-content-center justify-content-sm-between align-items-center flex-wrap">
+        <form method="GET" action="sort.do" class="row g-0 justify-content-center justify-content-sm-between align-items-center flex-wrap">
             <div style="width: auto;" class="p-0 m-1">
 
-                <select class="form-select">
-                    <option selected>Sort by: Name</option>
-                    <option value="1">Sort by: Date</option>
+                <select name="sortby" class="form-select">
+                    <option value="name" selected>Sort by: Name</option>
+                    <option value="date">Sort by: Date</option>
                 </select>
 
             </div>
             <div style="width: auto;" class="p-0 m-1">
-                
-                <select class="form-select">
-                    <option selected>Ascending</option>
-                    <option value="1">Descending</option>
+
+                <select name="sorthow" class="form-select">
+                    <option value="asc" selected>Ascending</option>
+                    <option value="dsc">Descending</option>
                 </select>
-                
-            </div>
-            
-            <div style="width: auto;" class="p-0 m-1">
-                
-                <select class="form-select">
-                    <option selected>Today</option>
-                    <option value="1">This Week</option>
-                    <option value="2">This Month</option>
-                </select>
-                
-            </div>
-            <div style="width: auto;" class="p-0 m-1">
-                
-                <select class="form-select mb-2">
-                    <option selected>Search in: Name</option>
-                    <option value="1">Search in: Number</option>
-                    <option value="2">Search in: Email</option>
-                    <option value="3">Search in: Date</option>
-                </select>
-                 <input type="text" class="form-control" placeholder="Search:">
+
             </div>
 
-        </div>
+            <div style="width: auto;" class="p-0 m-1">
+
+                <select name="selectiveDate" class="form-select">
+                    <option value="all" selected>All Time</option>
+                    <option value="day">Today</option>
+                    <option value="week">This Week</option>
+                    <option value="month">This Month</option>
+                </select>
+
+            </div>
+            <div style="width: auto;" class="p-0 m-1">
+
+                <select name="searchWhere" class="form-select mb-2">
+                    <option value="name" selected>Search in: Name</option>
+                    <option value="number">Search in: Number</option>
+                    <option value="email">Search in: Email</option>
+                    <option value="date">Search in: Date</option>
+                </select>
+                <input name="searchValue" type="text" class="form-control" placeholder="Search:">
+            </div>
+
+            <div style="width: auto;" class="p-0 m-1">
+
+                <button type="submit" class="btn btn-primary">Sort / Search</button>
+
+            </div>
+
+        </form>
 
     </div>
     <div class="container-fluid p-3">
         <%
-            try {
+            ArrayList<Reservation> reservationArray = (ArrayList<Reservation>) getServletContext().getAttribute("reservationArray");
+            Iterator<Reservation> iterator = reservationArray.iterator();
 
-                //Register driver
-                Class.forName(getServletContext().getInitParameter("jdbcClassName"));
-                System.out.println("Loaded driver.");
-
-                //Use String buffer for connection
-                StringBuffer buff = new StringBuffer(getServletContext().getInitParameter("jdbcDriverURL"))
-                        .append("://").append(getServletContext().getInitParameter("dbHostName"))
-                        .append(":").append(getServletContext().getInitParameter("dbPort"))
-                        .append("/").append(getServletContext().getInitParameter("databaseName"));
-                //jdbc:derby://localhost:1527/KaEntengRestaurantToTableDB
-
-                //Establish connection
-                Connection con = DriverManager.getConnection(buff.toString(),
-                        getServletContext().getInitParameter("dbUserName"), getServletContext().getInitParameter("dbPassword"));
-                System.out.println("You are now connected.");
-                String query = "SELECT * FROM RESERVATIONDB";
-                PreparedStatement pStmt = con.prepareStatement(query);
-                ResultSet rs = pStmt.executeQuery();
-
+            while (iterator.hasNext()) {
+                Reservation reservation = iterator.next();
         %>
-
-        <!-- One Instance of a Reservation -->
-        <%int i = 1;
-            while (rs.next()) {%>
         <div class="row g-0 align-items-center justify-content-center justify-content-sm-between p-1 p-sm-4 my-3 border rounded" style="border-color:darkgray; word-wrap:break-word;">
 
 
             <div class="card border-0 my-2" style="width: auto;">
                 <h1 class="card-header bg-white border-0">
-                    <p><%out.print(rs.getString("FNAME")); %>
-                        <%out.print(rs.getString("LNAME")); %></p>
+                    <p><%=reservation.getFirstName()%>
+                        <%=reservation.getLastName()%></p>
                 </h1>
                 <h6 class="card-subtitle py-2 px-3">
-                    <p><%out.print(rs.getDate("RESERVEDDATE"));%></p>
+                    <p><%=reservation.getDate()%></p>
                 </h6>
             </div>
             <ul class="list-group list-group-flush my-2" style="width: auto;">
-                <p><%out.print(rs.getInt("NUMBEROFPPL"));%></p>
-                <p><%out.print(rs.getString("CPNUMBER"));%></p>
-                <p><%out.println(rs.getString("EMAIL"));%></p>
+                <p><%=reservation.getGroupSize()%></p>
+                <p><%=reservation.getCellNum()%></p>
+                <p><%=reservation.getEmail()%></p>
             </ul>
 
             <div class=" my-2" style="width: auto;">
-                <form method="POST" action="admin_update.jsp">
-                    <input type="hidden" name="update<%=i%>" value="<%= rs.getString("USERID")%>">
-                    <input class="btn btn-success text-white mb-3" type="submit" value="Edit">
+                <form method="POST" action="update.do">
+                    <input type="hidden" name="userid" value="<%=reservation.getUserId()%>">
+                    <input class="btn btn-success text-white mb-3" type="submit" name="action" value="Edit">
                 </form>
                 <br>
                 <form method="POST" action="delete.do">
-                    <input type="hidden" name="delete<%=i%>" value="<%= rs.getString("USERID")%>">
+                    <input type="hidden" name="userid" value="<%=reservation.getUserId()%>">
                     <!-- Button trigger modal -->
                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
                         Delete
@@ -154,7 +144,7 @@
                                     Delete this record?
                                 </div>
                                 <div class="modal-footer">
-                                    <input class="btn btn-danger" type="submit" value="Delete">
+                                    <input class="btn btn-danger" type="submit" name="action" value="Delete">
                                 </div>
                             </div>
                         </div>
@@ -165,14 +155,6 @@
 
         </div>
         <%}%>
-        <%
-                rs.close();
-                pStmt.close();
-                con.close();
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        %>
     </div>
     <footer-component></footer-component>
     <script src="script.js" type="text/javascript" defer></script>

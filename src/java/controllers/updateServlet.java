@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import javax.servlet.RequestDispatcher;
@@ -18,6 +19,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.Reservation;
 
 public class UpdateServlet extends HttpServlet {
 
@@ -59,67 +61,65 @@ public class UpdateServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
         ServletContext sc = getServletContext();
         HttpSession session = request.getSession();
+
         try {
+
+            //get user id
             int userid = Integer.parseInt(request.getParameter("userid"));
-            String fn = request.getParameter("fname").trim();
-            String ln = request.getParameter("lname").trim();
-            String cpNum = request.getParameter("number").trim();
-            String date = request.getParameter("date").trim();
 
-            try {
-                inputDate = sdf.parse(date);
-            } catch (ParseException pe) {
-                pe.printStackTrace();
-            }
+            PreparedStatement pStmt = con.prepareStatement("SELECT * FROM RESERVATIONDB WHERE USERID = ?");
 
-            int numPpl = Integer.parseInt(request.getParameter("numofppl"));
+            pStmt.setInt(1, userid);
 
-            String email = request.getParameter("email").trim();
+            ResultSet rs = pStmt.executeQuery();
+            rs.next();
 
-            //add 3 days to current date to implement company policy
-            Calendar c = Calendar.getInstance();
-            c.setTime(todayDate);
-            c.add(Calendar.DATE, 3);
+            if (request.getParameter("action").equals("Edit")) {
 
-            //check how many slots are available for the date chosen
-            int selectedDateSlots = 30;
+                Reservation reservation = new Reservation(userid, rs.getInt("NUMBEROFPPL"), rs.getString("FNAME"), rs.getString("LNAME"), rs.getString("CPNUMBER"), rs.getString("EMAIL"), rs.getDate("RESERVEDDATE"));
 
-            String query = "SELECT NUMBEROFPPL FROM RESERVATIONDB WHERE RESERVEDDATE=?";
-            PreparedStatement prepStmt = con.prepareStatement(query);
-            prepStmt.setDate(1, new java.sql.Date(inputDate.getTime()));
-            ResultSet rs = prepStmt.executeQuery();
-            while (rs.next()) { //loop through db
-                selectedDateSlots -= rs.getInt("NUMBEROFPPL");
-            }
-            prepStmt.close();
-            
-            //update error message if the reservation is not 3 days ahead or over the max 30 person policy
-            if (inputDate.before(c.getTime())) {
-                sc.setAttribute("errorMessage", "Your edited date was less than 3 days in advance");
-                RequestDispatcher dispatcher = request.getRequestDispatcher("errorPage.jsp");
+                sc.setAttribute("reservation", reservation);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("admin_update.jsp");
                 dispatcher.forward(request, response);
                 return;
-            } else if (selectedDateSlots - numPpl < 0) {
-                sc.setAttribute("errorMessage", "Your edited number of people is too big for that date");
-                RequestDispatcher dispatcher = request.getRequestDispatcher("errorPage.jsp");
+            } else if (request.getParameter("action").equals("Update")) {
+
+                pStmt = con.prepareStatement("UPDATE RESERVATIONDB SET FNAME = ?, LNAME = ?, "
+                        + "CPNUMBER = ?, NUMBEROFPPL = ?, EMAIL = ?, RESERVEDDATE = ?"
+                        + "WHERE USERID = ?");
+                System.out.println(request.getParameter("fname"));
+                pStmt.setString(1, request.getParameter("fname"));
+                pStmt.setString(2, request.getParameter("lname"));
+                pStmt.setString(3, request.getParameter("number"));
+                pStmt.setInt(4, Integer.parseInt(request.getParameter("numofppl")));
+                pStmt.setString(5, request.getParameter("email"));
+
+                try {
+                    inputDate = sdf.parse(request.getParameter("date"));
+                } catch (ParseException pe) {
+                    pe.printStackTrace();
+                }
+
+                pStmt.setDate(6, new java.sql.Date(inputDate.getTime()));
+                pStmt.setInt(7, userid);
+                pStmt.executeUpdate();
+
+                String query = "SELECT * FROM RESERVATIONDB";
+                pStmt = con.prepareStatement(query);
+                rs = pStmt.executeQuery();
+
+                ArrayList<Reservation> reservationArray = new ArrayList<Reservation>();
+
+                while (rs.next()) {
+                    Reservation reservation = new Reservation(rs.getInt("USERID"), rs.getInt("NUMBEROFPPL"), rs.getString("FNAME"), rs.getString("LNAME"), rs.getString("CPNUMBER"), rs.getString("EMAIL"), rs.getDate("RESERVEDDATE"));
+                    reservationArray.add(reservation);
+                }
+                sc.setAttribute("reservationArray", reservationArray);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("admin_database.jsp");
                 dispatcher.forward(request, response);
+                pStmt.close();
                 return;
             }
-            PreparedStatement pStmt = con.prepareStatement("UPDATE RESERVATIONDB SET FNAME = ?, LNAME = ?, "
-                    + "CPNUMBER = ?, NUMBEROFPPL = ?, EMAIL = ?, RESERVEDDATE = ?"
-                    + "WHERE USERID = ?");
-
-            pStmt.setString(1, fn);
-            pStmt.setString(2, ln);
-            pStmt.setString(3, cpNum);
-            pStmt.setInt(4, numPpl);
-            pStmt.setString(5, email);
-            pStmt.setDate(6, new java.sql.Date(inputDate.getTime()));
-            pStmt.setInt(7, userid);
-
-            pStmt.executeUpdate();
-            pStmt.close();
-            response.sendRedirect("admin_database.jsp");
         } catch (Exception e) {
             e.printStackTrace();
         }

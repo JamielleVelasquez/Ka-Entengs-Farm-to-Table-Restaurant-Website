@@ -20,9 +20,6 @@
     </head>
 
     <body>
-        <%
-
-        %>
     <header-component></header-component>
     <div class="container-fluid p-4 p-lg-5">
         <div class="display-4 reserveLabel">Reservation</div>

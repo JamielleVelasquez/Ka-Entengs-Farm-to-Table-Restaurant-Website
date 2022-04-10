@@ -1,4 +1,5 @@
 package controllers;
+
 import listeners.UserContextListener;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -7,6 +8,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 import javax.servlet.RequestDispatcher;
@@ -21,13 +23,14 @@ import javax.servlet.http.HttpSession;
 import model.Admin;
 import static security.CipherClass.*;
 import logging.LoggerClass;
+import model.Reservation;
 
 public class LoginServlet extends HttpServlet {
 
     Connection con;
     LoggerClass loggerClass = new LoggerClass();
     Logger logger = loggerClass.getLoggerClass();
-    
+
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
         try {
@@ -64,7 +67,7 @@ public class LoginServlet extends HttpServlet {
             sc.setAttribute("errorMessage", "");
             try {
                 if (con != null) {
-                    
+
                     //Initialize Variables
                     HttpSession session = request.getSession();
                     String userEmail = request.getParameter("resUserEmail").trim();
@@ -72,7 +75,7 @@ public class LoginServlet extends HttpServlet {
                     String query = "SELECT * FROM ADMINACCOUNTS";
                     PreparedStatement pStmt = con.prepareStatement(query);
                     ResultSet rs = pStmt.executeQuery();
-                    
+
                     //Check login details if correct
                     while (rs.next()) {
                         //If the username/email and password is correct, redirect
@@ -85,9 +88,22 @@ public class LoginServlet extends HttpServlet {
                             UserContextListener ucl = new UserContextListener();
                             ucl.contextInitialized(new ServletContextEvent(sc));
                             logger.log(Level.INFO, rs.getString("USERNAME") + " logged in");
-                            response.sendRedirect("admin_database.jsp");
+
+                            query = "SELECT * FROM RESERVATIONDB";
+                            pStmt = con.prepareStatement(query);
+                            rs = pStmt.executeQuery();
+
+                            ArrayList<Reservation> reservationArray = new ArrayList<Reservation>();
+                            
+                            while (rs.next()) {
+                                Reservation reservation = new Reservation(rs.getInt("USERID"), rs.getInt("NUMBEROFPPL"), rs.getString("FNAME"), rs.getString("LNAME"), rs.getString("CPNUMBER"), rs.getString("EMAIL"), rs.getDate("RESERVEDDATE"));
+                                reservationArray.add(reservation);
+                            }
+                            sc.setAttribute("reservationArray", reservationArray);
+                            RequestDispatcher dispatcher = request.getRequestDispatcher("admin_database.jsp");
+                            dispatcher.forward(request, response);
                             return;
-                        } 
+                        }
                     }
                     //If the username/email and password is incorrect, show error message
                     pStmt.close();
