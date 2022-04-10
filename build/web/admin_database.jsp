@@ -28,10 +28,9 @@
         %> 
     <header-component></header-component>
     <div class="container-fluid p-3 pb-sm-0 p-sm-5 ">
-        <div class="row g-0 mb-5 justify-content-center justify-content-sm-between m-0 mx-sm-5">
+        <div class="row g-0 mb-5 justify-content-center justify-content-sm-around m-0">
             <div style="width: auto;">
                 <h1>Reservations</h1>
-                <hr class="color-green opacity-100" style="height: 2px;">
             </div>
             <div class="text-end mx-5" style="width: auto;">
                 <h6>
@@ -41,53 +40,50 @@
                 <form action="logout.do" method="POST">
                     <button class="btn btn-primary">Log Out</button>
                 </form>
+
             </div>
-        </div>
-        <div class="row g-0 justify-content-center justify-content-sm-between flex-wrap">
-            <div style="width: auto;" class="p-0 m-1">
-                <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle" type="button" id="" data-bs-toggle="dropdown">
-                        Sorting by: Name
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Sorting by: Name</a></li>
-                        <li><a class="dropdown-item" href="#">Sorting by: Date</a></li>
-                        <li><a class="dropdown-item" href="#">Sorting by: no. of Persons</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div style="width: auto;" class="p-0 m-1">
-                <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle" type="button" id="" data-bs-toggle="dropdown">
-                        Ascending
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Ascending</a></li>
-                        <li><a class="dropdown-item" href="#">Descending</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div style="width: auto;" class="p-0 m-1">
-                <div class="dropdown">
-                    <button class="btn btn-primary dropdown-toggle" type="button" id="" data-bs-toggle="dropdown">
-                        Searching in: First Name
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="#">Searching in: First Name</a></li>
-                        <li><a class="dropdown-item" href="#">Searching in: Last Name</a></li>
-                        <li><a class="dropdown-item" href="#">Searching in: Date</a></li>
-                        <li><a class="dropdown-item" href="#">Searching in: Number</a></li>
-                        <li><a class="dropdown-item" href="#">Searching in: Email</a></li>
-                        <li><a class="dropdown-item" href="#">Searching in: no. of Persons</a></li>
-                    </ul>
-                </div>
-            </div>
-            <div style="width: auto;" class="p-0 m-1">
-                <input type="text" class="form-control" placeholder="Search:">
-            </div>
-            <div style="width: auto;" class="p-0 m-1">
+            <form style="width: auto;" class="p-0 m-1">
                 <button class="btn btn-primary">Print PDF</button>
+            </form>
+        </div>
+        <div class="row g-0 justify-content-center justify-content-sm-between align-items-center flex-wrap">
+            <div style="width: auto;" class="p-0 m-1">
+
+                <select class="form-select">
+                    <option selected>Sort by: Name</option>
+                    <option value="1">Sort by: Date</option>
+                </select>
+
             </div>
+            <div style="width: auto;" class="p-0 m-1">
+                
+                <select class="form-select">
+                    <option selected>Ascending</option>
+                    <option value="1">Descending</option>
+                </select>
+                
+            </div>
+            
+            <div style="width: auto;" class="p-0 m-1">
+                
+                <select class="form-select">
+                    <option selected>Today</option>
+                    <option value="1">This Week</option>
+                    <option value="2">This Month</option>
+                </select>
+                
+            </div>
+            <div style="width: auto;" class="p-0 m-1">
+                
+                <select class="form-select mb-2">
+                    <option selected>Search in: Name</option>
+                    <option value="1">Search in: Number</option>
+                    <option value="2">Search in: Email</option>
+                    <option value="3">Search in: Date</option>
+                </select>
+                 <input type="text" class="form-control" placeholder="Search:">
+            </div>
+
         </div>
 
     </div>
