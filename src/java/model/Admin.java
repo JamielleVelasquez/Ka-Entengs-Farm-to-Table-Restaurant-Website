@@ -4,6 +4,12 @@ package model;
 public class Admin {
     private static String userEmail, email, password;
 
+    public Admin(String userEmail, String email,String  password) {
+        this.userEmail = userEmail;
+        this.email = email;
+        this.password = password;
+    }
+
     public Admin(String uNameEmail, String pWord) {
         userEmail = uNameEmail;
         password = pWord;

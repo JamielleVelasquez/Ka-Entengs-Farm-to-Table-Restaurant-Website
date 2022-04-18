@@ -1,22 +1,35 @@
 package controllers;
+
+import listeners.UserContextListener;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
+import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.Admin;
 import static security.CipherClass.*;
+import logging.LoggerClass;
 
-public class SignupServlet extends HttpServlet {
+
+public class OpenEditServlet extends HttpServlet {
 
     Connection con;
+    LoggerClass loggerClass = new LoggerClass();
+    Logger logger = loggerClass.getLoggerClass();
 
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
@@ -48,56 +61,40 @@ public class SignupServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.setCharacterEncoding("UTF-8");
-        ServletContext sc = getServletContext();
-        sc.setAttribute("errorMessage", "");
-        try {
-            if (con != null) {
-                String username = request.getParameter("regUser").trim();
-                String email = request.getParameter("regEmail").trim();
-                String pass = request.getParameter("regPass").trim();
-                String conpass = request.getParameter("regConfirmPass").trim();
-                if (!pass.equals(conpass)) { //password checker
-                    sc.setAttribute("errorMessage", "Error, your password does not match with your confirm password!");
-                    RequestDispatcher dispatcher = request.getRequestDispatcher("admin_signup.jsp");
-                    dispatcher.forward(request, response);
+        response.setContentType("text/html;charset=UTF-8");
+        try (PrintWriter out = response.getWriter()) {
+            ServletContext sc = getServletContext();
+            sc.setAttribute("errorMessage", "");
+            try {
+                if (con != null) {
+
+                    PreparedStatement pStmt;
+                    ResultSet rs;
+                        
+                            String query = "SELECT * FROM ADMINACCOUNTS";
+                            pStmt = con.prepareStatement(query);
+                            rs = pStmt.executeQuery();
+                                
+                            ArrayList<Admin> adminArray = new ArrayList<Admin>();
+                            
+                            while (rs.next()) {
+                                Admin admin = new Admin( rs.getString("USERNAME"), rs.getString("EMAIL"),rs.getString("PASSWORD"));
+                                adminArray.add(admin);
+                                System.out.println(admin.getUsername());
+                            }
+                            sc.setAttribute("adminArray", adminArray);
+                            RequestDispatcher dispatcher = request.getRequestDispatcher("Admin_Edit.jsp");
+                            dispatcher.forward(request, response);
+                    pStmt.close();
+                    rs.close();
                     return;
+                } else {
+                    response.sendError(HttpServletResponse.SC_NOT_FOUND);
                 }
-
-                String query = "SELECT USERNAME, EMAIL FROM ADMINACCOUNTS";
-                PreparedStatement pStmt = con.prepareStatement(query);
-                ResultSet rs = pStmt.executeQuery();
-                while (rs.next()) {
-                    if (email.equals(rs.getString("EMAIL"))) { //check if email exists
-                        sc.setAttribute("errorMessage", "Sorry, that email is already taken! Please sign up with a different one!");
-                        RequestDispatcher dispatcher = request.getRequestDispatcher("admin_signup.jsp");
-                        dispatcher.forward(request, response);
-                        return;
-                    }
-                    if (username.equals(rs.getString("USERNAME"))) { //check if email exists
-                        sc.setAttribute("errorMessage", "Sorry, that username is already taken! Please enter a different one!");
-                        RequestDispatcher dispatcher = request.getRequestDispatcher("admin_signup.jsp");
-                        dispatcher.forward(request, response);
-                        return;
-                    }
-                }
-                pStmt.close();
-
-                PreparedStatement st = con.prepareStatement("INSERT INTO ADMINACCOUNTS (USERNAME, EMAIL, PASSWORD) VALUES (?, ?, ?)");
-                st.setString(1, username);
-                st.setString(2, email);
-                st.setString(3, encrypt(pass));
-                st.executeUpdate();
-                response.sendRedirect("admin_login.jsp");
-                st.close();
-                rs.close();
-                return;
-            } else {
-                response.sendError(HttpServletResponse.SC_NOT_FOUND);
+            } catch (SQLException sqle) {
+                sc.setAttribute("errorMessage", "SQL Exception occurred!");
+                response.sendRedirect("errorPage.jsp");
             }
-        } catch (SQLException sqle) {
-            sc.setAttribute("errorMessage", "SQL Exception occurred!");
-            response.sendRedirect("errorPage.jsp");
         }
     }
 

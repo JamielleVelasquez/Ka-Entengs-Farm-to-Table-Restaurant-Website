@@ -48,6 +48,12 @@
             <form action="pdf.do" method="get" style="width: auto;" class="p-0 m-1">
                 <button class="btn btn-primary">Print PDF</button>
             </form>
+                <form action="OpenRev.do" method="get" style="width: auto;" class="p-0 m-1">
+                <button class="btn btn-primary">Reviews</button>
+            </form>
+                <form action="OpenEdit.do" method="get" style="width: auto;" class="p-0 m-1">
+                <button class="btn btn-primary">Edit Admin</button>
+            </form>
         </div>
         <form method="GET" action="sort.do" class="row g-0 justify-content-center justify-content-sm-between align-items-center flex-wrap">
             <div style="width: auto;" class="p-0 m-1">

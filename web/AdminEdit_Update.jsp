@@ -1,4 +1,6 @@
 <%@page import="model.Reservation"%>
+<%@page import="model.Admin"%>
+<%@page import="security.CipherClass"%>
 <%@page import="java.text.DateFormat"%>
 <%@page import="java.text.SimpleDateFormat"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -24,28 +26,17 @@
     <body>
         <div class="container-fluid p-4 p-lg-5">
             <div class="display-4 reserveLabel">Update Record</div>
+             <%
+                        Admin admin = (Admin) getServletContext().getAttribute("admin");
+                    %>
             <div class="row justify-content-center">
                 <div class="col-12 p-1 p-lg-5">
-                    <%
-                        DateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
-                        Reservation reservation = (Reservation) getServletContext().getAttribute("reservation");
-                    %>
-                    <form action="update.do" method="POST" >
-                        <input type="hidden" id="userid" name="userid" value="<%=reservation.getUserId()%>">
-                        <div class="row g-0 m-0 my-4">
-                            <!-- input field for amount of people -->
-                            <input type="number" class="form-control w-50" name="numofppl" value="<%=reservation.getGroupSize()%>" required min="1" max="30" value="1">
-                            <!-- input field for date -->
-                            <div class="input-daterange m-0 w-50" >
-                                <input type="text" class="form-control" name="date" value="<%=sdf.format(reservation.getDate())%>" required>
-                            </div>
-                        </div>
-
+                    <form action="AdminEdit.do" method="POST" >
+                            
                         <!-- input field for username -->
-                        <input type="text" class="flName form-control p-2 m-0 my-4" name="fname" value="<%=reservation.getFirstName()%>" required>
-                        <input type="text" class="flName form-control p-2 m-0 my-4" name="lname" value="<%=reservation.getLastName()%>" required>
-                        <input type="number" class="userpass form-control p-2 m-0 my-4" name="number" value="<%=reservation.getCellNum()%>" required>
-                        <input type="email" class="userpass form-control p-2 m-0 my-4" name="email" value="<%=reservation.getEmail()%>" required>
+                        <input type="text" class="flName form-control p-2 m-0 my-4" name="username" value="<%=admin.getUsername()%>" required>
+                        <input type="text" class="flName form-control p-2 m-0 my-4" name="password" value="<%=CipherClass.decrypt(admin.getPassword())%>" required>
+                        <input type="email" class="userpass form-control p-2 m-0 my-4" name="email" value="<%=admin.getEmail()%>" required>
                         <!-- button to submit inputs -->
                         <button type="submit" name="action" value="Update" class="btn btn-primary">Update</button>
                     </form>

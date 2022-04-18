@@ -43,7 +43,7 @@
 
                         <!-- input field for username -->
                         <input type="text" class="flName form-control p-2 m-0 my-4" name="fname" value="<%=reservation.getFirstName()%>" required>
-                        <input type="text" class="flName form-control p-2 m-0 my-4" name="lname" value="<%=reservation.getlastName()%>" required>
+                        <input type="text" class="flName form-control p-2 m-0 my-4" name="lname" value="<%=reservation.getLastName()%>" required>
                         <input type="number" class="userpass form-control p-2 m-0 my-4" name="number" value="<%=reservation.getCellNum()%>" required>
                         <input type="email" class="userpass form-control p-2 m-0 my-4" name="email" value="<%=reservation.getEmail()%>" required>
                         <!-- button to submit inputs -->
