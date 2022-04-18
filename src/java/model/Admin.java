@@ -2,22 +2,29 @@ package model;
 
 
 public class Admin {
-    private static String userEmail, email, password;
+    private String userEmail, email, password;
 
-    public Admin(String userEmail, String email,String  password) {
+    public Admin(String userEmail, String email,String password) {
         this.userEmail = userEmail;
         this.email = email;
         this.password = password;
     }
-
+ 
     public Admin(String uNameEmail, String pWord) {
-        userEmail = uNameEmail;
-        password = pWord;
+        this.userEmail = uNameEmail;
+        this.password = pWord;
     }
 
-    public void setDetails(String uNameEmail, String pWord) {
-        userEmail = uNameEmail;
-        password = pWord;
+    public void setUserEmail(String uNameEmail) {
+        this.userEmail = uNameEmail;
+    }
+    
+    public void setEmail(String email) {
+        this.email = email;
+    }
+    
+    public void setPassword(String pWord) {
+        this.password = pWord;
     }
 
     public String getEmail() {

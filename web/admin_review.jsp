@@ -36,6 +36,15 @@
             <div style="width: auto;">
                 <h1>Reviews</h1>
             </div>
+
+            <form action="admin_database.jsp" method="get" style="width: auto;" class="p-0 m-1">
+                <button class="btn btn-primary">Reservations</button>
+            </form>  
+            
+            <a href="Admin_Edit.jsp" style="width: auto;" class="p-0 m-1">
+                <button class="btn btn-primary">Admin Accounts</button>
+            </a>
+            
             <div class="text-end mx-5" style="width: auto;">
                 <h6>
                     Signed in as:
@@ -45,12 +54,6 @@
                     <button class="btn btn-primary">Log Out</button>
                 </form>
             </div>
-               <form action="admin_database.jsp" method="get" style="width: auto;" class="p-0 m-1">
-                <button class="btn btn-primary">Reservation</button>
-            </form>  
-                <form action="OpenEdit.do" method="get" style="width: auto;" class="p-0 m-1">
-                <button class="btn btn-primary">Edit Admin</button>
-            </form>
         </div>
 
     </div>
@@ -72,8 +75,8 @@
                 <h6 class="card-subtitle py-2 px-3">
                     <p><%=review.getDate()%></p>
                 </h6>
-                 <h6 class="card-subtitle py-2 px-3">
-                    <p><%=review.isActive()%></p>
+                <h6 class="card-subtitle py-2 px-3">
+                    <p>Display: <%=review.isActive()%></p>
                 </h6>
             </div>
             <ul class="list-group list-group-flush my-2" style="width: auto;">
@@ -90,7 +93,7 @@
                     <input type="hidden" name="name" value="<%=review.getName()%>">
                     <!-- Button trigger modal -->
                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                        remove
+                        Delete
                     </button>
 
                     <!-- Modal -->
@@ -113,7 +116,6 @@
         </div>
         <%}%>
     </div>
-    <footer-component></footer-component>
     <script src="script.js" type="text/javascript" defer></script>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

@@ -1,3 +1,5 @@
+<%@page import="model.Admin"%>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -16,8 +18,12 @@
     <body>
 
         <%
-                response.setHeader("Cache-control", "no-cache, no-store, must-revalidate");
-        %>
+            if (session.getAttribute("sessionTest") == null || session == null) {
+                response.sendRedirect("landing_page.jsp");
+                return;
+            }
+            response.setHeader("Cache-control", "no-cache, no-store, must-revalidate");
+        %> 
 
     <header-component></header-component>
     <div class="row align-items-center g-0" style="height: 80vh;">
@@ -35,6 +41,8 @@
                 <input type="password" class="userPass form-control mx-auto m-4" name="regPass" placeholder="Password" required>
                 <input type="password" class="userPass form-control mx-auto m-4" name="regConfirmPass" placeholder="Confirm Password" required>
                 <br>
+                <!-- error messages go here -->
+                <p class="text-danger">${errorMessage}</p>
                 <!-- button to submit inputs -->
                 <button class="loginBT btn btn-primary mt-3">Sign Up</button>
             </form>

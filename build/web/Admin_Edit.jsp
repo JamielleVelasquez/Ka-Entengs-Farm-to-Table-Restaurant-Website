@@ -30,7 +30,7 @@
             response.setHeader("Cache-control", "no-cache, no-store, must-revalidate");
             Admin scMsg = (Admin) getServletContext().getAttribute("loginDetails");
             String firstName = scMsg.getUsername();
-            
+
         %> 
     <header-component></header-component>
     <div class="container-fluid p-3 pb-sm-0 p-sm-5 ">
@@ -38,6 +38,19 @@
             <div style="width: auto;">
                 <h1>Admins</h1>
             </div>
+
+            <a style="width: auto;" class="p-0 m-1" href="admin_signup.jsp">
+                <button class="btn btn-primary">Admin Signup</button>
+            </a>
+
+            <a href="admin_review.jsp" style="width: auto;" class="p-0 m-1">
+                <button class="btn btn-primary">Reviews</button>
+            </a>
+
+            <form action="admin_database.jsp" method="get" style="width: auto;" class="p-0 m-1">
+                <button class="btn btn-primary">Reservation</button>
+            </form>  
+
             <div class="text-end mx-5" style="width: auto;">
                 <h6>
                     Signed in as:
@@ -47,40 +60,29 @@
                     <button class="btn btn-primary">Log Out</button>
                 </form>
             </div>
-                <form action="OpenRev.do" method="get" style="width: auto;" class="p-0 m-1">
-                <button class="btn btn-primary">Reviews</button>
-            </form>
-               <form action="admin_database.jsp" method="get" style="width: auto;" class="p-0 m-1">
-                <button class="btn btn-primary">Reservation</button>
-            </form>  
         </div>
-
     </div>
     <div class="container-fluid p-3">
         <%
             ArrayList<Admin> adminArray = (ArrayList<Admin>) getServletContext().getAttribute("adminArray");
             Iterator<Admin> iterator = adminArray.iterator();
-
+            
             while (iterator.hasNext()) {
-          
                 Admin adminu = iterator.next();
-               
         %>
+        
         <div class="row g-0 align-items-center justify-content-center justify-content-sm-between p-1 p-sm-4 my-3 border rounded" style="border-color:darkgray; word-wrap:break-word;">
 
 
             <div class="card border-0 my-2" style="width: auto;">
                 <h1 class="card-header bg-white border-0">
-                    <p><%=adminu.getEmail()%></p>
+                    <p>Username: <%=adminu.getUsername()%></p>
                 </h1>
                 <h6 class="card-subtitle py-2 px-3">
-                    <p><%=adminu.getUsername()%></p>
-                </h6>
-                 <h6 class="card-subtitle py-2 px-3">
-                    <p><%=adminu.getPassword()%></p>
+                    <p>Email: <%=adminu.getEmail()%></p>                    
                 </h6>
             </div>
-           
+
 
             <div class=" my-2" style="width: auto;">
                 <form method="POST" action="AdminEdit.do">
@@ -92,7 +94,7 @@
                     <input type="hidden" name="username" value="<%=adminu.getUsername()%>">
                     <!-- Button trigger modal -->
                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                        remove
+                        Delete
                     </button>
 
                     <!-- Modal -->
@@ -115,7 +117,6 @@
         </div>
         <%}%>
     </div>
-    <footer-component></footer-component>
     <script src="script.js" type="text/javascript" defer></script>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

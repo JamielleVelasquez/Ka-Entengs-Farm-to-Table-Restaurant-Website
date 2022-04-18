@@ -22,6 +22,13 @@
         <title>Update Record</title>
     </head>
     <body>
+        <%
+            if (session.getAttribute("sessionTest") == null || session == null) {
+                response.sendRedirect("landing_page.jsp");
+                return;
+            }
+            response.setHeader("Cache-control", "no-cache, no-store, must-revalidate");
+        %> 
         <div class="container-fluid p-4 p-lg-5">
             <div class="display-4 reserveLabel">Update Record</div>
             <div class="row justify-content-center">

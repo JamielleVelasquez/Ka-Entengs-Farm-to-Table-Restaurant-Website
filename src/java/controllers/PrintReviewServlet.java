@@ -7,22 +7,14 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import model.Reservation;
 import model.Reviews;
 
 public class PrintReviewServlet extends HttpServlet {
@@ -60,25 +52,30 @@ public class PrintReviewServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
+        try {
             PreparedStatement pStmt = con.prepareStatement("SELECT * FROM REVIEWS WHERE ACTIVE = true");
             ResultSet rs = pStmt.executeQuery();
-            ArrayList<Reviews> reviewArray = new ArrayList<Reviews>();
-
-            while (rs.next()) {
-                Reviews review = new Reviews(rs.getString("NAME"), rs.getString("COMMENT"), rs.getDate("DATE"), rs.getBoolean("ACTIVE"));
-                out.println(" <div class=\"card border-0\">");
-                out.println("<div class=\"card-body\">");
-                out.println("<h4 class=\"card-title\">" + review.getName() + "</h4>");
-                out.println("<h6 class=\"class-subtitle\"> Reviewed on: " + review.getDate() + " </h6>");
-                out.println("<p class=\"card-text\">" + review.getReview() + "</p>");
-                out.println("</div>");
-                out.println("</div>");
+            PrintWriter out = response.getWriter();
+            try {
+                while (rs.next()) {
+                    Reviews review = new Reviews(rs.getString("NAME"), rs.getString("COMMENT"), rs.getDate("DATE"), rs.getBoolean("ACTIVE"));
+                    out.println(" <div class=\"card border-0\">");
+                    out.println("<div class=\"card-body\">");
+                    out.println("<h4 class=\"card-title\">" + review.getName() + "</h4>");
+                    out.println("<h6 class=\"class-subtitle\"> Reviewed on: " + review.getDate() + " </h6>");
+                    out.println("<p class=\"card-text\">" + review.getReview() + "</p>");
+                    out.println("</div>");
+                    out.println("</div>");
+                }
+            } finally {
+                out.flush();
             }
+
             rs.close();
             pStmt.close();
         } catch (SQLException ex) {
             Logger.getLogger(PrintReviewServlet.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
         }
     }
 

@@ -12,20 +12,11 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/jim/Documents/GitHub/Ka-Entengs-Farm-to-Table-Restaurant-Website/web/admin_review.jsp</file>
-            <file>file:/C:/Users/jim/Documents/GitHub/Ka-Entengs-Farm-to-Table-Restaurant-Website/web/script.js</file>
-            <file>file:/C:/Users/jim/Documents/GitHub/Ka-Entengs-Farm-to-Table-Restaurant-Website/web/Admin_Edit.jsp</file>
-            <file>file:/C:/Users/jim/Documents/GitHub/Ka-Entengs-Farm-to-Table-Restaurant-Website/src/java/controllers/OpenEditServlet.java</file>
-            <file>file:/C:/Users/jim/Documents/GitHub/Ka-Entengs-Farm-to-Table-Restaurant-Website/src/java/controllers/DeleteServlet.java</file>
-            <file>file:/C:/Users/jim/Documents/GitHub/Ka-Entengs-Farm-to-Table-Restaurant-Website/src/java/controllers/AdminEditServlet.java</file>
-            <file>file:/C:/Users/jim/Documents/GitHub/Ka-Entengs-Farm-to-Table-Restaurant-Website/web/admin_login.jsp</file>
-            <file>file:/C:/Users/jim/Documents/GitHub/Ka-Entengs-Farm-to-Table-Restaurant-Website/web/AdminEdit_Update.jsp</file>
-            <file>file:/C:/Users/jim/Documents/GitHub/Ka-Entengs-Farm-to-Table-Restaurant-Website/src/java/controllers/AddReviewServlet.java</file>
-            <file>file:/C:/Users/jim/Documents/GitHub/Ka-Entengs-Farm-to-Table-Restaurant-Website/web/admin_forgot_pass.jsp</file>
-            <file>file:/C:/Users/jim/Documents/GitHub/Ka-Entengs-Farm-to-Table-Restaurant-Website/src/java/controllers/ForgotPassServlet.java</file>
-            <file>file:/C:/Users/jim/Documents/GitHub/Ka-Entengs-Farm-to-Table-Restaurant-Website/src/java/security/CipherClass.java</file>
-            <file>file:/C:/Users/jim/Documents/GitHub/Ka-Entengs-Farm-to-Table-Restaurant-Website/web/landing_page.jsp</file>
-            <file>file:/C:/Users/jim/Documents/GitHub/Ka-Entengs-Farm-to-Table-Restaurant-Website/web/reservation.jsp</file>
+            <file>file:/C:/Users/jamie/Documents/School%20Documents/Software%20Engineering/Ka-Entengs-Farm-to-Table-Restaurant-Website/src/java/controllers/SortSearchServlet.java</file>
+            <file>file:/C:/Users/jamie/Documents/School%20Documents/Software%20Engineering/Ka-Entengs-Farm-to-Table-Restaurant-Website/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/jamie/Documents/School%20Documents/Software%20Engineering/Ka-Entengs-Farm-to-Table-Restaurant-Website/src/java/controllers/AddReviewServlet.java</file>
+            <file>file:/C:/Users/jamie/Documents/School%20Documents/Software%20Engineering/Ka-Entengs-Farm-to-Table-Restaurant-Website/src/java/controllers/LoginServlet.java</file>
+            <file>file:/C:/Users/jamie/Documents/School%20Documents/Software%20Engineering/Ka-Entengs-Farm-to-Table-Restaurant-Website/src/java/controllers/AvailableSlotsServlet.java</file>
         </group>
     </open-files>
 </project-private>

@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="style.css" rel="stylesheet" type="text/css" />
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="style.css" rel="stylesheet" type="text/css" />
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 
-    <title>Ka Enteng's Farm and Table Restaurant</title>
-</head>
+        <title>Ka Enteng's Farm and Table Restaurant</title>
+    </head>
 
-<body>
+    <body>
     <header-component></header-component>
     <div class="container-fluid p-0 position-relative" style="background-image: url('https://picsum.photos/1920/720');
-height: 90vh;
-background-size: cover;">
+         height: 90vh;
+         background-size: cover;">
         <div id="landing-page-main-header" class="text-white display-3 p-2 ps-sm-5 pb-sm-4 fw-bold">Experience Nature Through Us</div>
     </div>
     <div id="container-text-image" class="container-fluid g-0 row p-3 p-sm-5 align-items-center" style="height: 550px;">
@@ -29,15 +29,15 @@ background-size: cover;">
                 and microoganisms as well as their benefits to your health and environment. See the cycle of food for youself as you eat healthy and nutritious meals that were freshly picked from the farm.</p>
             <a href="tour_info.html">
                 <button class="btn btn-primary">
-                        View Details
+                    View Details
                 </button>
             </a>
         </div>
         <div id="container-image" class="col-12 col-sm-6 col-lg-4" style="background-image: url('https://picsum.photos/1000/1000');
-            background-position: center;
-            height: 90%;
-            background-size: cover;
-            float: right;"></div>
+             background-position: center;
+             height: 90%;
+             background-size: cover;
+             float: right;"></div>
     </div>
     <div class="container-fluid p-1 py-4 p-sm-5 bg-green">
         <div class="row justify-content-center align-items-center mt-4 g-0">
@@ -51,9 +51,9 @@ background-size: cover;">
 
         <div class="row g-0">
             <div class="img-fluid col-12 col-lg-4 p-0 order-last order-lg-first" style="background-image: url('https://picsum.photos/500/500');
-                background-position: center;
-                height: 500px;
-                background-size: cover;">
+                 background-position: center;
+                 height: 500px;
+                 background-size: cover;">
             </div>
             <div class="col-12 col-lg-8 p-3 py-5 p-sm-5 my-auto">
                 <h1 class="mb-4">Bringing homegrown flavor to your platter</h1>
@@ -62,7 +62,7 @@ background-size: cover;">
                 <a href="menu.html">
                     <button class="btn btn-primary">
                         Our Menu
-                </button>
+                    </button>
                 </a>
             </div>
         </div>
@@ -73,9 +73,7 @@ background-size: cover;">
             <div class="display-3 col-12 col-md-3 mb-4 m-md-0">Reviews</div>
             <div class="vr p-0 mx-5 opacity-50 d-none d-md-block"></div>
             <div class="col-12 col-md-7 overflow-auto p-0" style="height: 50vh;">
-                <!-- Cards to display Review Database -->
-<!--                Uncomment code below to see problem with header/footer and the review-->
-               <%--<jsp:include page="/PrintReview.do"/>--%>
+                <jsp:include page="/PrintReview.do"/>
             </div>
         </div>
     </div>
@@ -86,7 +84,7 @@ background-size: cover;">
 
                 <input class="form-control" type="text" name="regName" id="reviewName" placeholder="Name:"><br>
                 <textarea class="form-control" name="regComment" id="reviewText" placeholder="How did we do?"></textarea><br>
-                <button type="submit" class="btn btn-primary">Placeholder</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
             </form>
 
             <div class="vr p-0 text-white opacity-50 d-none d-sm-block"></div>
@@ -98,6 +96,7 @@ background-size: cover;">
         </div>
     </div>
     <footer-component></footer-component>
+
     <script src="script.js" type="text/javascript" defer></script>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

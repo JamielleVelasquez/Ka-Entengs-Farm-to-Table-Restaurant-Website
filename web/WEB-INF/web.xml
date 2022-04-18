@@ -357,38 +357,6 @@
         </init-param>
     </servlet>
     <servlet>
-        <servlet-name>OpenReviewServlet</servlet-name>
-        <servlet-class>controllers.OpenReviewServlet</servlet-class>
-        <init-param>
-            <param-name>jdbcClassName</param-name>
-            <param-value>org.apache.derby.jdbc.ClientDriver</param-value>
-        </init-param>
-        <init-param>
-            <param-name>dbUserName</param-name>
-            <param-value>app</param-value>
-        </init-param>
-        <init-param>
-            <param-name>dbPassword</param-name>
-            <param-value>app</param-value>
-        </init-param>
-        <init-param>
-            <param-name>jdbcDriverURL</param-name>
-            <param-value>jdbc:derby</param-value>
-        </init-param>
-        <init-param>
-            <param-name>dbHostName</param-name>
-            <param-value>localhost</param-value>
-        </init-param>
-        <init-param>
-            <param-name>dbPort</param-name>
-            <param-value>1527</param-value>
-        </init-param>
-        <init-param>
-            <param-name>databaseName</param-name>
-            <param-value>KaEntengRestaurantToTableDB</param-value>
-        </init-param>
-    </servlet>
-    <servlet>
         <servlet-name>ReviewStatusServlet</servlet-name>
         <servlet-class>controllers.ReviewStatusServlet</servlet-class>
         <init-param>
@@ -453,41 +421,9 @@
         </init-param>
     </servlet>
     <servlet>
-        <servlet-name>OpenEditServlet</servlet-name>
-        <servlet-class>controllers.OpenEditServlet</servlet-class>
-        <init-param>
-            <param-name>jdbcClassName</param-name>
-            <param-value>org.apache.derby.jdbc.ClientDriver</param-value>
-        </init-param>
-        <init-param>
-            <param-name>dbUserName</param-name>
-            <param-value>app</param-value>
-        </init-param>
-        <init-param>
-            <param-name>dbPassword</param-name>
-            <param-value>app</param-value>
-        </init-param>
-        <init-param>
-            <param-name>jdbcDriverURL</param-name>
-            <param-value>jdbc:derby</param-value>
-        </init-param>
-        <init-param>
-            <param-name>dbHostName</param-name>
-            <param-value>localhost</param-value>
-        </init-param>
-        <init-param>
-            <param-name>dbPort</param-name>
-            <param-value>1527</param-value>
-        </init-param>
-        <init-param>
-            <param-name>databaseName</param-name>
-            <param-value>KaEntengRestaurantToTableDB</param-value>
-        </init-param>
-    </servlet>
-    <servlet>
         <servlet-name>AdminEditServlet</servlet-name>
         <servlet-class>controllers.AdminEditServlet</servlet-class>
-         <init-param>
+        <init-param>
             <param-name>jdbcClassName</param-name>
             <param-value>org.apache.derby.jdbc.ClientDriver</param-value>
         </init-param>
@@ -577,20 +513,12 @@
         <url-pattern>/add.do</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
-        <servlet-name>OpenReviewServlet</servlet-name>
-        <url-pattern>/OpenRev.do</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
         <servlet-name>ReviewStatusServlet</servlet-name>
         <url-pattern>/reviewstat.do</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>PrintReviewServlet</servlet-name>
         <url-pattern>/PrintReview.do</url-pattern>
-    </servlet-mapping>
-    <servlet-mapping>
-        <servlet-name>OpenEditServlet</servlet-name>
-        <url-pattern>/OpenEdit.do</url-pattern>
     </servlet-mapping>
     <servlet-mapping>
         <servlet-name>AdminEditServlet</servlet-name>

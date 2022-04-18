@@ -22,7 +22,7 @@
     <body>
         <%
             if (session.getAttribute("sessionTest") == null || session == null) {
-                response.sendRedirect("landing_page.html");
+                response.sendRedirect("landing_page.jsp");
                 return;
             }
             response.setHeader("Cache-control", "no-cache, no-store, must-revalidate");
@@ -35,6 +35,19 @@
             <div style="width: auto;">
                 <h1>Reservations</h1>
             </div>
+
+            <form action="pdf.do" method="get" style="width: auto;" class="p-0 m-1">
+                <button class="btn btn-primary">Print PDF</button>
+            </form>
+            
+            <a href="admin_review.jsp" style="width: auto;" class="p-0 m-1">
+                <button class="btn btn-primary">Reviews</button>
+            </a>
+
+            <a href="Admin_Edit.jsp" style="width: auto;" class="p-0 m-1">
+                <button class="btn btn-primary">Admin Accounts</button>
+            </a>
+
             <div class="text-end mx-5" style="width: auto;">
                 <h6>
                     Signed in as:
@@ -45,15 +58,6 @@
                 </form>
 
             </div>
-            <form action="pdf.do" method="get" style="width: auto;" class="p-0 m-1">
-                <button class="btn btn-primary">Print PDF</button>
-            </form>
-                <form action="OpenRev.do" method="get" style="width: auto;" class="p-0 m-1">
-                <button class="btn btn-primary">Reviews</button>
-            </form>
-                <form action="OpenEdit.do" method="get" style="width: auto;" class="p-0 m-1">
-                <button class="btn btn-primary">Edit Admin</button>
-            </form>
         </div>
         <form method="GET" action="sort.do" class="row g-0 justify-content-center justify-content-sm-between align-items-center flex-wrap">
             <div style="width: auto;" class="p-0 m-1">
@@ -162,7 +166,6 @@
         </div>
         <%}%>
     </div>
-    <footer-component></footer-component>
     <script src="script.js" type="text/javascript" defer></script>
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>

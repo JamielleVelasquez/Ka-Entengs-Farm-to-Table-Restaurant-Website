@@ -24,6 +24,7 @@ import model.Admin;
 import static security.CipherClass.*;
 import logging.LoggerClass;
 import model.Reservation;
+import model.Reviews;
 
 public class LoginServlet extends HttpServlet {
 
@@ -92,14 +93,38 @@ public class LoginServlet extends HttpServlet {
                             query = "SELECT * FROM RESERVATIONDB";
                             pStmt = con.prepareStatement(query);
                             rs = pStmt.executeQuery();
-                                
+
                             ArrayList<Reservation> reservationArray = new ArrayList<Reservation>();
-                            
+
                             while (rs.next()) {
                                 Reservation reservation = new Reservation(rs.getInt("USERID"), rs.getInt("NUMBEROFPPL"), rs.getString("FNAME"), rs.getString("LNAME"), rs.getString("CPNUMBER"), rs.getString("EMAIL"), rs.getDate("RESERVEDDATE"));
                                 reservationArray.add(reservation);
                             }
                             sc.setAttribute("reservationArray", reservationArray);
+
+                            query = "SELECT * FROM REVIEWS";
+                            pStmt = con.prepareStatement(query);
+                            rs = pStmt.executeQuery();
+
+                            ArrayList<Reviews> ReviewsArray = new ArrayList<Reviews>();
+
+                            while (rs.next()) {
+                                Reviews review = new Reviews(rs.getString("NAME"), rs.getString("COMMENT"), rs.getDate("DATE"), rs.getBoolean("ACTIVE"));
+                                ReviewsArray.add(review);
+                            }
+                            sc.setAttribute("ReviewsArray", ReviewsArray);
+
+                            query = "SELECT * FROM ADMINACCOUNTS";
+                            pStmt = con.prepareStatement(query);
+                            rs = pStmt.executeQuery();
+                            ArrayList<Admin> adminArray = new ArrayList<Admin>();
+                            
+                            while (rs.next()) {
+                                Admin admin = new Admin(rs.getString("USERNAME"), rs.getString("EMAIL"), rs.getString("PASSWORD"));
+                                adminArray.add(admin);
+                            }
+                            sc.setAttribute("adminArray", adminArray);
+
                             RequestDispatcher dispatcher = request.getRequestDispatcher("admin_database.jsp");
                             dispatcher.forward(request, response);
                             return;

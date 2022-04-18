@@ -6,11 +6,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -20,14 +16,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import model.Admin;
-import model.Reservation;
-import security.CipherClass;
+
 public class AdminEditServlet extends HttpServlet {
 
     Connection con;
-    SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyy");
-    Date todayDate = new Date();
-    Date inputDate = null;
 
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
@@ -66,7 +58,7 @@ public class AdminEditServlet extends HttpServlet {
         try {
 
             //get user id
-            String username =request.getParameter("username");
+            String username = request.getParameter("username");
 
             PreparedStatement pStmt = con.prepareStatement("SELECT * FROM ADMINACCOUNTS WHERE USERNAME = ?");
 
@@ -77,18 +69,17 @@ public class AdminEditServlet extends HttpServlet {
 
             if (request.getParameter("action").equals("Edit")) {
 
-                Admin admin = new Admin( rs.getString("USERNAME"), rs.getString("EMAIL"), rs.getString("PASSWORD"));
+                Admin admin = new Admin(rs.getString("USERNAME"), rs.getString("EMAIL"), rs.getString("PASSWORD"));
 
                 sc.setAttribute("admin", admin);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("AdminEdit_Update.jsp");
                 dispatcher.forward(request, response);
                 return;
             } else if (request.getParameter("action").equals("Update")) {
-
-                pStmt = con.prepareStatement("UPDATE ADMINACCOUNTS SET USERNAME = ?, EMAIL = ?, PASSWORD = ?");
-                pStmt.setString(1, request.getParameter("username"));
+                pStmt = con.prepareStatement("UPDATE ADMINACCOUNTS SET USERNAME = ?, EMAIL = ? WHERE USERNAME = ?");
+                pStmt.setString(1, request.getParameter("newUsername"));
                 pStmt.setString(2, request.getParameter("email"));
-                pStmt.setString(3, security.CipherClass.encrypt(request.getParameter("password")));
+                pStmt.setString(3, username);
                 pStmt.executeUpdate();
 
                 String query = "SELECT * FROM ADMINACCOUNTS";
@@ -106,24 +97,24 @@ public class AdminEditServlet extends HttpServlet {
                 dispatcher.forward(request, response);
                 pStmt.close();
                 return;
-            }else if (request.getParameter("action").equals("Delete")){
-            pStmt = con.prepareStatement("DELETE FROM ADMINACCOUNTS WHERE USERNAME = ?");
-            pStmt.setString(1,request.getParameter("username"));
-            pStmt.executeUpdate();
-            String query = "SELECT * FROM ADMINACCOUNTS";
-            pStmt = con.prepareStatement(query);
-            rs = pStmt.executeQuery();
+            } else if (request.getParameter("action").equals("Delete")) {
+                pStmt = con.prepareStatement("DELETE FROM ADMINACCOUNTS WHERE USERNAME = ?");
+                pStmt.setString(1, request.getParameter("username"));
+                pStmt.executeUpdate();
+                String query = "SELECT * FROM ADMINACCOUNTS";
+                pStmt = con.prepareStatement(query);
+                rs = pStmt.executeQuery();
 
-            ArrayList<Admin> adminArray = new ArrayList<Admin>();
+                ArrayList<Admin> adminArray = new ArrayList<Admin>();
 
-            while (rs.next()) {
+                while (rs.next()) {
                     Admin admin = new Admin(rs.getString("USERNAME"), rs.getString("EMAIL"), rs.getString("PASSWORD"));
                     adminArray.add(admin);
-            }
-            sc.setAttribute("adminArray", adminArray);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("Admin_Edit.jsp");
-            dispatcher.forward(request, response);
-            pStmt.close();
+                }
+                sc.setAttribute("adminArray", adminArray);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("Admin_Edit.jsp");
+                dispatcher.forward(request, response);
+                pStmt.close();
             }
         } catch (Exception e) {
             e.printStackTrace();

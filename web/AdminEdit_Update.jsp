@@ -24,18 +24,23 @@
         <title>Update Record</title>
     </head>
     <body>
+        <%
+            if (session.getAttribute("sessionTest") == null || session == null) {
+                response.sendRedirect("landing_page.jsp");
+                return;
+            }
+            response.setHeader("Cache-control", "no-cache, no-store, must-revalidate");
+            Admin admin = (Admin) getServletContext().getAttribute("admin");
+        %> 
         <div class="container-fluid p-4 p-lg-5">
             <div class="display-4 reserveLabel">Update Record</div>
-             <%
-                        Admin admin = (Admin) getServletContext().getAttribute("admin");
-                    %>
             <div class="row justify-content-center">
                 <div class="col-12 p-1 p-lg-5">
                     <form action="AdminEdit.do" method="POST" >
-                            
+                        <input type="hidden" id="username" name="username" value="<%=admin.getUsername()%>">
+
                         <!-- input field for username -->
-                        <input type="text" class="flName form-control p-2 m-0 my-4" name="username" value="<%=admin.getUsername()%>" required>
-                        <input type="text" class="flName form-control p-2 m-0 my-4" name="password" value="<%=CipherClass.decrypt(admin.getPassword())%>" required>
+                        <input type="text" class="flName form-control p-2 m-0 my-4" name="newUsername" value="<%=admin.getUsername()%>" required>
                         <input type="email" class="userpass form-control p-2 m-0 my-4" name="email" value="<%=admin.getEmail()%>" required>
                         <!-- button to submit inputs -->
                         <button type="submit" name="action" value="Update" class="btn btn-primary">Update</button>
