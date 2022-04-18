@@ -1,16 +1,31 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="1">
+        <file>
+            <url>web/errorPage.jsp</url>
+            <bookmark id="1">
+                <name/>
+                <line>32</line>
+                <key/>
+            </bookmark>
+        </file>
+    </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+            <file>file:/C:/Users/jim/Documents/GitHub/Ka-Entengs-Farm-to-Table-Restaurant-Website/web/admin_review.jsp</file>
             <file>file:/C:/Users/jim/Documents/GitHub/Ka-Entengs-Farm-to-Table-Restaurant-Website/web/script.js</file>
-            <file>file:/C:/Users/jim/Documents/GitHub/Ka-Entengs-Farm-to-Table-Restaurant-Website/web/WEB-INF/web.xml</file>
-            <file>file:/C:/Users/jim/Documents/GitHub/Ka-Entengs-Farm-to-Table-Restaurant-Website/web/style.css</file>
-            <file>file:/C:/Users/jim/Documents/GitHub/Ka-Entengs-Farm-to-Table-Restaurant-Website/nbproject/build-impl.xml</file>
-            <file>file:/C:/Users/jim/Documents/GitHub/Ka-Entengs-Farm-to-Table-Restaurant-Website/web/admin_database.jsp</file>
+            <file>file:/C:/Users/jim/Documents/GitHub/Ka-Entengs-Farm-to-Table-Restaurant-Website/web/Admin_Edit.jsp</file>
+            <file>file:/C:/Users/jim/Documents/GitHub/Ka-Entengs-Farm-to-Table-Restaurant-Website/src/java/controllers/OpenEditServlet.java</file>
+            <file>file:/C:/Users/jim/Documents/GitHub/Ka-Entengs-Farm-to-Table-Restaurant-Website/src/java/controllers/DeleteServlet.java</file>
+            <file>file:/C:/Users/jim/Documents/GitHub/Ka-Entengs-Farm-to-Table-Restaurant-Website/src/java/controllers/AdminEditServlet.java</file>
+            <file>file:/C:/Users/jim/Documents/GitHub/Ka-Entengs-Farm-to-Table-Restaurant-Website/web/admin_login.jsp</file>
+            <file>file:/C:/Users/jim/Documents/GitHub/Ka-Entengs-Farm-to-Table-Restaurant-Website/web/AdminEdit_Update.jsp</file>
+            <file>file:/C:/Users/jim/Documents/GitHub/Ka-Entengs-Farm-to-Table-Restaurant-Website/src/java/controllers/AddReviewServlet.java</file>
+            <file>file:/C:/Users/jim/Documents/GitHub/Ka-Entengs-Farm-to-Table-Restaurant-Website/web/admin_forgot_pass.jsp</file>
+            <file>file:/C:/Users/jim/Documents/GitHub/Ka-Entengs-Farm-to-Table-Restaurant-Website/src/java/controllers/ForgotPassServlet.java</file>
             <file>file:/C:/Users/jim/Documents/GitHub/Ka-Entengs-Farm-to-Table-Restaurant-Website/src/java/security/CipherClass.java</file>
-            <file>file:/C:/Users/jim/Documents/GitHub/Ka-Entengs-Farm-to-Table-Restaurant-Website/src/java/controllers/PDFServlet.java</file>
-            <file>file:/C:/Users/jim/Documents/GitHub/Ka-Entengs-Farm-to-Table-Restaurant-Website/src/conf/MANIFEST.MF</file>
+            <file>file:/C:/Users/jim/Documents/GitHub/Ka-Entengs-Farm-to-Table-Restaurant-Website/web/landing_page.jsp</file>
+            <file>file:/C:/Users/jim/Documents/GitHub/Ka-Entengs-Farm-to-Table-Restaurant-Website/web/reservation.jsp</file>
         </group>
     </open-files>
 </project-private>
