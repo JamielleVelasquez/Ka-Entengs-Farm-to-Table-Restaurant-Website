@@ -1,12 +1,12 @@
 package controllers;
-
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
+import java.sql.Timestamp;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -14,9 +14,9 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import model.Reservation;
+import static security.CipherClass.*;
 
-public class DeleteServlet extends HttpServlet {
+public class AddReviewServlet extends HttpServlet {
 
     Connection con;
 
@@ -50,29 +50,31 @@ public class DeleteServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        request.setCharacterEncoding("UTF-8");
         ServletContext sc = getServletContext();
-        response.setContentType("text/html;charset=UTF-8");
+        sc.setAttribute("errorMessage", "");
         try {
-            PreparedStatement pStmt = con.prepareStatement("DELETE FROM RESERVATIONDB WHERE USERID = ?");
-            pStmt.setInt(1, Integer.parseInt(request.getParameter("userid")));
-            pStmt.executeUpdate();
-            String query = "SELECT * FROM RESERVATIONDB";
-            pStmt = con.prepareStatement(query);
-            ResultSet rs = pStmt.executeQuery();
+            if (con != null) {
+               
+                String name = request.getParameter("regName").trim();
+                String comment = request.getParameter("regComment").trim();
 
-            ArrayList<Reservation> reservationArray = new ArrayList<Reservation>();
+                PreparedStatement st = con.prepareStatement("INSERT INTO REVIEWS (NAME, COMMENT, DATE, ACTIVE) VALUES (?, ?, ?, ?)");
+                st.setString(1, name);
+                st.setString(2, comment);
+                java.sql.Timestamp date = new java.sql.Timestamp(new java.util.Date().getTime());
+                st.setTimestamp(3, date);
+                st.setBoolean(4,false);
 
-            while (rs.next()) {
-                Reservation reservation = new Reservation(rs.getInt("USERID"), rs.getInt("NUMBEROFPPL"), rs.getString("FNAME"), rs.getString("LNAME"), rs.getString("CPNUMBER"), rs.getString("EMAIL"), rs.getDate("RESERVEDDATE"));
-                reservationArray.add(reservation);
+                st.executeUpdate();
+                response.sendRedirect("landing_page.jsp");
+                st.close();
+                return;
+            } else {
+                response.sendError(HttpServletResponse.SC_NOT_FOUND);
             }
-            sc.setAttribute("reservationArray", reservationArray);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("admin_database.jsp");
-            dispatcher.forward(request, response);
-            pStmt.close();
-            return;
-        } catch (Exception e) {
-            e.printStackTrace();
+        } catch (SQLException sqle) {
+            sc.setAttribute("errorMessage", "SQL Exception occurred!");
             response.sendRedirect("errorPage.jsp");
         }
     }

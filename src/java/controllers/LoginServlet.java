@@ -92,7 +92,7 @@ public class LoginServlet extends HttpServlet {
                             query = "SELECT * FROM RESERVATIONDB";
                             pStmt = con.prepareStatement(query);
                             rs = pStmt.executeQuery();
-
+                                
                             ArrayList<Reservation> reservationArray = new ArrayList<Reservation>();
                             
                             while (rs.next()) {

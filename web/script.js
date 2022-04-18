@@ -10,7 +10,7 @@ class Header extends HTMLElement {
         <header class="sticky-top bg-white" id="header">
         <nav class="navbar navbar-expand-md p-0">
             <div class="container-fluid">
-                <a class="navbar-brand h4 text-dark px-0 px-sm-4 d-none d-sm-block" href="landing_page.html">Enteng's Farm to Table Restaurant</a>
+                <a class="navbar-brand h4 text-dark px-0 px-sm-4 d-none d-sm-block" href="landing_page.jsp">Enteng's Farm to Table Restaurant</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-toggle">
                     <i class="bi bi-list"></i>
                 </button>

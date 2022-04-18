@@ -14,7 +14,6 @@
 </head>
 
 <body>
-
     <header-component></header-component>
     <div class="container-fluid p-0 position-relative" style="background-image: url('https://picsum.photos/1920/720');
 height: 90vh;
@@ -75,29 +74,18 @@ background-size: cover;">
             <div class="vr p-0 mx-5 opacity-50 d-none d-md-block"></div>
             <div class="col-12 col-md-7 overflow-auto p-0" style="height: 50vh;">
                 <!-- Cards to display Review Database -->
-                <div class="card border-0">
-                    <div class="card-body">
-                        <h4 class="card-title">
-                            Jamielle V.
-                        </h4>
-                        <h6 class="class-subtitle">
-                            Reviewed on 3/2/22
-                        </h6>
-                        <p class="card-text">
-                            "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In maximus est blandit arcu mollis, et fringilla diam dapibus."
-                        </p>
-                    </div>
-                </div>
+<!--                Uncomment code below to see problem with header/footer and the review-->
+               <%--<jsp:include page="/PrintReview.do"/>--%>
             </div>
         </div>
     </div>
     <div class="container-fluid p-5 bg-green">
 
         <div class="row align-items-center">
-            <form class="col-12 col-sm-7 p-0 pe-sm-5">
+            <form class="col-12 col-sm-7 p-0 pe-sm-5" action="add.do" method="POST">
 
-                <input class="form-control" type="text" name="" id="reviewName" placeholder="Name:"><br>
-                <textarea class="form-control" name="" id="reviewText" placeholder="How did we do?"></textarea><br>
+                <input class="form-control" type="text" name="regName" id="reviewName" placeholder="Name:"><br>
+                <textarea class="form-control" name="regComment" id="reviewText" placeholder="How did we do?"></textarea><br>
                 <button type="submit" class="btn btn-primary">Placeholder</button>
             </form>
 

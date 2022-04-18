@@ -17,7 +17,7 @@ public class LogoutServlet extends HttpServlet {
         sc.removeAttribute("loginDetails");
         session.removeAttribute("sessionTest");
         session.invalidate();
-        response.sendRedirect("landing_page.html");
+        response.sendRedirect("landing_page.jsp");
     }
 
     @Override

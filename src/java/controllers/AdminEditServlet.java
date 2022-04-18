@@ -19,9 +19,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import model.Admin;
 import model.Reservation;
-
-public class UpdateServlet extends HttpServlet {
+import security.CipherClass;
+public class AdminEditServlet extends HttpServlet {
 
     Connection con;
     SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyy");
@@ -65,60 +66,64 @@ public class UpdateServlet extends HttpServlet {
         try {
 
             //get user id
-            int userid = Integer.parseInt(request.getParameter("userid"));
+            String username =request.getParameter("username");
 
-            PreparedStatement pStmt = con.prepareStatement("SELECT * FROM RESERVATIONDB WHERE USERID = ?");
+            PreparedStatement pStmt = con.prepareStatement("SELECT * FROM ADMINACCOUNTS WHERE USERNAME = ?");
 
-            pStmt.setInt(1, userid);
+            pStmt.setString(1, username);
 
             ResultSet rs = pStmt.executeQuery();
             rs.next();
 
             if (request.getParameter("action").equals("Edit")) {
 
-                Reservation reservation = new Reservation(userid, rs.getInt("NUMBEROFPPL"), rs.getString("FNAME"), rs.getString("LNAME"), rs.getString("CPNUMBER"), rs.getString("EMAIL"), rs.getDate("RESERVEDDATE"));
+                Admin admin = new Admin( rs.getString("USERNAME"), rs.getString("EMAIL"), rs.getString("PASSWORD"));
 
-                sc.setAttribute("reservation", reservation);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("admin_update.jsp");
+                sc.setAttribute("admin", admin);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("AdminEdit_Update.jsp");
                 dispatcher.forward(request, response);
                 return;
             } else if (request.getParameter("action").equals("Update")) {
 
-                pStmt = con.prepareStatement("UPDATE RESERVATIONDB SET FNAME = ?, LNAME = ?, "
-                        + "CPNUMBER = ?, NUMBEROFPPL = ?, EMAIL = ?, RESERVEDDATE = ?"
-                        + "WHERE USERID = ?");
-                System.out.println(request.getParameter("fname"));
-                pStmt.setString(1, request.getParameter("fname"));
-                pStmt.setString(2, request.getParameter("lname"));
-                pStmt.setString(3, request.getParameter("number"));
-                pStmt.setInt(4, Integer.parseInt(request.getParameter("numofppl")));
-                pStmt.setString(5, request.getParameter("email"));
-
-                try {
-                    inputDate = sdf.parse(request.getParameter("date"));
-                } catch (ParseException pe) {
-                    pe.printStackTrace();
-                }
-
-                pStmt.setDate(6, new java.sql.Date(inputDate.getTime()));
-                pStmt.setInt(7, userid);
+                pStmt = con.prepareStatement("UPDATE ADMINACCOUNTS SET USERNAME = ?, EMAIL = ?, PASSWORD = ?");
+                pStmt.setString(1, request.getParameter("username"));
+                pStmt.setString(2, request.getParameter("email"));
+                pStmt.setString(3, security.CipherClass.encrypt(request.getParameter("password")));
                 pStmt.executeUpdate();
 
-                String query = "SELECT * FROM RESERVATIONDB";
+                String query = "SELECT * FROM ADMINACCOUNTS";
                 pStmt = con.prepareStatement(query);
                 rs = pStmt.executeQuery();
 
-                ArrayList<Reservation> reservationArray = new ArrayList<Reservation>();
+                ArrayList<Admin> adminArray = new ArrayList<Admin>();
 
                 while (rs.next()) {
-                    Reservation reservation = new Reservation(rs.getInt("USERID"), rs.getInt("NUMBEROFPPL"), rs.getString("FNAME"), rs.getString("LNAME"), rs.getString("CPNUMBER"), rs.getString("EMAIL"), rs.getDate("RESERVEDDATE"));
-                    reservationArray.add(reservation);
+                    Admin admin = new Admin(rs.getString("USERNAME"), rs.getString("EMAIL"), rs.getString("PASSWORD"));
+                    adminArray.add(admin);
                 }
-                sc.setAttribute("reservationArray", reservationArray);
-                RequestDispatcher dispatcher = request.getRequestDispatcher("admin_database.jsp");
+                sc.setAttribute("adminArray", adminArray);
+                RequestDispatcher dispatcher = request.getRequestDispatcher("Admin_Edit.jsp");
                 dispatcher.forward(request, response);
                 pStmt.close();
                 return;
+            }else if (request.getParameter("action").equals("Delete")){
+            pStmt = con.prepareStatement("DELETE FROM ADMINACCOUNTS WHERE USERNAME = ?");
+            pStmt.setString(1,request.getParameter("username"));
+            pStmt.executeUpdate();
+            String query = "SELECT * FROM ADMINACCOUNTS";
+            pStmt = con.prepareStatement(query);
+            rs = pStmt.executeQuery();
+
+            ArrayList<Admin> adminArray = new ArrayList<Admin>();
+
+            while (rs.next()) {
+                    Admin admin = new Admin(rs.getString("USERNAME"), rs.getString("EMAIL"), rs.getString("PASSWORD"));
+                    adminArray.add(admin);
+            }
+            sc.setAttribute("adminArray", adminArray);
+            RequestDispatcher dispatcher = request.getRequestDispatcher("Admin_Edit.jsp");
+            dispatcher.forward(request, response);
+            pStmt.close();
             }
         } catch (Exception e) {
             e.printStackTrace();

@@ -1,5 +1,6 @@
 package controllers;
 
+import listeners.UserContextListener;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
@@ -7,19 +8,29 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.*;
-import javax.mail.*;
-import javax.mail.internet.*;
+import java.util.ArrayList;
+import java.util.logging.Logger;
+import java.util.logging.Level;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import model.Admin;
 import static security.CipherClass.*;
+import logging.LoggerClass;
+import model.Reservation;
+import model.Reviews;
 
-public class ForgotPassServlet extends HttpServlet {
+public class OpenReviewServlet extends HttpServlet {
 
     Connection con;
+    LoggerClass loggerClass = new LoggerClass();
+    Logger logger = loggerClass.getLoggerClass();
 
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
@@ -53,57 +64,36 @@ public class ForgotPassServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         try (PrintWriter out = response.getWriter()) {
+            ServletContext sc = getServletContext();
+            sc.setAttribute("errorMessage", "");
             try {
-                String email = request.getParameter("adminEmail");
-                String strQuery = "SELECT PASSWORD FROM ADMINACCOUNTS WHERE EMAIL='" + email + "'";
-                PreparedStatement pStmt = con.prepareStatement(strQuery);
-                ResultSet rs = pStmt.executeQuery();
-                rs.next();
-                String password = decrypt(rs.getString(1));
-                if (password != null) {
-                    String receiver = email;
-                    String from = "kaEntengsAdminTest";
+                if (con != null) {
 
-                    Properties props = new Properties();
-                    props.put("mail.smtp.host", "smtp.mailtrap.io");
-                    props.put("mail.smtp.port", "2525");
-                    props.put("mail.smtp.auth", "true");
-
-                    Session session = Session.getInstance(props, new javax.mail.Authenticator() {
-
-                        protected PasswordAuthentication getPasswordAuthentication() {
-                            return new PasswordAuthentication("ebfcf7c7036a91", "91b19e43b09fa6"); //create account in mailtrap.io for unique keys
-                        }
-                    });
-
-                    //compose the message  
-                    try {
-                        MimeMessage message = new MimeMessage(session);
-                        message.setFrom(new InternetAddress(from));
-                        message.addRecipient(Message.RecipientType.TO, new InternetAddress(receiver));
-                        message.setSubject("Ka-Enteng's Forgot Password Test");
-                        message.setText("Hey! Your password is " + password + ".");
-                        message.saveChanges();
-
-                        // Send message  
-                        Transport.send(message);
-                        System.out.println("Email sent successfully!");
-
-                    } catch (MessagingException mex) {
-                        mex.printStackTrace();
-                    }
-                    /*mail code
-                        paste your mail code here
-                        ------------------
-                    Mail code*/
-                    out.println("Your password has been sent to your email successfully!");
-                    response.sendRedirect("admin_login.jsp");
+                    PreparedStatement pStmt;
+                    ResultSet rs;
+                        
+                            String query = "SELECT * FROM REVIEWS";
+                            pStmt = con.prepareStatement(query);
+                            rs = pStmt.executeQuery();
+                                
+                            ArrayList<Reviews> ReviewsArray = new ArrayList<Reviews>();
+                            
+                            while (rs.next()) {
+                                Reviews review = new Reviews( rs.getString("NAME"), rs.getString("COMMENT"), rs.getDate("DATE"),rs.getBoolean("ACTIVE"));
+                                ReviewsArray.add(review);
+                            }
+                            sc.setAttribute("ReviewsArray", ReviewsArray);
+                            RequestDispatcher dispatcher = request.getRequestDispatcher("admin_review.jsp");
+                            dispatcher.forward(request, response);
+                    pStmt.close();
+                    rs.close();
                     return;
                 } else {
-                    out.println("Invalid email provided!");
+                    response.sendError(HttpServletResponse.SC_NOT_FOUND);
                 }
-            } catch (Exception e) {
-                e.printStackTrace();
+            } catch (SQLException sqle) {
+                sc.setAttribute("errorMessage", "SQL Exception occurred!");
+                response.sendRedirect("errorPage.jsp");
             }
         }
     }
