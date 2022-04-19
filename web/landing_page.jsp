@@ -27,7 +27,7 @@
             <h1 class="mb-4">Farm Tour and Workshops</h1>
             <p>Take a guided tour around the farm and explore what we have to offer. Participate in workshops that teaches organic farming techniques and farm-to-table meals that you can apply in your own home. Learn all about the life cycle of plants, pollinators,
                 and microoganisms as well as their benefits to your health and environment. See the cycle of food for youself as you eat healthy and nutritious meals that were freshly picked from the farm.</p>
-            <a href="tour_info.html">
+            <a href="tour_info.jsp">
                 <button class="btn btn-primary">
                     View Details
                 </button>

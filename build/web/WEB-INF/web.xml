@@ -452,6 +452,10 @@
             <param-value>KaEntengRestaurantToTableDB</param-value>
         </init-param>
     </servlet>
+    <servlet>
+        <servlet-name>PrintIteneraryServlet</servlet-name>
+        <servlet-class>controllers.PrintIteneraryServlet</servlet-class>
+    </servlet>
     <servlet-mapping>
         <servlet-name>reservationServlet</servlet-name>
         <url-pattern>/reserve.do</url-pattern>
@@ -523,6 +527,10 @@
     <servlet-mapping>
         <servlet-name>AdminEditServlet</servlet-name>
         <url-pattern>/AdminEdit.do</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>PrintIteneraryServlet</servlet-name>
+        <url-pattern>/PrintIteneraryServlet</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

@@ -22,7 +22,7 @@ class Header extends HTMLElement {
                         </li>
                         <li class="nav-item px-2 my-1"><a class="nav-link" href="gallery.html">Gallery</a>
                         </li>
-                        <li class="nav-item px-2 my-1"><a href="tour_info.html" class="btn btn-primary nav-link">Reserve a Tour</a>
+                        <li class="nav-item px-2 my-1"><a href="tour_info.jsp" class="btn btn-primary nav-link">Reserve a Tour</a>
                         </li>
                     </ul>
                 </div>
