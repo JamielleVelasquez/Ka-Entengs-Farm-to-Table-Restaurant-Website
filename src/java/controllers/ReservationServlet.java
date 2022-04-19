@@ -11,7 +11,7 @@ import javax.servlet.http.*;
 public class ReservationServlet extends HttpServlet {
 
     Connection con;
-    DateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+    DateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
     Date todayDate = new Date();
     Date inputDate = null;
 
@@ -120,7 +120,7 @@ public class ReservationServlet extends HttpServlet {
                     pStmt.setDate(7, new java.sql.Date(inputDate.getTime()));
 
                     pStmt.executeUpdate();
-                    response.sendRedirect("tour_info.html");
+                    response.sendRedirect("tour_info.jsp");
                     pStmt.close();
                     return;
                 } else {

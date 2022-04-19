@@ -36,7 +36,7 @@
             <div class="display-4 reserveLabel">Update Record</div>
             <div class="row justify-content-center">
                 <div class="col-12 p-1 p-lg-5">
-                    <form action="AdminEdit.do" method="POST" >
+                    <form action="AdminEdit.do" method="POST" autocomplete="off">
                         <input type="hidden" id="username" name="username" value="<%=admin.getUsername()%>">
 
                         <!-- input field for username -->

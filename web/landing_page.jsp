@@ -82,7 +82,7 @@
     <div class="container-fluid p-5 bg-green">
 
         <div class="row align-items-center">
-            <form class="col-12 col-sm-7 p-0 pe-sm-5" action="add.do" method="POST">
+            <form class="col-12 col-sm-7 p-0 pe-sm-5" action="add.do" method="POST" autocomplete="off">
 
                 <input class="form-control" type="text" name="regName" id="reviewName" placeholder="Name:"><br>
                 <textarea class="form-control" name="regComment" id="reviewText" placeholder="How did we do?"></textarea><br>

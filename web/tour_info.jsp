@@ -55,12 +55,12 @@
                     It makes all inputs from natural materials, indigenous mircroorganism, does not use insecticides and herbicides, traditional agricultural practices like not tilling the land, zero emission of waste through recycling.
                 </p>
                 <a href="#iternerary">
-                    <button class="btn btn-primary">Itenerary</button>
+                    <button class="btn btn-primary">Itinerary</button>
                 </a>
 
             </div>
             <div class="container p-3 p-sm-0" style="margin-top: 3rem;">
-                <h1 class="text-center">Itenerary</h1>
+                <h1 class="text-center">Itinerary</h1>
                 <hr class="col-7 mx-auto color-green opacity-100 mb-5" style="height: 2px;">
                 <div class="row my-3 justify-content-center">
                     <div class="col-2 col-sm-1">Time</div>
@@ -68,8 +68,8 @@
                 </div>
 
                 <%
-                  File f = new File(getServletContext().getRealPath("/").replace('\\', '/')
-                            + "ReadFiles/Itenerary.txt");
+                    File f = new File(getServletContext().getRealPath("/").replace('\\', '/')
+                            + "ReadFiles/Itinerary.txt");
                     ArrayList<String> list = new ArrayList<String>();
                     list = PrintItenerary.ITarray(f);
                     for (int i = 0; i < list.size(); i++) {
@@ -80,7 +80,6 @@
                 %>  
 
             </div>
-
             <div class="container-fluid p-3 p-sm-5 position-relative" style="background-image: url('https://picsum.photos/1920/720');
                  height: 400px;
                  background-size: cover;">
@@ -109,12 +108,14 @@
                 </div>
 
             </div>
+        </div>
 
-            <footer-component></footer-component>
-            <script src="script.js" type="text/javascript" defer></script>
+    <footer-component></footer-component>
 
-            <!-- Bootstrap JS -->
-            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
-    </body>
+    <script src="script.js" type="text/javascript" defer></script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+</body>
 
 </html>

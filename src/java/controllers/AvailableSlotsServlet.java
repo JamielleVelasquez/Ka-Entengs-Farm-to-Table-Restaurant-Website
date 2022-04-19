@@ -10,7 +10,7 @@ import javax.servlet.http.*;
 
 public class AvailableSlotsServlet extends HttpServlet {
 
-    DateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+    DateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
     Date todayDate = new Date();
 
     Connection con;

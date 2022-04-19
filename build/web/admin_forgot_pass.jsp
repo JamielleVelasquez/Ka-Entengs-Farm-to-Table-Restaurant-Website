@@ -22,7 +22,7 @@
         <div class="forgotPassBox col-12 p-3 col-sm-9 col-lg-6 mx-auto text-center">
             <h2 class="forgotLabel display-3">Forgot Password?</h2>
             <hr class="w-25 mx-auto mb-5 color-green opacity-100" style="height: 2px;">
-            <form action="forgotPass.do" method="POST">
+            <form action="forgotPass.do" method="POST" autocomplete="off">
                 <!-- input field for email -->
                 <div class="forgotEmail">
                     <input type="text" class="fEmail form-control mx-auto m-4" name="adminEmail" placeholder="Email" required>

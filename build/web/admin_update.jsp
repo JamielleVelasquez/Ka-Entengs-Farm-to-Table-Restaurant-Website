@@ -37,7 +37,7 @@
                         DateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
                         Reservation reservation = (Reservation) getServletContext().getAttribute("reservation");
                     %>
-                    <form action="update.do" method="POST" >
+                    <form action="update.do" method="POST" autocomplete="off">
                         <input type="hidden" id="userid" name="userid" value="<%=reservation.getUserId()%>">
                         <div class="row g-0 m-0 my-4">
                             <!-- input field for amount of people -->

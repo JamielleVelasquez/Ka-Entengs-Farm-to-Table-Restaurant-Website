@@ -25,12 +25,12 @@
         <div class="display-4 reserveLabel">Reservation</div>
         <div class="row justify-content-center">
             <div class="col-12 col-sm-5 p-1 ms-1 mb-4 p-lg-5 ms-lg-5">
-                <form action="reserve.do" method="POST" >
+                <form action="reserve.do" method="POST" autocomplete="off">
                     <div class="row g-0 m-0 my-4">
                         <!-- input field for amount of people -->
                         <input type="number" class="form-control w-50" name="resNumPpl" placeholder="Number of people" required min="1" max="30" value="1">
                         <!-- input field for date -->
-                        <div class="input-daterange m-0 w-50">
+                        <div id="datepicker" class="input-daterange m-0 w-50">
                             <input type="text" class="form-control" name="resDate" placeholder="Date" required>
                         </div>
                     </div>
@@ -45,11 +45,11 @@
                     <!-- button to submit inputs -->
                     <button class="reserveBT btn btn-primary">Reserve</button>
                 </form>
-                <form action="checkSlots.do" class="row justify-content-center p-3 pt-5">
+                <form action="checkSlots.do" class="row justify-content-center p-3 pt-5" autocomplete="off">
                     <!-- variable to display available slots -->
                     <p class="w-auto text-center my-auto">${selectedDateSlots} slots left on </p>
                     <!-- input field for date -->
-                    <div class="input-daterange m-0" style="width: 135px">
+                    <div id="datechecker"class="input-daterange m-0" style="width: 135px">
                         <input type="text" class="form-control" name="resDate" placeholder="Date" value="${selectedDate}" required>
                     </div>
                     <button class="btn btn-primary w-auto">Check Availability</button>
@@ -79,3 +79,27 @@
 </body>
 
 </html>
+<script>
+    $(function () {
+        $("#datepicker").datepicker({
+            dateFormat: "dd-mm-yy",
+            showOtherMonths: true,
+            selectOtherMonths: true,
+            autoclose: true,
+            changeMonth: true,
+            changeYear: true,
+            orientation: "bottom left"
+        });
+    });
+    $(function () {
+        $("#datechecker").datepicker({
+            dateFormat: "dd-mm-yy",
+            showOtherMonths: true,
+            selectOtherMonths: true,
+            autoclose: true,
+            changeMonth: true,
+            changeYear: true,
+            orientation: "top"
+        });
+    });
+</script>

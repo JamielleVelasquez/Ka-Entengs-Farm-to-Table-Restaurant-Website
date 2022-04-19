@@ -51,8 +51,8 @@
                 <button class="btn btn-primary">Admin Accounts</button>
             </a>
             
-            <a href="menu_edit.jsp" style="width: auto;" class="p-0 m-1">
-                <button class="btn btn-primary">Edit Menu</button>
+            <a href="admin_database.jsp" style="width: auto;" class="p-0 m-1">
+                <button class="btn btn-primary">Reservations</button>
             </a>
 
             <div class="text-end mx-5" style="width: auto;">
@@ -90,12 +90,12 @@
 
 
             <div class=" my-2" style="width: auto;">
-                <form method="POST" action="AdminEdit.do">
+                <form method="POST" action="AdminEdit.do" autocomplete="off">
                     <input type="hidden" name="username" value="<%=adminu.getUsername()%>">
                     <input class="btn btn-success text-white mb-3" type="submit" name="action" value="Edit">
                 </form>
                 <br>
-                <form method="POST" action="AdminEdit.do">
+                <form method="POST" action="AdminEdit.do" autocomplete="off">
                     <input type="hidden" name="username" value="<%=adminu.getUsername()%>">
                     <!-- Button trigger modal -->
                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">

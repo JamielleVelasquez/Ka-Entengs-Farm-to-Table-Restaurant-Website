@@ -24,7 +24,7 @@
             <div class="loginBox col-12 p-3 col-sm-9 col-lg-6 mx-auto text-center">
                 <div class="loginLabel display-3">Login</div>
                 <hr class="w-25 mx-auto mb-5 color-green opacity-100" style="height: 2px;">
-                <form action="login.do" method="POST">
+                <form action="login.do" method="POST" autocomplete="off">
                     <!-- input field for username -->
                     <div class="userEmail">
                         <input type="text" class="uNameEmail form-control mx-auto m-4" name="resUserEmail" placeholder="Username / Email" required>
