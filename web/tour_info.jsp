@@ -1,3 +1,5 @@
+<%@page import="java.util.Scanner"%>
+<%@page import="java.io.File"%>
 <%@page import="controllers.PrintItenerary"%>
 <%@page import="java.util.ArrayList"%>
 <!DOCTYPE html>
@@ -45,7 +47,7 @@
              background-size: cover;">
         </div>
         <div id="iternerary" class="container-fluid position-relative p-0 p-sm-5" style="margin-top: 6rem;">
-            <div id="tour-info-headline" class="container col-12 bg-ivory  py-4 p-3 p-lg-5 start-50 translate-middle" style="position: absolute; top: -9rem;">
+            <div id="tour-info-headline" class="container col-12 bg-ivory  py-4 p-3 p-lg-5 start-50 translate-middle" style="position: absolute; top: -10rem;">
                 <h1 class="text-center fw-bold">Get in touch with nature for a day</h1>
                 <hr>
                 <p>Book a tour of the farm and experience organic farming at work. Learn all about the relationships of plants towards pollinators and microorganisms as we teach you how to utilize them for your own garden. Become a part of the food cycle as
@@ -64,17 +66,19 @@
                     <div class="col-2 col-sm-1">Time</div>
                     <div class="col-10 col-lg-6 col-sm-8">Activity</div>         
                 </div>
-                <div>
-                           <% ArrayList<String> list = new ArrayList<String>();
-                           list=PrintItenerary.ITarray();
-                        for (int i=0;i<list.size();i++)
-          {
 
-              out.println(list.get(i));
+                <%
+                  File f = new File(getServletContext().getRealPath("/").replace('\\', '/')
+                            + "ReadFiles/Itenerary.txt");
+                    ArrayList<String> list = new ArrayList<String>();
+                    list = PrintItenerary.ITarray(f);
+                    for (int i = 0; i < list.size(); i++) {
 
-          } 
-                    %>  
-                    </div>
+                        out.println(list.get(i));
+
+                    }
+                %>  
+
             </div>
 
             <div class="container-fluid p-3 p-sm-5 position-relative" style="background-image: url('https://picsum.photos/1920/720');
