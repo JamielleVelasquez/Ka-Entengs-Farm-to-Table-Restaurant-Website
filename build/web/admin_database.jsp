@@ -47,6 +47,10 @@
             <a href="Admin_Edit.jsp" style="width: auto;" class="p-0 m-1">
                 <button class="btn btn-primary">Admin Accounts</button>
             </a>
+            
+            <a href="menu_edit.jsp" style="width: auto;" class="p-0 m-1">
+                <button class="btn btn-primary">Edit Menu</button>
+            </a>
 
             <div class="text-end mx-5" style="width: auto;">
                 <h6>

@@ -81,7 +81,7 @@ public class SortSearchServlet extends HttpServlet {
                     orderBy = "RESERVEDDATE";
                     break;
             }
-
+            
             switch (sortHow) {
                 case "asc":
                     orderBy = orderBy.concat(" ASC");
