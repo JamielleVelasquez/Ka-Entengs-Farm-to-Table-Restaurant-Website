@@ -1,9 +1,10 @@
+/* global session */
+
 // Reusable Components
 class Header extends HTMLElement {
     constructor() {
         super();
     }
-
 
     connectedCallback() {
         this.innerHTML = `
@@ -18,7 +19,7 @@ class Header extends HTMLElement {
                     <ul class="navbar-nav p-2">
                         <li class="nav-item px-2 my-1"><a class="nav-link" href="about.html">About Us</a>
                         </li>
-                        <li class="nav-item px-2 my-1"><a class="nav-link" href="menu.html">Menu</a>
+                        <li class="nav-item px-2 my-1"><a class="nav-link" href="menu.jsp">Menu</a>
                         </li>
                         <li class="nav-item px-2 my-1"><a class="nav-link" href="gallery.html">Gallery</a>
                         </li>
@@ -39,7 +40,6 @@ class Footer extends HTMLElement {
     constructor() {
         super();
     }
-
 
     connectedCallback() {
         this.innerHTML = `
@@ -74,7 +74,7 @@ class Footer extends HTMLElement {
 customElements.define('header-component', Header)
 customElements.define('footer-component', Footer)
 
-$(document).ready(function() {
+$(document).ready(function () {
 
     $('.input-daterange').datepicker({
         format: 'dd-mm-yyyy',

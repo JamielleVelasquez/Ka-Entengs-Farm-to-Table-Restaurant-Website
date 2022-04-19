@@ -124,7 +124,7 @@ public class LoginServlet extends HttpServlet {
                                 adminArray.add(admin);
                             }
                             sc.setAttribute("adminArray", adminArray);
-
+                            
                             RequestDispatcher dispatcher = request.getRequestDispatcher("admin_database.jsp");
                             dispatcher.forward(request, response);
                             return;

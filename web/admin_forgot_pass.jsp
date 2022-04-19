@@ -15,10 +15,6 @@
 
     <body>
         <%
-            if (session.getAttribute("sessionTest") == null || session == null) {
-                response.sendRedirect("landing_page.jsp");
-                return;
-            }
             response.setHeader("Cache-control", "no-cache, no-store, must-revalidate");
         %> 
     <header-component></header-component>

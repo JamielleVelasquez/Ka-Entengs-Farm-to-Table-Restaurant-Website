@@ -14,7 +14,9 @@
     </head>
 
     <body>
+        
     <header-component></header-component>
+    
     <div class="container-fluid p-0 position-relative" style="background-image: url('https://picsum.photos/1920/720');
          height: 90vh;
          background-size: cover;">
@@ -59,7 +61,7 @@
                 <h1 class="mb-4">Bringing homegrown flavor to your platter</h1>
                 <p class="mb-4">Our restaurant situated at the heart of Enteng's farm provides the perfect place to enjoy farm-to-table meals. We are serving homegrown food made with the freshest ingredients straight from the farm.
                 </p>
-                <a href="menu.html">
+                <a href="menu.jsp">
                     <button class="btn btn-primary">
                         Our Menu
                     </button>

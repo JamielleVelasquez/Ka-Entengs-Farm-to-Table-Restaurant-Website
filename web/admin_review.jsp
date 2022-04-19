@@ -34,17 +34,25 @@
     <div class="container-fluid p-3 pb-sm-0 p-sm-5 ">
         <div class="row g-0 mb-5 justify-content-center justify-content-sm-around m-0">
             <div style="width: auto;">
-                <h1>Reviews</h1>
+                <h1>Reservations</h1>
             </div>
 
-            <form action="admin_database.jsp" method="get" style="width: auto;" class="p-0 m-1">
-                <button class="btn btn-primary">Reservations</button>
-            </form>  
+            <form action="pdf.do" method="get" style="width: auto;" class="p-0 m-1">
+                <button class="btn btn-primary">Print PDF</button>
+            </form>
             
+            <a href="admin_review.jsp" style="width: auto;" class="p-0 m-1">
+                <button class="btn btn-primary">Reviews</button>
+            </a>
+
             <a href="Admin_Edit.jsp" style="width: auto;" class="p-0 m-1">
                 <button class="btn btn-primary">Admin Accounts</button>
             </a>
             
+            <a href="menu_edit.jsp" style="width: auto;" class="p-0 m-1">
+                <button class="btn btn-primary">Edit Menu</button>
+            </a>
+
             <div class="text-end mx-5" style="width: auto;">
                 <h6>
                     Signed in as:
@@ -53,6 +61,7 @@
                 <form action="logout.do" method="POST">
                     <button class="btn btn-primary">Log Out</button>
                 </form>
+
             </div>
         </div>
 
