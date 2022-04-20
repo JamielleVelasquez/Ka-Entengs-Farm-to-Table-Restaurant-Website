@@ -92,16 +92,33 @@
                 <div class="mx-auto m-0 mt-sm-5">
                     <h1>Prices</h1>
                     <hr class="mb-4 w-25 mx-auto">
+                    <%
+                try {
+                    String line = "";
+                    Scanner scan = new Scanner(new File(getServletContext().getRealPath("/").replace('\\', '/')
+                            + "ReadFiles/Itinerary.txt"));
+                    line = scan.nextLine();
+                while(!line.equalsIgnoreCase("PRICES")){
+                     line = scan.nextLine();
+                }
+                line = scan.nextLine();
+                int index = line.indexOf(":");
+
+            %>
                     <p>
-                    <p class="fw-bold">Adult: Php 1,500*/person</p>
-                    (with Jeron Travel Coaster/Van, Php 2,000/person)
-                    <br>(Group packages with minimum of 15 people is Php 1,425/person)
-                    <p class="fw-bold"><br>Child 4yrs+: Php 1,200*/person</p>
-                    (with Jeron Travel Coaster/Van, Php 1,575*/person)
+                    <p class="fw-bold">Adult: Php <%out.println(line.substring(0, index));line = scan.nextLine();index = line.indexOf(":");%>*/person</p>
+                    (with Jeron Travel Coaster/Van, Php <%out.println(line.substring(0, index));line = scan.nextLine();index = line.indexOf(":");%>/person)
+                    <br>(Group packages with minimum of 15 people is Php <%out.println(line.substring(0, index));line = scan.nextLine();index = line.indexOf(":");%>/person)
+                    <p class="fw-bold"><br>Child 4yrs+: Php <%out.println(line.substring(0, index));line = scan.nextLine();index = line.indexOf(":");%>*/person</p>
+                    (with Jeron Travel Coaster/Van, Php <%out.println(line.substring(0, index));line = scan.nextLine();index = line.indexOf(":");%>*/person)
                     <p class="fw-bold"><br>Child 3yrs and below: FREE</p>
-                    +Php 150 for Drivers/Nanny
+                    +Php <%out.println(line.substring(0, index));%> for Drivers/Nanny
                     <br>* inclusive of 12% VAT and 10% Service charge
                     </p>
+                     <%
+                } catch (Exception io) {
+                    io.printStackTrace();
+                }%>
                     <a href="reservation.jsp">
                         <button class="btn btn-primary mt-3">Reserve a Tour</button>
                     </a>
