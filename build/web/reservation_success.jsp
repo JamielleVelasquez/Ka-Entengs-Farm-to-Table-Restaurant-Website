@@ -22,7 +22,7 @@
     <body>
     <header-component></header-component>
     <div class="container-fluid p-4 p-lg-5">
-        
+
         <div class="row justify-content-center">
             <div class="col-12 col-sm-5 p-1 ms-1 mb-4 p-lg-5 ms-lg-5">
                 <div class="display-6 reserveLabel pb-3">Your Reservation was a Success</div>
@@ -35,9 +35,14 @@
             <div class="vr line col-2 mx-4 d-none d-sm-block"></div>
             <div class="col-12 col-sm-5 p-1 ms-1 p-lg-5 ms-lg-5">
                 <h2>(insert payment method here)</h2>
+                <br><br>
+                <center>
+                    <a href="landing_page.jsp" class="btn btn-primary backBT">Back to Homepage</a>
+                </center>
             </div>
+            <br>
         </div>
-
+        <br><br><br>
     </div>
     <footer-component></footer-component>
     <script src="script.js" type="text/javascript" defer></script>
@@ -46,27 +51,3 @@
 </body>
 
 </html>
-<script>
-    $(function () {
-        $("#datepicker").datepicker({
-            dateFormat: "dd-mm-yy",
-            showOtherMonths: true,
-            selectOtherMonths: true,
-            autoclose: true,
-            changeMonth: true,
-            changeYear: true,
-            orientation: "bottom left"
-        });
-    });
-    $(function () {
-        $("#datechecker").datepicker({
-            dateFormat: "dd-mm-yy",
-            showOtherMonths: true,
-            selectOtherMonths: true,
-            autoclose: true,
-            changeMonth: true,
-            changeYear: true,
-            orientation: "top"
-        });
-    });
-</script>

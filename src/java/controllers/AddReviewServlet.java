@@ -63,7 +63,7 @@ public class AddReviewServlet extends HttpServlet {
                 st.setBoolean(4,false);
 
                 st.executeUpdate();
-                response.sendRedirect("landing_page.jsp");
+                response.sendRedirect("review_success.jsp");
                 st.close();
                 return;
             } else {

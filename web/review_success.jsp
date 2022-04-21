@@ -16,7 +16,7 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.standalone.min.css" integrity="sha512-TQQ3J4WkE/rwojNFo6OJdyu6G8Xe9z8rMrlF9y7xpFbQfW5g8aSWcygCQ4vqRiJqFsDsE1T6MoAOMJkFXlrI9A==" crossorigin="anonymous"
               referrerpolicy="no-referrer" />
 
-        <title>Reservation</title>
+        <title>Review Success</title>
     </head>
 
     <body>
@@ -25,24 +25,18 @@
 
         <div class="row justify-content-center">
             <div class="col-12 col-sm-5 p-1 ms-1 mb-4 p-lg-5 ms-lg-5">
-                <div class="display-6 reserveLabel pb-3">Your Reservation was a Success</div>
-                <p>
-                    In order for your reservation to push through please pay a
-                    &#x20B1;${downpayment} downpayment through (payment method). A confirmation email will be sent to you
-                    after we have confirmed your payment.
-                </p>
-            </div>
-            <div class="vr line col-2 mx-4 d-none d-sm-block"></div>
-            <div class="col-12 col-sm-5 p-1 ms-1 p-lg-5 ms-lg-5">
-                <h2>(insert payment method here)</h2>
-                <br><br>
                 <center>
+                    <div class="display-6 reserveLabel pb-3">Your Review was a Success</div>
+                    Thank you for leaving a review!
+                    <br>
+                    <br>
+                    <br>
                     <a href="landing_page.jsp" class="btn btn-primary backBT">Back to Homepage</a>
                 </center>
             </div>
             <br>
         </div>
-        <br><br><br>
+        <br><br><br><br>
     </div>
     <footer-component></footer-component>
     <script src="script.js" type="text/javascript" defer></script>
