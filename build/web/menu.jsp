@@ -30,20 +30,20 @@
             <br>
             <a  href =#menu ><button class="btn btn-primary">Our Menu</button></a>
         </div>
-        <img class="col-4 d-none d-md-block rounded" src="https://picsum.photos/400/400" alt="">
+        <img class="col-4 d-none d-md-block rounded" src="img/menu-banner.jpg" alt="">
     </div>
     <div class="row px-3 px-sm-5 pb-5 g-0 justify-content-evenly">
         <div class="card col-12 col-md-3 my-3 m-md-0">
-            <img src="https://picsum.photos/400/400" class="card-img-top" alt="">
-            <h5 class="card-title m-0 p-3">Placeholder</h5>
+            <img src="img/menu-1.jpg" class="card-img-top" alt="">
+            <h5 class="card-title m-0 p-3">Fresh Farm Produce Ensalada Native Salad</h5>
         </div>
         <div class="card col-12 col-md-3 my-3 m-md-0">
-            <img src="https://picsum.photos/400/400" class="card-img-top" alt="">
-            <h5 class="card-title m-0 p-3">Placeholder</h5>
+            <img src="img/menu-2.jpg" class="card-img-top" alt="">
+            <h5 class="card-title m-0 p-3">Vegetarian Burgers</h5>
         </div>
         <div class="card col-12 col-md-3 my-3 m-md-0">
-            <img src="https://picsum.photos/400/400" class="card-img-top" alt="">
-            <h5 class="card-title m-0 p-3">Placeholder</h5>
+            <img src="img/menu-3.jpg" class="card-img-top" alt="">
+            <h5 class="card-title m-0 p-3">Patola or Pumpkin & Bean Soup</h5>
         </div>
     </div>
     <div id="menu" class="container-fluid bg-ivory" style="line-height: 2rem;">

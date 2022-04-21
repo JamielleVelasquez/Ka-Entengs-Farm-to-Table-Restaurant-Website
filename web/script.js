@@ -21,8 +21,6 @@ class Header extends HTMLElement {
                         </li>
                         <li class="nav-item px-2 my-1"><a class="nav-link" href="menu.jsp">Menu</a>
                         </li>
-                        <li class="nav-item px-2 my-1"><a class="nav-link" href="gallery.html">Gallery</a>
-                        </li>
                         <li class="nav-item px-2 my-1"><a href="tour_info.jsp" class="btn btn-primary nav-link">Reserve a Tour</a>
                         </li>
                     </ul>
@@ -50,21 +48,20 @@ class Footer extends HTMLElement {
                     <h3> Enteng's Farm to Table Restaurant</h3>
                     <p>Enteng's Farm practices sustainable and organic farming. We take pride in using natural resources and natural methods to produce quality output.</p>
                 </div>
-                <div class="col-12 g-3 col-md-2">
-                    <h3>Our Socials</h3>
-                    <p>Placeholder</p>
+                <div class="col-12 g-3 col-md-3 h4">
+                    <h3 class="pb-3">Our Socials</h3>
+                    <i class="bi bi-facebook"></i>
+                    <i class="bi bi-twitter px-4"></i>
+                    <i class="bi bi-instagram"></i>
                 </div>
-                <div class="col-12 g-3 col-md-2">
-                    <h3>About Us</h3>
-                    <p>Placeholder</p>
-                </div>
-                <div class="col-12 g-3 col-md-2">
-                    <h3>Contact Us</h3>
-                    <p>Placeholder</p>
+                <div class="col-12 g-3 col-md-3">
+                    <h3 class="pb-3">Contact Us</h3>
+                    <i class="bi bi-telephone-fill"></i> +63 977 8124594
+                    <br> <i class="bi bi-envelope-fill"></i> entengsfarm@gmail.com
                 </div>
             </div>
             <hr>
-            <p class="text-center">© 2021 Enteng's Farm to Table Restaurant. All rights reserved</p>
+            <p class="text-center">&copy; 2021 Enteng's Farm to Table Restaurant. All rights reserved</p>
         </div>
         </footer>
     `;

@@ -42,7 +42,7 @@
 
             </nav>
         </header>
-        <div class="container-fluid p-0 position-relative" style="background-image: url('https://picsum.photos/1920/720');
+        <div class="container-fluid p-0 position-relative" style="background-image: url('img/tour-banner.jpg');
              height: 70vh;
              background-size: cover;">
         </div>
@@ -80,7 +80,7 @@
                 %>  
 
             </div>
-            <div class="container-fluid p-3 p-sm-5 position-relative" style="background-image: url('https://picsum.photos/1920/720');
+            <div class="container-fluid p-3 p-sm-5 position-relative" style="background-image: url('img/tour-1.jpg');
                  height: 400px;
                  background-size: cover;">
                 <div id="tour-info-things-to-remember" class="bg-green col-12 col-sm-6 col-md-5 col-lg-4 col-xxl-3 me-auto text-white p-3 p-md-5">

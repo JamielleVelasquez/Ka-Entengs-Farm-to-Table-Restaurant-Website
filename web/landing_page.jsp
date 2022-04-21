@@ -17,7 +17,7 @@
         
     <header-component></header-component>
     
-    <div class="container-fluid p-0 position-relative" style="background-image: url('https://picsum.photos/1920/720');
+    <div class="container-fluid p-0 position-relative" style="background-image: url('img/landing-page-banner.png');
          height: 90vh;
          background-size: cover;">
         <div id="landing-page-main-header" class="text-white display-3 p-2 ps-sm-5 pb-sm-4 fw-bold">Experience Nature Through Us</div>
@@ -35,7 +35,7 @@
                 </button>
             </a>
         </div>
-        <div id="container-image" class="col-12 col-sm-6 col-lg-4" style="background-image: url('https://picsum.photos/1000/1000');
+        <div id="container-image" class="col-12 col-sm-6 col-lg-4" style="background-image: url('img/landing-page-tour.png');
              background-position: center;
              height: 90%;
              background-size: cover;
@@ -52,7 +52,7 @@
     <div class="container-fluid p-0 bg-ivory">
 
         <div class="row g-0">
-            <div class="img-fluid col-12 col-lg-4 p-0 order-last order-lg-first" style="background-image: url('https://picsum.photos/500/500');
+            <div class="img-fluid col-12 col-lg-4 p-0 order-last order-lg-first" style="background-image: url('img/landing-page-resto.jpg');
                  background-position: center;
                  height: 500px;
                  background-size: cover;">

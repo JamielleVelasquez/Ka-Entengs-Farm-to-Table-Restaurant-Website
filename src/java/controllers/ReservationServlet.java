@@ -120,7 +120,12 @@ public class ReservationServlet extends HttpServlet {
                     pStmt.setDate(7, new java.sql.Date(inputDate.getTime()));
 
                     pStmt.executeUpdate();
-                    response.sendRedirect("tour_info.jsp");
+                    
+                    int downpayment = (numPpl * 1200) / 2;
+                    
+                    sc.setAttribute("downpayment", downpayment);
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("reservation_success.jsp");
+                    dispatcher.forward(request, response);
                     pStmt.close();
                     return;
                 } else {

@@ -57,17 +57,21 @@
             </div>
             <div class="vr line col-2 mx-4 d-none d-sm-block"></div>
             <div class="col-12 col-sm-5 p-1 ms-1 p-lg-5 ms-lg-5">
+                <h2>Downpayment</h2>
+                <p>
+                    We require a 50% non-refundable downpayment upon reservation.
+                </p>
                 <h2>Cancellation Policy</h2>
                 <!-- Needs to be Checked -->
                 <p>
-                    We understand that unavoidable circumstances arise and appointments sometimes have to be cancelled or rescheduled. We ask that you do so as early as possible. Tours can always be rescheduled, provided there is still space available for your group. To
-                    reschedule, or cancel your tour, please contact us at least 10 business days prior to your appointment by email at (insert email) or by phone (insert phone). Bookings should not be considered cancelled or rescheduled until a confirmation
-                    email has been received.
+                    Tours can always be rescheduled, provided there is still space available for your group. To
+                    reschedule, or cancel your tour, please contact us at least 10 business days prior to your appointment by email at entengsfarm@gmail.com or by phone +63 977 8124594.
                 </p>
                 <p>
                     Bookings, rescheduled or cancelled, less than 10 business days prior to your tour date, will be charged a Php 1250.00 administration fee. There is a Php 5000.00 no-show fee, per tour group of 15-30 people (not per school), for groups that simply don't
-                    show up on the day of their tour without cancelling in advance. If you have any concerns, please call us to discuss your specific situation.
+                    show up on the day of their tour without cancelling in advance.
                 </p>
+                
             </div>
         </div>
 
