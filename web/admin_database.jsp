@@ -145,28 +145,9 @@
                 <br>
                 <form method="POST" action="delete.do">
                     <input type="hidden" name="userid" value="<%=reservation.getUserId()%>">
-                    <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                        Delete
-                    </button>
-
-                    <!-- Modal -->
-                    <div class="modal fade" id="deleteModal" tabindex="-1">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-body">
-                                    Delete this record?
-                                </div>
-                                <div class="modal-footer">
-                                    <input class="btn btn-danger" type="submit" name="action" value="Delete">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                    <input class="btn btn-danger" type="submit" onclick="return confirm('Are you sure?')" name="action" value="Delete">
                 </form>
             </div>
-
         </div>
         <%}%>
     </div>

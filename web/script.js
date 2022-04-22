@@ -26,8 +26,6 @@ class Header extends HTMLElement {
                     </ul>
                 </div>
             </div>
-
-
         </nav>
         </header>
     `;

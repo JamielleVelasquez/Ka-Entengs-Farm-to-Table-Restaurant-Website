@@ -40,7 +40,7 @@
             <form action="pdf.do" method="get" style="width: auto;" class="p-0 m-1">
                 <button class="btn btn-primary">Print PDF</button>
             </form>
-            
+
             <a href="admin_review.jsp" style="width: auto;" class="p-0 m-1">
                 <button class="btn btn-primary">Reviews</button>
             </a>
@@ -48,7 +48,7 @@
             <a href="Admin_Edit.jsp" style="width: auto;" class="p-0 m-1">
                 <button class="btn btn-primary">Admin Accounts</button>
             </a>
-            
+
             <a href="admin_database.jsp" style="width: auto;" class="p-0 m-1">
                 <button class="btn btn-primary">Reservations</button>
             </a>
@@ -100,24 +100,7 @@
                 <br>
                 <form method="POST" action="reviewstat.do" autocomplete="off">
                     <input type="hidden" name="name" value="<%=review.getName()%>">
-                    <!-- Button trigger modal -->
-                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">
-                        Delete
-                    </button>
-
-                    <!-- Modal -->
-                    <div class="modal fade" id="deleteModal" tabindex="-1">
-                        <div class="modal-dialog">
-                            <div class="modal-content">
-                                <div class="modal-body">
-                                    Delete this record?
-                                </div>
-                                <div class="modal-footer">
-                                    <input class="btn btn-danger" type="submit" name="action" value="Delete">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    <input class="btn btn-danger" type="submit" onclick="return confirm('Are you sure?')" name="action" value="Delete">
 
                 </form>
             </div>
