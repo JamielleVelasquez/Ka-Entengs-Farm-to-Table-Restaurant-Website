@@ -56,6 +56,8 @@
                         <!-- button to submit inputs -->
                         <button type="submit" name="action" value="Update" class="btn btn-primary">Update</button>
                     </form>
+                    <br>
+                    <a href="admin_database.jsp" class="btn btn-primary backBT">Back to Database page</a>
                 </div>
             </div>
         </div>

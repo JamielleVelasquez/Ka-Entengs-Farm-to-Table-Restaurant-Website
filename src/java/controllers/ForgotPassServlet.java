@@ -10,7 +10,9 @@ import java.sql.SQLException;
 import java.util.*;
 import javax.mail.*;
 import javax.mail.internet.*;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletConfig;
+import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -52,9 +54,23 @@ public class ForgotPassServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+        ServletContext sc = getServletContext();
         try (PrintWriter out = response.getWriter()) {
+            String email = request.getParameter("adminEmail");
             try {
-                String email = request.getParameter("adminEmail");
+                String queryStr = "SELECT EMAIL FROM ADMINACCOUNTS WHERE EMAIL='" + email + "'";
+                PreparedStatement prepStmt = con.prepareStatement(queryStr);
+                ResultSet rSet = prepStmt.executeQuery();
+                rSet.next();
+                rSet.getString(1);
+            } catch (SQLException sqle) {
+                sqle.printStackTrace();
+                sc.setAttribute("forgotErrMessage", "Sorry, this email does not exist in the database or is wrong!");
+                RequestDispatcher dispatcher = request.getRequestDispatcher("admin_forgot_pass.jsp");
+                dispatcher.forward(request, response);
+                return;
+            }
+            try {
                 String strQuery = "SELECT PASSWORD FROM ADMINACCOUNTS WHERE EMAIL='" + email + "'";
                 PreparedStatement pStmt = con.prepareStatement(strQuery);
                 ResultSet rs = pStmt.executeQuery();
@@ -102,7 +118,7 @@ public class ForgotPassServlet extends HttpServlet {
                 } else {
                     out.println("Invalid email provided!");
                 }
-            } catch (Exception e) {
+            } catch (SQLException e) {
                 e.printStackTrace();
             }
         }

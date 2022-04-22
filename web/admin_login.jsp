@@ -16,8 +16,8 @@
 <body>
 
     <%
-            response.setHeader("Cache-control", "no-cache, no-store, must-revalidate");
-        %>
+        response.setHeader("Cache-control", "no-cache, no-store, must-revalidate");
+    %>
 
         <header-component></header-component>
         <div class="row align-items-center g-0" style="height: 80vh;">

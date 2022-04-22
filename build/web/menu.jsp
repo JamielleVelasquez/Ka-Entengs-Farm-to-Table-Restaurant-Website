@@ -24,6 +24,10 @@
 
     <body>
     <header-component></header-component>
+        <%
+            response.setHeader("Cache-control", "no-cache, no-store, must-revalidate");
+            session = null;
+        %>
     <div class="row p-3 p-sm-5 g-0 justify-content-evenly align-items-center">
         <div class="col-12 col-md-4">
             <div class="display-4 fw-bold">Freshness Served in every Plate</div>
@@ -237,10 +241,10 @@
                     </div>
                 </div>
             </div>
-            <%
+            <%scan.close();
                 } catch (Exception io) {
                     io.printStackTrace();
-                }%>
+                                }%>
         </div>
     </div>
 

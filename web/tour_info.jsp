@@ -18,114 +18,105 @@
     </head>
 
     <body>
-        <header class="sticky-top bg-white" id="header">
-            <nav class="navbar navbar-expand-md p-0">
-                <div class="container-fluid">
-                    <a class="navbar-brand h4 text-dark px-0 px-sm-4 d-none d-sm-block" href="landing_page.jsp">Enteng's Farm to Table Restaurant</a>
-                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-toggle">
-                        <i class="bi bi-list"></i>
-                    </button>
-                    <div class="collapse navbar-collapse flex-grow-0" id="navbar-toggle">
-                        <ul class="navbar-nav p-2">
-                            <li class="nav-item px-2 my-1"><a class="nav-link" href="about.html">About Us</a>
-                            </li>
-                            <li class="nav-item px-2 my-1"><a class="nav-link" href="menu.html">Menu</a>
-                            </li>
-                            <li class="nav-item px-2 my-1"><a class="nav-link" href="gallery.html">Gallery</a>
-                            </li>
-                            <li class="nav-item px-2 my-1"><a href="reservation.jsp" class="btn btn-primary nav-link">Reserve a Tour</a>
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+    <header-component></header-component>
+        <%
+            response.setHeader("Cache-control", "no-cache, no-store, must-revalidate");
+            session = null;
+        %>
+    <div class="container-fluid p-0 position-relative" style="background-image: url('img/tour-banner.jpg');
+         height: 70vh;
+         background-size: cover;">
+    </div>
+    <div id="iternerary" class="container-fluid position-relative p-0 p-sm-5" style="margin-top: 6rem;">
+        <div id="tour-info-headline" class="container col-12 bg-ivory  py-4 p-3 p-lg-5 start-50 translate-middle" style="position: absolute; top: -10rem;">
+            <h1 class="text-center fw-bold">Get in touch with nature for a day</h1>
+            <hr>
+            <p>Book a tour of the farm and experience organic farming at work. Learn all about the relationships of plants towards pollinators and microorganisms as we teach you how to utilize them for your own garden. Become a part of the food cycle as
+                you eat farm-to-table meals with freshly picked ingredients. <br> <br> Natural Farming methods have been growing over the years and have shown evidence of increased food production by 40%, environment conservation and sustainable livelihoods.
+                It makes all inputs from natural materials, indigenous mircroorganism, does not use insecticides and herbicides, traditional agricultural practices like not tilling the land, zero emission of waste through recycling.
+            </p>
+            <a href="#iternerary">
+                <button class="btn btn-primary">Itinerary</button>
+            </a>
 
-
-            </nav>
-        </header>
-        <div class="container-fluid p-0 position-relative" style="background-image: url('img/tour-banner.jpg');
-             height: 70vh;
-             background-size: cover;">
         </div>
-        <div id="iternerary" class="container-fluid position-relative p-0 p-sm-5" style="margin-top: 6rem;">
-            <div id="tour-info-headline" class="container col-12 bg-ivory  py-4 p-3 p-lg-5 start-50 translate-middle" style="position: absolute; top: -10rem;">
-                <h1 class="text-center fw-bold">Get in touch with nature for a day</h1>
-                <hr>
-                <p>Book a tour of the farm and experience organic farming at work. Learn all about the relationships of plants towards pollinators and microorganisms as we teach you how to utilize them for your own garden. Become a part of the food cycle as
-                    you eat farm-to-table meals with freshly picked ingredients. <br> <br> Natural Farming methods have been growing over the years and have shown evidence of increased food production by 40%, environment conservation and sustainable livelihoods.
-                    It makes all inputs from natural materials, indigenous mircroorganism, does not use insecticides and herbicides, traditional agricultural practices like not tilling the land, zero emission of waste through recycling.
-                </p>
-                <a href="#iternerary">
-                    <button class="btn btn-primary">Itinerary</button>
-                </a>
-
+        <div class="container p-3 p-sm-0" style="margin-top: 3rem;">
+            <h1 class="text-center">Itinerary</h1>
+            <hr class="col-7 mx-auto color-green opacity-100 mb-5" style="height: 2px;">
+            <div class="row my-3 justify-content-center">
+                <div class="col-2 col-sm-1">Time</div>
+                <div class="col-10 col-lg-6 col-sm-8">Activity</div>         
             </div>
-            <div class="container p-3 p-sm-0" style="margin-top: 3rem;">
-                <h1 class="text-center">Itinerary</h1>
-                <hr class="col-7 mx-auto color-green opacity-100 mb-5" style="height: 2px;">
-                <div class="row my-3 justify-content-center">
-                    <div class="col-2 col-sm-1">Time</div>
-                    <div class="col-10 col-lg-6 col-sm-8">Activity</div>         
-                </div>
 
-                <%
-                    File f = new File(getServletContext().getRealPath("/").replace('\\', '/')
-                            + "ReadFiles/Itinerary.txt");
-                    ArrayList<String> list = new ArrayList<String>();
-                    list = PrintItenerary.ITarray(f);
-                    for (int i = 0; i < list.size(); i++) {
+            <%
+                File f = new File(getServletContext().getRealPath("/").replace('\\', '/')
+                        + "ReadFiles/Itinerary.txt");
+                ArrayList<String> list = new ArrayList<String>();
+                list = PrintItenerary.ITarray(f);
+                for (int i = 0; i < list.size(); i++) {
 
-                        out.println(list.get(i));
+                    out.println(list.get(i));
 
-                    }
-                %>  
-
-            </div>
-            <div class="container-fluid p-3 p-sm-5 position-relative" style="background-image: url('img/tour-1.jpg');
-                 height: 400px;
-                 background-size: cover;">
-                <div id="tour-info-things-to-remember" class="bg-green col-12 col-sm-6 col-md-5 col-lg-4 col-xxl-3 me-auto text-white p-3 p-md-5">
-                    <h1>Things to Remember</h1>
-                    <p>Bring an extra change of clothes, a tumbler for hydration, a hat, and a fan to stay cool. Wear comfortable clothes and footwear for the farm: long sleeves , ¾ pants / leggings, Crocs, boots, or bare feet for grounding.</p>
-                </div>
-            </div>
-            <div class="container-fluid p-4 p-sm-5 text-center bg-ivory">
-                <div class="mx-auto m-0 mt-sm-5">
-                    <h1>Prices</h1>
-                    <hr class="mb-4 w-25 mx-auto">
-                    <%
-                try {
-                    String line = "";
-                    Scanner scan = new Scanner(new File(getServletContext().getRealPath("/").replace('\\', '/')
-                            + "ReadFiles/Itinerary.txt"));
-                    line = scan.nextLine();
-                while(!line.equalsIgnoreCase("PRICES")){
-                     line = scan.nextLine();
                 }
-                line = scan.nextLine();
-                int index = line.indexOf(":");
+            %>  
 
-            %>
-                    <p>
-                    <p class="fw-bold">Adult: Php <%out.println(line.substring(0, index));line = scan.nextLine();index = line.indexOf(":");%>*/person</p>
-                    (with Jeron Travel Coaster/Van, Php <%out.println(line.substring(0, index));line = scan.nextLine();index = line.indexOf(":");%>/person)
-                    <br>(Group packages with minimum of 15 people is Php <%out.println(line.substring(0, index));line = scan.nextLine();index = line.indexOf(":");%>/person)
-                    <p class="fw-bold"><br>Child 4yrs+: Php <%out.println(line.substring(0, index));line = scan.nextLine();index = line.indexOf(":");%>*/person</p>
-                    (with Jeron Travel Coaster/Van, Php <%out.println(line.substring(0, index));line = scan.nextLine();index = line.indexOf(":");%>*/person)
-                    <p class="fw-bold"><br>Child 3yrs and below: FREE</p>
-                    +Php <%out.println(line.substring(0, index));%> for Drivers/Nanny
-                    <br>* inclusive of 12% VAT and 10% Service charge
-                    </p>
-                     <%
-                } catch (Exception io) {
-                    io.printStackTrace();
-                }%>
-                    <a href="reservation.jsp">
-                        <button class="btn btn-primary mt-3">Reserve a Tour</button>
-                    </a>
-                </div>
-
+        </div>
+        <div class="container-fluid p-3 p-sm-5 position-relative" style="background-image: url('img/tour-1.jpg');
+             height: 400px;
+             background-size: cover;">
+            <div id="tour-info-things-to-remember" class="bg-green col-12 col-sm-6 col-md-5 col-lg-4 col-xxl-3 me-auto text-white p-3 p-md-5">
+                <h1>Things to Remember</h1>
+                <p>Bring an extra change of clothes, a tumbler for hydration, a hat, and a fan to stay cool. Wear comfortable clothes and footwear for the farm: long sleeves , ¾ pants / leggings, Crocs, boots, or bare feet for grounding.</p>
             </div>
         </div>
+        <div class="container-fluid p-4 p-sm-5 text-center bg-ivory">
+            <div class="mx-auto m-0 mt-sm-5">
+                <h1>Prices</h1>
+                <hr class="mb-4 w-25 mx-auto">
+                <%
+                    try {
+                        String line = "";
+                        Scanner scan = new Scanner(new File(getServletContext().getRealPath("/").replace('\\', '/')
+                                + "ReadFiles/Itinerary.txt"));
+                        line = scan.nextLine();
+                        while (!line.equalsIgnoreCase("PRICES")) {
+                            line = scan.nextLine();
+                        }
+                        line = scan.nextLine();
+                        int index = line.indexOf(":");
+
+                %>
+                <p>
+                <p class="fw-bold">Adult: Php <%out.println(line.substring(0, index));
+                        line = scan.nextLine();
+                        index = line.indexOf(":");%>*/person</p>
+                (with Jeron Travel Coaster/Van, Php <%out.println(line.substring(0, index));
+                        line = scan.nextLine();
+                        index = line.indexOf(":");%>/person)
+                <br>(Group packages with minimum of 15 people is Php <%out.println(line.substring(0, index));
+                        line = scan.nextLine();
+                        index = line.indexOf(":");%>/person)
+                <p class="fw-bold"><br>Child 4yrs+: Php <%out.println(line.substring(0, index));
+                        line = scan.nextLine();
+                        index = line.indexOf(":");%>*/person</p>
+                (with Jeron Travel Coaster/Van, Php <%out.println(line.substring(0, index));
+                        line = scan.nextLine();
+                        index = line.indexOf(":");%>*/person)
+                <p class="fw-bold"><br>Child 3yrs and below: FREE</p>
+                +Php <%out.println(line.substring(0, index));%> for Drivers/Nanny
+                <br>* inclusive of 12% VAT and 10% Service charge
+                </p>
+                <%
+                    } catch (Exception io) {
+                        io.printStackTrace();
+                         }%>
+                <a href="reservation.jsp">
+                    <button class="btn btn-primary mt-3">Reserve a Tour</button>
+                </a>
+            </div>
+
+        </div>
+    </div>
 
     <footer-component></footer-component>
 

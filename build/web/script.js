@@ -17,7 +17,7 @@ class Header extends HTMLElement {
                 </button>
                 <div class="collapse navbar-collapse flex-grow-0" id="navbar-toggle">
                     <ul class="navbar-nav p-2">
-                        <li class="nav-item px-2 my-1"><a class="nav-link" href="about.html">About Us</a>
+                        <li class="nav-item px-2 my-1"><a class="nav-link" href="about.jsp">About Us</a>
                         </li>
                         <li class="nav-item px-2 my-1"><a class="nav-link" href="menu.jsp">Menu</a>
                         </li>

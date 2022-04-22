@@ -28,6 +28,7 @@
                     <input type="text" class="fEmail form-control mx-auto m-4" name="adminEmail" placeholder="Email" required>
                 </div>
                 <!-- button to submit inputs -->
+                <p class="text-danger mt-3 m-0">${forgotErrMessage}</p>
                 <button class="sendEmailBT btn btn-primary mt-3">Send Email</button>
             </form>
         </div>

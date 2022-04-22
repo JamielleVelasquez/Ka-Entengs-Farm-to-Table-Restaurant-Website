@@ -1,43 +1,47 @@
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="style.css" rel="stylesheet" type="text/css" />
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link href="style.css" rel="stylesheet" type="text/css" />
+        <!-- Bootstrap CSS -->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
 
-    <title>About Us</title>
-</head>
+        <title>About Us</title>
+    </head>
 
-<body>
+    <body>
     <header-component></header-component>
+        <%
+            response.setHeader("Cache-control", "no-cache, no-store, must-revalidate");
+            session = null;
+        %>
     <div class="container-fluid p-0 position-relative" style="background-image: url('img/about-banner.jpg');
-height: 70vh;
-background-size: cover;">
+         height: 70vh;
+         background-size: cover;">
     </div>
     <div id="iternerary" class="container-fluid position-relative p-0" style="margin-top: 6rem;">
         <div id="tour-info-headline" class="container col-12 bg-ivory p-3 py-5 p-lg-5 start-50 translate-middle" style="position: absolute; top: -9rem;">
             <h1 class="text-center fw-bolder">Enteng's Farm</h1>
             <hr>
-            <p>The farm was inspired by the nostalgia of our hometowns in Dulag and Tacloban, Leyte, and as we found our way to Manila for opportunities, Pulilan, Bulacan is a beautiful intersection of both. It is an oasis of one’s longing for the “probinsyano”
+            <p>The farm was inspired by the nostalgia of our hometowns in Dulag and Tacloban, Leyte, and as we found our way to Manila for opportunities, Pulilan, Bulacan is a beautiful intersection of both. It is an oasis of one's longing for the "probinsyano"
                 in us to partake in missed homegrown delicacies and favorites while in the great company of friends, family, and like-minded people. We aim to go back to the source of abundance in the Philippines and that is our land, people, and community.
             </p>
         </div>
         <div id="container-text-image" class="container-fluid g-0 row p-3 py-5  p-sm-5 align-items-center" style="height: 550px;">
             <div class="col-12 col-sm-6 col-lg-8 p-0 p-sm-4">
                 <h1 class="mb-4">Why Natural Farming?</h1>
-                <p>Natural Farming (Traditional Farming) was the original type of agriculture, and has been practiced for thousands of years. <br><br> All traditional farming is now considered to be “Natural Farming” although at the time there were no known
+                <p>Natural Farming (Traditional Farming) was the original type of agriculture, and has been practiced for thousands of years. <br><br> All traditional farming is now considered to be "Natural Farming" although at the time there were no known
                     inorganic methods. <br><br> Health and environment considerations are also some of the big factors why some of our farmers are now shifting to Natural Farming Management.</p>
             </div>
             <div id="container-image" class="col-12 col-sm-6 col-lg-4" style="background-image: url('img/about-1.jpg');
-                background-position: center;
-                height: 90%;
-                background-size: cover;
-                float: right;"></div>
+                 background-position: center;
+                 height: 90%;
+                 background-size: cover;
+                 float: right;"></div>
         </div>
         <div class="container-fluid row align-items-center text-center p-3 py-5  p-sm-5 text-white g-0 bg-green">
             <div class="col order-1 order-md-0">
@@ -59,10 +63,10 @@ background-size: cover;">
         </div>
         <div id="container-text-image" class="container-fluid g-0 row p-3 p-sm-5 align-items-center" style="height: 550px;">
             <div id="container-image" class="col-12 col-sm-6 col-lg-4" style="background-image: url('img/about-2.jpg');
-                background-position: center;
-                height: 90%;
-                background-size: cover;
-                float: left;"></div>
+                 background-position: center;
+                 height: 90%;
+                 background-size: cover;
+                 float: left;"></div>
             <div class="col-12 col-sm-6 col-lg-8 p-0 p-sm-4 ps-sm-5">
                 <h1 class="mb-4 mt-5">Integrated and Sustainable</h1>
                 <p>Natural Farming uses science and technology to make use of all resources available in the farm. It also promotes the zero-waste cycle wherein the wastages in each project is used and recycle for the other projects, making them interdependent

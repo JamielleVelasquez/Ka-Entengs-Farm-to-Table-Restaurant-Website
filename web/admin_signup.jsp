@@ -46,6 +46,8 @@
                 <!-- button to submit inputs -->
                 <button class="loginBT btn btn-primary mt-3">Sign Up</button>
             </form>
+            <br>
+            <a href="admin_login.jsp" class="btn btn-primary backBT">Back to Login page</a>
         </div>
     </div>
 
