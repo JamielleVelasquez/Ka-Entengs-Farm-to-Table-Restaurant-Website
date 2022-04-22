@@ -14,7 +14,11 @@
     </head>
 
     <body>
-        
+        <script>
+            if (window.history.replaceState) {
+                window.history.replaceState(null, null, window.location.href);
+            }
+        </script>
     <header-component></header-component>
     
     <div class="container-fluid p-0 position-relative" style="background-image: url('img/landing-page-banner.png');

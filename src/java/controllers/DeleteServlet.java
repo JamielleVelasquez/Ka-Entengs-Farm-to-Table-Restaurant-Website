@@ -53,8 +53,9 @@ public class DeleteServlet extends HttpServlet {
         ServletContext sc = getServletContext();
         response.setContentType("text/html;charset=UTF-8");
         try {
+            int id = Integer.parseInt(request.getParameter("userid"));
             PreparedStatement pStmt = con.prepareStatement("DELETE FROM RESERVATIONDB WHERE USERID = ?");
-            pStmt.setInt(1, Integer.parseInt(request.getParameter("userid")));
+            pStmt.setInt(1, id);
             pStmt.executeUpdate();
             String query = "SELECT * FROM RESERVATIONDB";
             pStmt = con.prepareStatement(query);

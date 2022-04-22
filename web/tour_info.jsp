@@ -18,6 +18,11 @@
     </head>
 
     <body>
+        <script>
+            if (window.history.replaceState) {
+                window.history.replaceState(null, null, window.location.href);
+            }
+        </script>
         <header class="sticky-top bg-white" id="header">
             <nav class="navbar navbar-expand-md p-0">
                 <div class="container-fluid">

@@ -20,6 +20,11 @@
     </head>
 
     <body>
+        <script>
+            if (window.history.replaceState) {
+                window.history.replaceState(null, null, window.location.href);
+            }
+        </script>
         <%
             if (session.getAttribute("sessionTest") == null || session == null) {
                 response.sendRedirect("landing_page.jsp");
@@ -39,7 +44,7 @@
             <form action="pdf.do" method="get" style="width: auto;" class="p-0 m-1">
                 <button class="btn btn-primary">Print PDF</button>
             </form>
-            
+
             <a href="admin_review.jsp" style="width: auto;" class="p-0 m-1">
                 <button class="btn btn-primary">Reviews</button>
             </a>
@@ -47,7 +52,7 @@
             <a href="Admin_Edit.jsp" style="width: auto;" class="p-0 m-1">
                 <button class="btn btn-primary">Admin Accounts</button>
             </a>
-            
+
             <a href="admin_database.jsp" style="width: auto;" class="p-0 m-1">
                 <button class="btn btn-primary">Reservations</button>
             </a>

@@ -24,6 +24,11 @@
         <title>Update Record</title>
     </head>
     <body>
+        <script>
+            if (window.history.replaceState) {
+                window.history.replaceState(null, null, window.location.href);
+            }
+        </script>
         <%
             if (session.getAttribute("sessionTest") == null || session == null) {
                 response.sendRedirect("landing_page.jsp");
@@ -32,27 +37,27 @@
             response.setHeader("Cache-control", "no-cache, no-store, must-revalidate");
             Admin admin = (Admin) getServletContext().getAttribute("admin");
         %> 
-    <div class="container-fluid p-4 p-lg-5">
-        <div class="display-4 reserveLabel">Update Record</div>
-        <div class="row justify-content-center">
-            <div class="col-12 p-1 p-lg-5">
-                <form action="AdminEdit.do" method="POST" autocomplete="off">
-                    <input type="hidden" id="username" name="username" value="<%=admin.getUsername()%>">
+        <div class="container-fluid p-4 p-lg-5">
+            <div class="display-4 reserveLabel">Update Record</div>
+            <div class="row justify-content-center">
+                <div class="col-12 p-1 p-lg-5">
+                    <form action="AdminEdit.do" method="POST" autocomplete="off">
+                        <input type="hidden" id="username" name="username" value="<%=admin.getUsername()%>">
 
-                    <!-- input field for username -->
-                    <input type="text" class="flName form-control p-2 m-0 my-4" name="newUsername" value="<%=admin.getUsername()%>" required>
-                    <input type="email" class="userpass form-control p-2 m-0 my-4" name="email" value="<%=admin.getEmail()%>" required>
-                    <!-- button to submit inputs -->
-                    <button type="submit" name="action" value="Update" class="btn btn-primary">Update</button>
-                </form>
+                        <!-- input field for username -->
+                        <input type="text" class="flName form-control p-2 m-0 my-4" name="newUsername" value="<%=admin.getUsername()%>" required>
+                        <input type="email" class="userpass form-control p-2 m-0 my-4" name="email" value="<%=admin.getEmail()%>" required>
+                        <!-- button to submit inputs -->
+                        <button type="submit" name="action" value="Update" class="btn btn-primary">Update</button>
+                    </form>
                     <br>
-                <a href="Admin_Edit.jsp" class="btn btn-primary backBT">Back to Admin Edit page</a>
+                    <a href="Admin_Edit.jsp" class="btn btn-primary backBT">Back to Admin Edit page</a>
+                </div>
             </div>
         </div>
-    </div>
-    <script src="script.js" type="text/javascript" defer></script>
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+        <script src="script.js" type="text/javascript" defer></script>
+        <!-- Bootstrap JS -->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
-</body>
+    </body>
 </html>
