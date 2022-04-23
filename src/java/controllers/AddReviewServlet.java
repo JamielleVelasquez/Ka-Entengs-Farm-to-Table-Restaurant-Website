@@ -4,7 +4,9 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Random;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -51,8 +53,18 @@ public class AddReviewServlet extends HttpServlet {
         sc.setAttribute("errorMessage", "");
         try {
             if (con != null) {
-               
+
                 String name = request.getParameter("regName").trim();
+                if (name.isEmpty()) {
+                    PreparedStatement st = con.prepareStatement("SELECT * FROM REVIEWS", ResultSet.TYPE_SCROLL_SENSITIVE,
+                            ResultSet.CONCUR_READ_ONLY);
+                    ResultSet rs = st.executeQuery();
+                    int ctr = 0;
+                    while(rs.next()){
+                        ctr++;
+                    }
+                    name = "Anonymous " + ctr;
+                }
                 String comment = request.getParameter("regComment").trim();
 
                 PreparedStatement st = con.prepareStatement("INSERT INTO REVIEWS (NAME, COMMENT, DATE, ACTIVE) VALUES (?, ?, ?, ?)");
@@ -60,7 +72,7 @@ public class AddReviewServlet extends HttpServlet {
                 st.setString(2, comment);
                 java.sql.Timestamp date = new java.sql.Timestamp(new java.util.Date().getTime());
                 st.setTimestamp(3, date);
-                st.setBoolean(4,false);
+                st.setBoolean(4, false);
 
                 st.executeUpdate();
                 response.sendRedirect("review_success.jsp");

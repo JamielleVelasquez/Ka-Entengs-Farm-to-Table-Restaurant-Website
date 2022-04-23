@@ -88,8 +88,8 @@
         <div class="row align-items-center">
             <form class="col-12 col-sm-7 p-0 pe-sm-5" action="add.do" method="POST" autocomplete="off">
 
-                <input class="form-control" type="text" name="regName" id="reviewName" placeholder="Name:"><br>
-                <textarea class="form-control" name="regComment" id="reviewText" placeholder="How did we do?"></textarea><br>
+                <input class="form-control" type="text" name="regName" id="reviewName" placeholder="(Optional) Name:"><br>
+                <textarea class="form-control" name="regComment" id="reviewText" placeholder="How did we do?" required></textarea><br>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
 
