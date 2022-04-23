@@ -88,6 +88,7 @@ public class AvailableSlotsServlet extends HttpServlet {
                 selectedDateSlots = 0;
             sc.setAttribute("selectedDateSlots", selectedDateSlots);
             sc.setAttribute("selectedDate", sdf.format(selectedDate));
+            sc.setAttribute("errorMessage", "");
             response.sendRedirect("reservation.jsp");
             prepStmt.close();
 

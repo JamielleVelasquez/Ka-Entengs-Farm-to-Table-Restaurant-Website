@@ -113,6 +113,7 @@ public class ForgotPassServlet extends HttpServlet {
                         ------------------
                     Mail code*/
                     out.println("Your password has been sent to your email successfully!");
+                    sc.setAttribute("forgotErrMessage", "");
                     response.sendRedirect("admin_login.jsp");
                     return;
                 } else {
