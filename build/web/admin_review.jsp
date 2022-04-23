@@ -100,7 +100,7 @@
             <div class=" my-2" style="width: auto;">
                 <form method="POST" action="reviewstat.do" autocomplete="off">
                     <input type="hidden" name="name" value="<%=review.getName()%>">
-                    <% if (review.isActive()) { %>
+                    <% if (!review.isActive()) { %>
                     <input class="btn btn-secondary text-white mb-3" type="submit" name="action" value="Status">
                     <% } else { %>
                     <input class="btn btn-success text-white mb-3" type="submit" name="action" value="Status">
