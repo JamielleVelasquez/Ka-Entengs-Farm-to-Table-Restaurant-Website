@@ -55,6 +55,7 @@ public class ForgotPassServlet extends HttpServlet {
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         ServletContext sc = getServletContext();
+        sc.setAttribute("forgotErrMessage", "");
         try (PrintWriter out = response.getWriter()) {
             String email = request.getParameter("adminEmail");
             try {
@@ -113,7 +114,6 @@ public class ForgotPassServlet extends HttpServlet {
                         ------------------
                     Mail code*/
                     out.println("Your password has been sent to your email successfully!");
-                    sc.setAttribute("forgotErrMessage", "");
                     response.sendRedirect("admin_login.jsp");
                     return;
                 } else {
