@@ -52,7 +52,7 @@
                 <button class="loginBT btn btn-primary mt-3">Sign Up</button>
             </form>
             <br>
-            <a href="admin_login.jsp" class="btn btn-primary backBT">Back to Login page</a>
+            <a href="admin_database.jsp" class="btn btn-primary backBT">Back to Reservations page</a>
         </div>
     </div>
 
