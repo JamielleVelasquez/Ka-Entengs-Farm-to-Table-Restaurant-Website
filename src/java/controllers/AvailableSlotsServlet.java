@@ -49,7 +49,7 @@ public class AvailableSlotsServlet extends HttpServlet {
 
             response.setContentType("text/html;charset=UTF-8");
             ServletContext sc = getServletContext();
-            sc.setAttribute("errorMessage", "");
+            sc.setAttribute("slotsMessage", "");
             
             int selectedDateSlots = 30;
             Date selectedDate = new Date();
@@ -72,7 +72,7 @@ public class AvailableSlotsServlet extends HttpServlet {
 
             //update error message if the reservation is not 3 days ahead
             if (selectedDate.before(c.getTime())) {
-                sc.setAttribute("errorMessage", "Date is invalid, we only allow reservations that are 3 days in advance");
+                sc.setAttribute("slotsMessage", "Date is invalid, we only allow reservations that are 3 days in advance");
                 RequestDispatcher dispatcher = request.getRequestDispatcher("reservation.jsp");
                 dispatcher.forward(request, response);
             }
@@ -88,7 +88,7 @@ public class AvailableSlotsServlet extends HttpServlet {
                 selectedDateSlots = 0;
             sc.setAttribute("selectedDateSlots", selectedDateSlots);
             sc.setAttribute("selectedDate", sdf.format(selectedDate));
-            sc.setAttribute("errorMessage", "");
+            sc.setAttribute("slotsMessage", "");
             response.sendRedirect("reservation.jsp");
             prepStmt.close();
 

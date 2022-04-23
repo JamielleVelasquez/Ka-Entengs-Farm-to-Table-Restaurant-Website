@@ -41,7 +41,7 @@
                     <input type="number" class="userpass form-control p-2 m-0 my-4" name="resNum" placeholder="Phone Number" required>
                     <input type="email" class="userpass form-control p-2 m-0 my-4" name="resEmail" placeholder="Email Address" required>
                     <!-- error messages go here -->
-                    <p class="text-danger">${errorMessage}</p>
+                    <p class="text-danger">${slotsMessage}</p>
                     <!-- button to submit inputs -->
                     <button class="reserveBT btn btn-primary">Reserve</button>
                 </form>
