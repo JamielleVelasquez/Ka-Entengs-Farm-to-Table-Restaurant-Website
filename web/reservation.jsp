@@ -28,20 +28,27 @@
                 <form action="reserve.do" method="POST" autocomplete="off">
                     <div class="row g-0 m-0 my-4">
                         <!-- input field for amount of people -->
-                        <input type="number" class="form-control w-50" name="resNumPpl" placeholder="Number of people" required min="1" max="30" value="1">
+                        <input type="number" class="form-control w-50" name="resNumPpl" placeholder="*Number of people" required min="1" max="30">
                         <!-- input field for date -->
                         <div id="datepicker" class="input-daterange m-0 w-50">
-                            <input type="text" class="form-control" name="resDate" placeholder="Date" required>
+                            <input type="text" class="form-control" name="resDate" placeholder="*Date" required>
                         </div>
                     </div>
 
                     <!-- input field for username -->
-                    <input type="text" class="flName form-control p-2 m-0 my-4" name="resFn" placeholder="First Name" required>
-                    <input type="text" class="flName form-control p-2 m-0 my-4" name="resLn" placeholder="Last Name" required>
-                    <input type="number" class="userpass form-control p-2 m-0 my-4" name="resNum" placeholder="Phone Number" required>
-                    <input type="email" class="userpass form-control p-2 m-0 my-4" name="resEmail" placeholder="Email Address" required>
+                    <input type="text" class="flName form-control p-2 m-0 my-4" name="resFn" placeholder="*First Name" required>
+                    <input type="text" class="flName form-control p-2 m-0 my-4" name="resLn" placeholder="*Last Name" required>
+                    <input type="number" class="userpass form-control p-2 m-0 my-4" name="resNum" placeholder="*Phone Number" required>
+                    <input type="email" class="userpass form-control p-2 m-0 my-4" name="resEmail" placeholder="*Email Address" required>
+                    <div class="form-check my-4">
+                        <input class="form-check-input" type="checkbox" value="" id="invalidCheck" required>
+                        <label class="form-check-label" for="invalidCheck">
+                            Agree to <a href="terms_and_conditions.html" target="_blank">terms and conditions</a>
+                        </label>
+                    </div>
+                    <p class="text-muted">*required</p>
                     <!-- error messages go here -->
-                    <p class="text-danger">${slotsMessage}</p>
+                    <p class="text-danger">${errorMessage}</p>
                     <!-- button to submit inputs -->
                     <button class="reserveBT btn btn-primary">Reserve</button>
                 </form>
@@ -59,19 +66,19 @@
             <div class="col-12 col-sm-5 p-1 ms-1 p-lg-5 ms-lg-5">
                 <h2>Downpayment</h2>
                 <p>
-                    We require a 50% non-refundable downpayment upon reservation.
+                    We require a 50% non-refundable down-payment upon reservation.
                 </p>
                 <h2>Cancellation Policy</h2>
                 <!-- Needs to be Checked -->
                 <p>
                     Tours can always be rescheduled, provided there is still space available for your group. To
-                    reschedule, or cancel your tour, please contact us at least 10 business days prior to your appointment by email at entengsfarm@gmail.com or by phone +63 977 8124594.
+                    reschedule, or cancel your tour, please contact us at least 3 business days prior to your appointment by email at entengsfarm@gmail.com or by phone +63 977 8124594.
                 </p>
                 <p>
-                    Bookings, rescheduled or cancelled, less than 10 business days prior to your tour date, will be charged a Php 1250.00 administration fee. There is a Php 5000.00 no-show fee, per tour group of 15-30 people (not per school), for groups that simply don't
+                    Bookings, rescheduled or cancelled, less than 3 business days prior to your tour date, will be charged a Php 1250.00 administration fee. There is a Php 5000.00 no-show fee, per tour group of 15-30 people (not per school), for groups that simply don't
                     show up on the day of their tour without cancelling in advance.
                 </p>
-                
+
             </div>
         </div>
 

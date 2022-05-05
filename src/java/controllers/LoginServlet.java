@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.logging.Logger;
 import java.util.logging.Level;
 import javax.servlet.RequestDispatcher;
@@ -90,7 +91,16 @@ public class LoginServlet extends HttpServlet {
                             ucl.contextInitialized(new ServletContextEvent(sc));
                             logger.log(Level.INFO, rs.getString("USERNAME") + " logged in");
 
-                            query = "SELECT * FROM RESERVATIONDB";
+                            //auto-trash reservations
+                            query = "DELETE FROM RESERVATIONDB WHERE RESERVEDDATE < ?";
+                            pStmt = con.prepareStatement(query);
+                            pStmt.setDate(1, new java.sql.Date(new Date().getTime()));
+                            pStmt.executeUpdate();
+
+                            while (rs.next()) {
+                            }
+
+                            query = "SELECT * FROM RESERVATIONDB ORDER BY RESERVEDDATE ASC";
                             pStmt = con.prepareStatement(query);
                             rs = pStmt.executeQuery();
 
@@ -118,13 +128,13 @@ public class LoginServlet extends HttpServlet {
                             pStmt = con.prepareStatement(query);
                             rs = pStmt.executeQuery();
                             ArrayList<Admin> adminArray = new ArrayList<Admin>();
-                            
+
                             while (rs.next()) {
                                 Admin admin = new Admin(rs.getString("USERNAME"), rs.getString("EMAIL"), rs.getString("PASSWORD"));
                                 adminArray.add(admin);
                             }
                             sc.setAttribute("adminArray", adminArray);
-                            
+
                             RequestDispatcher dispatcher = request.getRequestDispatcher("admin_database.jsp");
                             dispatcher.forward(request, response);
                             return;
@@ -143,6 +153,7 @@ public class LoginServlet extends HttpServlet {
             } catch (SQLException sqle) {
                 sc.setAttribute("errorMessage", "SQL Exception occurred!");
                 response.sendRedirect("errorPage.jsp");
+                sqle.printStackTrace();
             }
         }
     }

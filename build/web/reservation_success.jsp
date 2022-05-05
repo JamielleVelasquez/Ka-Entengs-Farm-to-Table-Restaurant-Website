@@ -34,7 +34,6 @@
             </div>
             <div class="vr line col-2 mx-4 d-none d-sm-block"></div>
             <div class="col-12 col-sm-5 p-1 ms-1 p-lg-5 ms-lg-5">
-                <h2>(insert payment method here)</h2>
                 <br><br>
                 <center>
                     <a href="landing_page.jsp" class="btn btn-primary backBT">Back to Homepage</a>

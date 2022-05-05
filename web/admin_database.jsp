@@ -41,10 +41,6 @@
                 <h1>Reservations</h1>
             </div>
 
-            <form action="pdf.do" method="get" style="width: auto;" class="p-0 m-1">
-                <button class="btn btn-primary">Print PDF</button>
-            </form>
-
             <a href="admin_review.jsp" style="width: auto;" class="p-0 m-1">
                 <button class="btn btn-primary">Reviews</button>
             </a>
@@ -53,13 +49,9 @@
                 <button class="btn btn-primary">Admin Accounts</button>
             </a>
 
-            <a href="admin_database.jsp" style="width: auto;" class="p-0 m-1">
-                <button class="btn btn-primary">Reservations</button>
-            </a>
-            
-            <a href="admin_signup.jsp" style="width: auto;" class="p-0 m-1">
-                <button class="btn btn-primary">Admin Sign Up</button>
-            </a>
+            <form action="pdf.do" method="get" style="width: auto;" class="p-0 m-1">
+                <button class="btn btn-primary">Print PDF</button>
+            </form>
 
             <div class="text-end mx-5" style="width: auto;">
                 <h6>

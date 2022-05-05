@@ -81,7 +81,7 @@ public class SortSearchServlet extends HttpServlet {
                     orderBy = "RESERVEDDATE";
                     break;
             }
-            
+
             switch (sortHow) {
                 case "asc":
                     orderBy = orderBy.concat(" ASC");
@@ -159,14 +159,11 @@ public class SortSearchServlet extends HttpServlet {
                         + " ORDER BY " + orderBy;
             }
 
-            System.out.println(query);
-
             pStmt = con.prepareStatement(query);
 
             if (!searchValue.isEmpty()) {
                 pStmt.setString(1, searchValue);
             }
-
             rs = pStmt.executeQuery();
 
             ArrayList<Reservation> reservationArray = new ArrayList<Reservation>();

@@ -57,7 +57,7 @@ public class DeleteServlet extends HttpServlet {
             PreparedStatement pStmt = con.prepareStatement("DELETE FROM RESERVATIONDB WHERE USERID = ?");
             pStmt.setInt(1, id);
             pStmt.executeUpdate();
-            String query = "SELECT * FROM RESERVATIONDB";
+            String query = "SELECT * FROM RESERVATIONDB ORDER BY RESERVEDDATE ASC";
             pStmt = con.prepareStatement(query);
             ResultSet rs = pStmt.executeQuery();
 

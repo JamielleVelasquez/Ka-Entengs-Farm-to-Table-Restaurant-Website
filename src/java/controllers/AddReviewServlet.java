@@ -6,6 +6,10 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
 import javax.servlet.ServletConfig;
 import javax.servlet.ServletContext;
@@ -17,6 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 public class AddReviewServlet extends HttpServlet {
 
     Connection con;
+    DateFormat sdf = new SimpleDateFormat("MM/dd/yyyy");
 
     public void init(ServletConfig config) throws ServletException {
         super.init(config);
@@ -60,18 +65,26 @@ public class AddReviewServlet extends HttpServlet {
                             ResultSet.CONCUR_READ_ONLY);
                     ResultSet rs = st.executeQuery();
                     int ctr = 0;
-                    while(rs.next()){
+                    while (rs.next()) {
                         ctr++;
                     }
                     name = "Anonymous " + ctr;
                 }
                 String comment = request.getParameter("regComment").trim();
+                String date = request.getParameter("resDate");
+                Date inputDate = new Date();
+
+                try {
+                    inputDate = sdf.parse(date);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
 
                 PreparedStatement st = con.prepareStatement("INSERT INTO REVIEWS (NAME, COMMENT, DATE, ACTIVE) VALUES (?, ?, ?, ?)");
                 st.setString(1, name);
                 st.setString(2, comment);
-                java.sql.Timestamp date = new java.sql.Timestamp(new java.util.Date().getTime());
-                st.setTimestamp(3, date);
+                Timestamp timestamp = new java.sql.Timestamp(inputDate.getTime());
+                st.setTimestamp(3, timestamp);
                 st.setBoolean(4, false);
 
                 st.executeUpdate();

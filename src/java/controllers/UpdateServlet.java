@@ -103,7 +103,7 @@ public class UpdateServlet extends HttpServlet {
                 pStmt.setInt(7, userid);
                 pStmt.executeUpdate();
 
-                String query = "SELECT * FROM RESERVATIONDB";
+                String query = "SELECT * FROM RESERVATIONDB ORDER BY RESERVEDDATE ASC";
                 pStmt = con.prepareStatement(query);
                 rs = pStmt.executeQuery();
 

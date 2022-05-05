@@ -16,32 +16,26 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.standalone.min.css" integrity="sha512-TQQ3J4WkE/rwojNFo6OJdyu6G8Xe9z8rMrlF9y7xpFbQfW5g8aSWcygCQ4vqRiJqFsDsE1T6MoAOMJkFXlrI9A==" crossorigin="anonymous"
               referrerpolicy="no-referrer" />
 
-        <title>Reservation</title>
+        <title>Review</title>
     </head>
 
     <body>
     <header-component></header-component>
-    <div class="container-fluid p-4 p-lg-5">
+    <div class="col-10 col-sm-6 align-items-start py-5 mx-auto" style="height: 90vh">
+        <div class="display-4 reserveLabel pb-4">Leave a Review</div>
+        <p>Let us know how your experience with us went!</p>
 
-        <div class="row justify-content-center">
-            <div class="col-12 col-sm-5 p-1 ms-1 mb-4 p-lg-5 ms-lg-5">
-                <div class="display-6 reserveLabel pb-3">Your Reservation was a Success</div>
-                <p>
-                    In order for your reservation to push through please pay a
-                    &#x20B1;${downpayment} downpayment through (payment method). A confirmation email will be sent to you
-                    after we have confirmed your payment.
-                </p>
+        <form action="add.do" method="POST" autocomplete="off">
+
+            <input class="form-control my-2" type="text" name="regName" id="reviewName" placeholder="Name:" required>
+            <div id="datepicker" class="input-daterange my-2">
+                <input type="text" class="form-control text-start" name="resDate" placeholder="Reservation Date" required>
             </div>
-            <div class="vr line col-2 mx-4 d-none d-sm-block"></div>
-            <div class="col-12 col-sm-5 p-1 ms-1 p-lg-5 ms-lg-5">
-                <br><br>
-                <center>
-                    <a href="landing_page.jsp" class="btn btn-primary backBT">Back to Homepage</a>
-                </center>
-            </div>
-            <br>
-        </div>
-        <br><br><br>
+            <textarea class="form-control my-2" name="regComment" id="reviewText" placeholder="How did we do?" required style="height: 20vh"></textarea><br>
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+
+
     </div>
     <footer-component></footer-component>
     <script src="script.js" type="text/javascript" defer></script>
@@ -50,3 +44,27 @@
 </body>
 
 </html>
+<script>
+    $(function () {
+        $("#datepicker").datepicker({
+            dateFormat: "dd-mm-yy",
+            showOtherMonths: true,
+            selectOtherMonths: true,
+            autoclose: true,
+            changeMonth: true,
+            changeYear: true,
+            orientation: "bottom left"
+        });
+    });
+    $(function () {
+        $("#datechecker").datepicker({
+            dateFormat: "dd-mm-yy",
+            showOtherMonths: true,
+            selectOtherMonths: true,
+            autoclose: true,
+            changeMonth: true,
+            changeYear: true,
+            orientation: "top"
+        });
+    });
+</script>

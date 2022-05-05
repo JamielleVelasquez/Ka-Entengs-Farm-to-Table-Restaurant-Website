@@ -83,24 +83,6 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid p-5 bg-green">
-
-        <div class="row align-items-center">
-            <form class="col-12 col-sm-7 p-0 pe-sm-5" action="add.do" method="POST" autocomplete="off">
-
-                <input class="form-control" type="text" name="regName" id="reviewName" placeholder="(Optional) Name:"><br>
-                <textarea class="form-control" name="regComment" id="reviewText" placeholder="How did we do?" required></textarea><br>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-
-            <div class="vr p-0 text-white opacity-50 d-none d-sm-block"></div>
-            <div class="col-12 col-sm-4 text-center mx-auto order-first order-sm-last pb-4 p-sm-0">
-                <h1 class="text-white">Past Customer?</h1>
-                <h6 class="text-white">Leave a Review!</h6>
-            </div>
-
-        </div>
-    </div>
     <footer-component></footer-component>
 
     <script src="script.js" type="text/javascript" defer></script>
