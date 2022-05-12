@@ -31,6 +31,12 @@
                     &#x20B1;${downpayment} downpayment through (payment method). A confirmation email will be sent to you
                     after we have confirmed your payment.
                 </p>
+                <p>
+                    If you want to modify your reservation, please contact us first at +63 977 8124594.
+                </p>
+                <p>
+                    After contacting us and confirming some information, you may create a new reservation with the new details.
+                </p>
             </div>
             <div class="vr line col-2 mx-4 d-none d-sm-block"></div>
             <div class="col-12 col-sm-5 p-1 ms-1 p-lg-5 ms-lg-5">

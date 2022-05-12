@@ -131,7 +131,7 @@ public class PDFServlet extends HttpServlet {
                 PdfContentByte cb = writer.getDirectContent();
 
                 //Add Header
-                Font font = new Font(FontFamily.HELVETICA, 16, Font.BOLD);
+                Font font = new Font(FontFamily.HELVETICA, 24, Font.BOLD);
                 Phrase header = new Phrase("Ka Enteng's Farm to Table Restaurant", font);
 
                 //Header Formatting

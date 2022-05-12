@@ -139,11 +139,6 @@
             </ul>
 
             <div class=" my-2" style="width: auto;">
-                <form method="POST" action="update.do">
-                    <input type="hidden" name="userid" value="<%=reservation.getUserId()%>">
-                    <input class="btn btn-success text-white mb-3" type="submit" name="action" value="Edit">
-                </form>
-                <br>
                 <form method="POST" action="delete.do">
                     <input type="hidden" name="userid" value="<%=reservation.getUserId()%>">
                     <input class="btn btn-danger" type="submit" onclick="return confirm('Are you sure?')" name="action" value="Delete">
