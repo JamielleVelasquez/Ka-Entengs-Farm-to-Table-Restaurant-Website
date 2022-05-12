@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.logging.Logger;
 import java.util.logging.Level;
@@ -100,7 +101,7 @@ public class LoginServlet extends HttpServlet {
                             while (rs.next()) {
                             }
 
-                            query = "SELECT * FROM RESERVATIONDB ORDER BY RESERVEDDATE ASC";
+                            query = "SELECT * FROM RESERVATIONDB"; // "SELECT * FROM RESERVATIONDB ORDER BY RESERVEDDATE ASC"
                             pStmt = con.prepareStatement(query);
                             rs = pStmt.executeQuery();
 
@@ -110,6 +111,7 @@ public class LoginServlet extends HttpServlet {
                                 Reservation reservation = new Reservation(rs.getInt("USERID"), rs.getInt("NUMBEROFPPL"), rs.getString("FNAME"), rs.getString("LNAME"), rs.getString("CPNUMBER"), rs.getString("EMAIL"), rs.getDate("RESERVEDDATE"));
                                 reservationArray.add(reservation);
                             }
+                            Collections.reverse(reservationArray);
                             sc.setAttribute("reservationArray", reservationArray);
 
                             query = "SELECT * FROM REVIEWS";
