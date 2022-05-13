@@ -45,9 +45,11 @@
                         <input type="hidden" id="username" name="username" value="<%=admin.getUsername()%>">
 
                         <!-- input field for username -->
-                        <input type="text" class="flName form-control p-2 m-0 my-4" name="newUsername" value="<%=admin.getUsername()%>" required>
-                        <input type="email" class="userpass form-control p-2 m-0 my-4" name="email" value="<%=admin.getEmail()%>" required>
+                        <input type="text" class="flName form-control p-2 m-0 my-4" name="newUsername" placeholder="*Username:" value="<%=admin.getUsername()%>" required>
+                        <input type="email" class="userpass form-control p-2 m-0 my-4" name="email" placeholder="*Email:" value="<%=admin.getEmail()%>" required>
                         <!-- button to submit inputs -->
+                        <p class="text-muted">*required</p>
+                        
                         <button type="submit" name="action" value="Update" class="btn btn-primary">Update</button>
                     </form>
                     <br>

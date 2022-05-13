@@ -38,13 +38,13 @@
             <form action="signup.do" method="POST" autocomplete="off">
                 <!-- input field for username -->
                 <div class="userEmail">
-                    <input type="text" class="uNameEmail form-control mx-auto m-4" name="regEmail" placeholder="Email" required>
+                    <input type="text" class="uNameEmail form-control mx-auto m-4" name="regEmail" placeholder="*Email" required>
                 </div>
                 <div class="userName">
-                    <input type="text" class="uNameEmail form-control mx-auto m-4" name="regUser" placeholder="Username" required>
+                    <input type="text" class="uNameEmail form-control mx-auto m-4" name="regUser" placeholder="*Username" required>
                 </div>
-                <input type="password" class="userPass form-control mx-auto m-4" name="regPass" placeholder="Password" required>
-                <input type="password" class="userPass form-control mx-auto m-4" name="regConfirmPass" placeholder="Confirm Password" required>
+                <input type="password" class="userPass form-control mx-auto m-4" name="regPass" placeholder="*Password" required>
+                <input type="password" class="userPass form-control mx-auto m-4" name="regConfirmPass" placeholder="*Confirm Password" required>
                 <br>
                 <!-- error messages go here -->
                 <p class="text-danger">${errorMessage}</p>
