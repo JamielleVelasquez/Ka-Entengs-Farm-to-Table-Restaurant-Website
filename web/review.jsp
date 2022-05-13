@@ -27,11 +27,12 @@
 
         <form action="add.do" method="POST" autocomplete="off">
 
-            <input class="form-control my-2" type="text" name="regName" id="reviewName" placeholder="Name:" required>
+            <input class="form-control my-2" type="text" name="regName" id="reviewName" placeholder="*Name:" required>
             <div id="datepicker" class="input-daterange my-2">
-                <input type="text" class="form-control text-start" name="resDate" placeholder="Reservation Date" required>
+                <input type="text" class="form-control text-start" name="resDate" placeholder="*Reservation Date" required>
             </div>
-            <textarea class="form-control my-2" name="regComment" id="reviewText" placeholder="How did we do?" required style="height: 20vh"></textarea><br>
+            <textarea class="form-control my-2" name="regComment" id="reviewText" placeholder="*How did we do?" required style="height: 20vh"></textarea><br>
+            <p class="text-muted">*required</p>
             <button type="submit" class="btn btn-primary">Submit</button>
         </form>
 
