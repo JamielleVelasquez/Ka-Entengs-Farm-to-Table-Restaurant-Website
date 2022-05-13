@@ -41,7 +41,7 @@
     <div class="container-fluid p-3 pb-sm-0 p-sm-5 ">
         <div class="row g-0 mb-5 justify-content-center justify-content-sm-around m-0">
             <div style="width: auto;">
-                <h1>Reservations</h1>
+                <h1>Admin Accounts</h1>
             </div>
 
             <a href="admin_database.jsp" style="width: auto;" class="p-0 m-1">

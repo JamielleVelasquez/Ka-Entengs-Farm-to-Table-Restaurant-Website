@@ -27,7 +27,7 @@
 
         <form action="add.do" method="POST" autocomplete="off">
 
-            <input class="form-control my-2" type="text" name="regName" id="reviewName" placeholder="*Name:" required>
+            <input class="form-control my-2" type="text" name="regName" id="reviewName" placeholder="Name:">
             <div id="datepicker" class="input-daterange my-2">
                 <input type="text" class="form-control text-start" name="resDate" placeholder="*Reservation Date" required>
             </div>
