@@ -1,5 +1,5 @@
 # Ka-Entengs-Farm-to-Table-Restaurant-Website
-This is a full-stack website for a restaurant in Bulacan, Philippines called Ka Enteng's Farm to Table Restaurant.
+This is a full-stack concept website for a restaurant in Bulacan, Philippines called Ka Enteng's Farm to Table Restaurant.
 
 This project is one of the requirements in the Software Engineering course for Computer Science students in the University of Santo Tomas, Philippines.
 
