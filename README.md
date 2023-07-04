@@ -9,3 +9,6 @@ The backend was built using Java and has the following features:
  - Reservation System
  - Review System
  - Admin Login System
+
+Check out the full documentation here:
+https://drive.google.com/file/d/1OUqlxjxziRSTXEHp4N4MadQLBq8rd2F2/view?usp=sharing
